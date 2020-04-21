@@ -2,9 +2,9 @@ D:\Dominik\Studium\4_Semester\5_Rechnertechnik\PIC-Simulator\PIC-Simulator\PIC-S
 D:\Dominik\Studium\4_Semester\5_Rechnertechnik\PIC-Simulator\PIC-Simulator\PIC-Simulator\bin\Debug\PIC-Simulator.exe
 D:\Dominik\Studium\4_Semester\5_Rechnertechnik\PIC-Simulator\PIC-Simulator\PIC-Simulator\bin\Debug\PIC-Simulator.pdb
 D:\Dominik\Studium\4_Semester\5_Rechnertechnik\PIC-Simulator\PIC-Simulator\PIC-Simulator\obj\Debug\PIC-Simulator.csprojAssemblyReference.cache
-D:\Dominik\Studium\4_Semester\5_Rechnertechnik\PIC-Simulator\PIC-Simulator\PIC-Simulator\obj\Debug\PIC_Simulator.Form1.resources
 D:\Dominik\Studium\4_Semester\5_Rechnertechnik\PIC-Simulator\PIC-Simulator\PIC-Simulator\obj\Debug\PIC_Simulator.Properties.Resources.resources
 D:\Dominik\Studium\4_Semester\5_Rechnertechnik\PIC-Simulator\PIC-Simulator\PIC-Simulator\obj\Debug\PIC-Simulator.csproj.GenerateResource.cache
 D:\Dominik\Studium\4_Semester\5_Rechnertechnik\PIC-Simulator\PIC-Simulator\PIC-Simulator\obj\Debug\PIC-Simulator.csproj.CoreCompileInputs.cache
 D:\Dominik\Studium\4_Semester\5_Rechnertechnik\PIC-Simulator\PIC-Simulator\PIC-Simulator\obj\Debug\PIC-Simulator.exe
 D:\Dominik\Studium\4_Semester\5_Rechnertechnik\PIC-Simulator\PIC-Simulator\PIC-Simulator\obj\Debug\PIC-Simulator.pdb
+D:\Dominik\Studium\4_Semester\5_Rechnertechnik\PIC-Simulator\PIC-Simulator\PIC-Simulator\obj\Debug\PIC_Simulator.GUI_Simu.resources
