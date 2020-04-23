@@ -11,14 +11,18 @@ namespace PIC_Simulator
 {
     public class Parser
     {
+
         private string filePath = "C:/tmp/testfile.txt";
+        private List<int> rom = new List<int>();
+        private List<string> file = new List<string>();
 
-        public List<int> parseFile()
+        public Parser(string filePath)
         {
-            List<int> rom = new List<int>();
-            List<string> lines = File.ReadAllLines(this.filePath).ToList();
+            this.filePath = filePath;
+            
+            file = File.ReadAllLines(this.filePath).ToList();
 
-            foreach (string line in lines)
+            foreach (string line in file)
             {
                 Regex regex = new Regex(@"(^([\d|\w]{4})\s([\d|\w]{4})\s+(\d+).*$)");
                 Match match = regex.Match(line);
@@ -28,7 +32,16 @@ namespace PIC_Simulator
                     rom.Add(int.Parse(commandCode, System.Globalization.NumberStyles.HexNumber));
                 }
             }
-            return rom;
+        }
+
+        public List<string> getFile()
+        {
+            return this.file;
+        }
+
+        public List<int> getRom()
+        {
+            return this.rom;
         }
     }
 }
