@@ -29,6 +29,7 @@ namespace PIC_Simulator
                 string commandCode = match.Groups[3].ToString();
                 if (commandCode != "")
                 {
+                    //MessageBox.Show(commandCode);
                     rom.Add(int.Parse(commandCode, System.Globalization.NumberStyles.HexNumber));
                 }
             }
