@@ -14,8 +14,7 @@ namespace PIC_Simulator
     public partial class GUI_Simu : Form
     {
         #region variables
-        Parser parser = new Parser();
-        List<int> commands = new List<int>();
+        Parser parser = new Parser("C:/tmp/testfile.txt");
         #endregion
 
         public GUI_Simu()
@@ -27,11 +26,16 @@ namespace PIC_Simulator
         #region Control-Buttons
         private void btnStart_Click(object sender, EventArgs e)
         {
-            commands = parser.parseFile();
-            for (int i = 0; i < commands.Count; i++)
+            List<int> command = parser.getRom();
+            for (int i = 0; i < command.Count; i++)
             {
-                tBProgramm.AppendText(commands[1].ToString());
+                tBProgramm.AppendText(command[i].ToString() + Environment.NewLine);
             }
+            //List<string> file = parser.getFile();
+            //for (int i = 0; i < command.Count; i++)
+            //{
+            //    tBProgramm.AppendText(file[i] + Environment.NewLine);
+            //}
         }
 
         private void btnStop_Click(object sender, EventArgs e)
