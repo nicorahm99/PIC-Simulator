@@ -46,6 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Command.cs" />
+    <Compile Include="Decoder.cs" />
     <Compile Include="Parser.cs" />
     <Compile Include="GUI_Simu.cs">
       <SubType>Form</SubType>
