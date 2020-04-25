@@ -13,16 +13,32 @@ namespace PIC_Simulator
 {
     public partial class GUI_Simu : Form
     {
-        #region variables
-        string testFilePath = "C:/tmp/testfile.txt";
-        Parser parser = new Parser(testFilePath);
+        #region init
+        Parser parser = new Parser();
+        string helpMsg = "PIC Simulator" + Environment.NewLine + "Dominik Lange & Nico Rahm" + Environment.NewLine + "25.04.2020" + Environment.NewLine + "Version 1.0";
+
+        private void initialisation()
+        {
+
+        }
         #endregion
 
+        #region windows
         public GUI_Simu()
         {
             InitializeComponent();
         }
 
+        private void GUI_Simu_load(object sender, EventArgs e)
+        {
+            initialisation();
+        }
+
+        private void GUI_Simu_close(object sender, FormClosingEventArgs e)
+        {
+
+        }
+        #endregion
 
         #region Control-Buttons
         private void btnStart_Click(object sender, EventArgs e)
@@ -60,19 +76,29 @@ namespace PIC_Simulator
         {
             Close();
         }
-        #endregion
-
-        private void grpBSFRW_Enter(object sender, EventArgs e)
+        
+        private void dateiÖffnenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
                 var FD = new System.Windows.Forms.OpenFileDialog();
-                FD.FileName = @"C\tmp";
+                //FD.FileName = @""; //start in direction ...
                 if (FD.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
-                    string filename = FD.FileName;
+                    parser.setFilePath(FD.FileName);
+                    MessageBox.Show("done");
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
+
+        private void tSBtnHilfe_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(helpMsg);
+        }
+        #endregion
     }
 }
