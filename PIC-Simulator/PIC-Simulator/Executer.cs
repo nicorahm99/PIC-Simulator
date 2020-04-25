@@ -30,27 +30,39 @@ namespace PIC_Simulator
                 case CommandNames.DECFSZ:
                     decFsZ(command.getDestinationSelect(), command.getFileAddress());
                     break;
-                //case CommandNames.INCF:
-                //    incF(command.getDestinationSelect(), command.getFileAddress());
-                //    break;
-                //case CommandNames.INCFSZ:
-                //    incFsZ(command.getDestinationSelect(), command.getFileAddress());
-                //    break;
-                //case CommandNames.IORWF:
-                //    iOrWF(command.getDestinationSelect(), command.getFileAddress());
-                //    break;
-                //case CommandNames.MOVF:
-                //    movF(command.getDestinationSelect(), command.getFileAddress());
-                //    break;
-                //case CommandNames.MOVWF:
-                //    movWF(command.getDestinationSelect(), command.getFileAddress());
-                //    break;
-                //case CommandNames.NOP:
-                //    //TODO Watch cycle-Time and clearance of Carry-/Zero-Flag
-                //    break;
-                //case CommandNames.RLF:
-                //    rlF(command.getDestinationSelect(), command.getFileAddress());
-                //    break;
+                case CommandNames.INCF:
+                    incF(command.getDestinationSelect(), command.getFileAddress());
+                    break;
+                case CommandNames.INCFSZ:
+                    incFsZ(command.getDestinationSelect(), command.getFileAddress());
+                    break;
+                case CommandNames.IORWF:
+                    iOrWF(command.getDestinationSelect(), command.getFileAddress());
+                    break;
+                case CommandNames.MOVF:
+                    movF(command.getDestinationSelect(), command.getFileAddress());
+                    break;
+                case CommandNames.MOVWF:
+                    movWF(command.getFileAddress());
+                    break;
+                case CommandNames.NOP:
+                    //TODO Watch cycle-Time and clearance of Carry-/Zero-Flag
+                    break;
+                case CommandNames.RLF:
+                    rlF(command.getDestinationSelect(), command.getFileAddress());
+                    break;
+                case CommandNames.RRF:
+                        rrF(command.getDestinationSelect(), command.getFileAddress());
+                    break;
+                case CommandNames.SUBWF:
+                    subWF(command.getDestinationSelect(), command.getFileAddress());
+                    break;
+                case CommandNames.SWAPF:
+                    swapF(command.getDestinationSelect(), command.getFileAddress());
+                    break;
+                case CommandNames.XORWF:
+                    xOrWF(command.getDestinationSelect(), command.getFileAddress());
+                    break;
             }
             return command;
         }
@@ -122,6 +134,122 @@ namespace PIC_Simulator
             }
             return fileAddress;
         }
+
+        private int incF(bool isResultWrittenToW, int fileAddress)
+        {
+            int result = getFile(fileAddress) + 1;
+            if (result > 255)
+            {
+                result -= 256;
+            }
+            setZeroFlagIfNeeded(result);
+            writeResultToRightDestination(result, isResultWrittenToW, fileAddress);
+            return fileAddress;
+        }
+
+        private int incFsZ(bool isResultWrittenToW, int fileAddress)
+        {
+            int fileContent = getFile(fileAddress);
+            if (fileContent != 0)
+            {
+                int result = fileContent + 1;
+                if (result > 255)
+                {
+                    result -= 256;
+                }
+                writeResultToRightDestination(result, isResultWrittenToW, fileAddress);
+            }
+            return fileAddress;
+        }
+
+        private int iOrWF(bool isResultWrittenToW, int fileAddress)
+        {
+            //TODO check ZeroFlag setting
+            int result = getWReg() | getFile(fileAddress);
+            setZeroFlagIfNeeded(result);
+            writeResultToRightDestination(result, isResultWrittenToW, fileAddress);
+            return fileAddress;
+        }
+
+        private int movF(bool isResultWrittenToW, int fileAddress)
+        {
+            int fileContent = getFile(fileAddress);
+            setZeroFlagIfNeeded(fileContent);
+            writeResultToRightDestination(fileContent, isResultWrittenToW, fileAddress);
+            return fileAddress;
+        }
+
+        private int movWF(int fileAddress)
+        {
+            int fileContent = getWReg();
+            writeResultToRightDestination(fileContent, false, fileAddress);
+            return fileAddress;
+        }
+
+        private int rlF(bool isResultWrittenToW, int fileAddress)
+        {
+            int fileContent = getFile(fileAddress);
+            int carryFlag = getFile(0x03) & 1;
+            int workingBits = fileContent << 1;
+            workingBits += carryFlag;
+            if ((workingBits & 0x100) == 1)
+            {
+                carryFlag = 1;
+            }
+            else
+            {
+                carryFlag = 0;
+            }
+            int result = workingBits & 0xff;
+            setCarryFlagTo(carryFlag);
+            writeResultToRightDestination(result, isResultWrittenToW, fileAddress);
+            return fileAddress;
+        }
+
+        private int rrF(bool isResultWrittenToW, int fileAddress)
+        {
+            int fileContent = getFile(fileAddress);
+            int carryFlag = getFile(0x03) & 1;
+            int newCarryFlag = fileContent & 0x1;
+            int workingBits = fileContent >> 1;
+            int result = (workingBits + (carryFlag << 7)) & 0xff;
+            setCarryFlagTo(newCarryFlag);
+            writeResultToRightDestination(result, isResultWrittenToW, fileAddress);
+            return fileAddress;
+        }
+
+        private int subWF(bool isResultWrittenToW, int fileAddress)
+        {
+            int result = getFile(fileAddress) - getWReg();
+            if (result > 0)
+            {
+                result += 256;
+                setCarryFlag();
+            }
+            //TODO DC Flag
+            //TODO check zeroFlag setting
+            setZeroFlagIfNeeded(result);
+            writeResultToRightDestination(result, isResultWrittenToW, fileAddress);
+            return fileAddress;
+        }
+
+        private int swapF(bool isResultWrittenToW, int fileAddress)
+        {
+            int fileContent = getFile(fileAddress);
+            int leftPart = (fileContent & 0xf0) >> 4;
+            fileContent = fileContent << 4;
+            int result = (fileContent + leftPart) & 0xff;
+            writeResultToRightDestination(result, isResultWrittenToW, fileAddress);
+            return fileAddress;
+        }
+
+        private int xOrWF(bool isResultWrittenToW, int fileAddress)
+        {
+            int result = getWReg() ^ getFile(fileAddress);
+            setZeroFlagIfNeeded(result);
+            writeResultToRightDestination(result, isResultWrittenToW, fileAddress);
+            return fileAddress;
+        }
         private int bitSetFile(int fileAddress, int bitAddress)
         {
             int registerContent = Program.memory.getFile(fileAddress);
@@ -158,9 +286,21 @@ namespace PIC_Simulator
             }
         }
 
+        private void setCarryFlagTo(int value)
+        {
+            if (value == 0)
+            {
+                bitClearFile(0x03, 0);
+            }
+            else
+            {
+                bitSetFile(0x03, 0);
+            }
+        }
+
         private void setCarryFlag()
         {
-            bitSetFile(0x03, 0);
+            setCarryFlagTo(1);
         }
 
         private int writeResultToRightDestination(int result, bool isResultWrittenToW, int fileAddress)

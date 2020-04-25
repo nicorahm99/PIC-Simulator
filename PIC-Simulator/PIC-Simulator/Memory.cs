@@ -26,19 +26,14 @@ namespace PIC_Simulator
 
         public int setFile(int fileAddress, int value)
         {
-            if (fileAddress >= 0x4f)
+            if (fileAddress >= 0x4f && (getStatusRP0() == 0)) // Bank 0
             {
                 memory[fileAddress] = value;
                 return value;
-            } 
-            else if(fileAddress >= 0x7f)
-            {
-                return 0;
             }
-            else if(fileAddress >= 0xcf)
+            else if (fileAddress >= 0x4f && (getStatusRP0() == 1)) // Bank 1
             {
-                int newFileAddress = fileAddress - 0x7f;
-                switch (newFileAddress)
+                switch (fileAddress)
                 {
                     case 0x01:
                         OPTION = value;
@@ -56,7 +51,7 @@ namespace PIC_Simulator
                         EECON2 = value;
                         break;
                     default:
-                        memory[newFileAddress] = value;
+                        memory[fileAddress] = value;
                         break;
                 }
                 return value;
@@ -98,6 +93,11 @@ namespace PIC_Simulator
 
         public int setWReg(int value) { return wReg = value; }
         public int getWReg() { return wReg; }
+
+        public int getStatusRP0()
+        {
+            return (memory[0x03] & 0x20) >> 5;
+        }
 
     }
 }
