@@ -16,32 +16,45 @@ namespace PIC_Simulator
         private List<int> rom = new List<int>();
         private List<string> file = new List<string>();
 
-        public Parser(string filePath)
+        public void setFilePath(string newPath)
         {
-            this.filePath = filePath;
-            
-            file = File.ReadAllLines(this.filePath).ToList();
+            this.filePath = newPath;
+        }
 
-            foreach (string line in file)
+        public void parse()
+        {
+            try
             {
-                Regex regex = new Regex(@"(^([\d|\w]{4})\s([\d|\w]{4})\s+(\d+).*$)");
-                Match match = regex.Match(line);
-                string commandCode = match.Groups[3].ToString();
-                if (commandCode != "")
+                file = File.ReadAllLines(this.filePath).ToList();
+
+                foreach (string line in file)
                 {
-                    //MessageBox.Show(commandCode);
-                    rom.Add(int.Parse(commandCode, System.Globalization.NumberStyles.HexNumber));
+                    Regex regex = new Regex(@"(^([\d|\w]{4})\s([\d|\w]{4})\s+(\d+).*$)");
+                    Match match = regex.Match(line);
+                    string commandCode = match.Groups[3].ToString();
+                    if (commandCode != "")
+                    {
+                        //MessageBox.Show(commandCode);
+                        rom.Add(int.Parse(commandCode, System.Globalization.NumberStyles.HexNumber));
+                    }
                 }
             }
+            catch (Exception ex) //invalid filepath
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            
         }
 
         public List<string> getFile()
         {
+            parse();
             return file;
         }
 
         public List<int> getRom()
         {
+            parse();
             return rom;
         }
     }
