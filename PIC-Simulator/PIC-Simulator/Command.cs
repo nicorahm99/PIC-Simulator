@@ -54,8 +54,8 @@ namespace PIC_Simulator
 
         private int fileAdress; // eaquals operand f
 
-        public void setFileAdress(int value) { fileAdress = value; }
-        public int getFileAdress() { return fileAdress; }
+        public void setFileAddress(int value) { fileAdress = value; }
+        public int getFileAddress() { return fileAdress; }
 
         private bool destinationSelect; // eaquals operand d
 

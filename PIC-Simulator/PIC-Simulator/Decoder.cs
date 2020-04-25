@@ -203,20 +203,20 @@ namespace PIC_Simulator
             {
                 resultCommand.setCommandName(commandName);
                 resultCommand.setDestinationSelect(isResultWrittenToW(commandCode));
-                resultCommand.setFileAdress(extractFileAddress(commandCode));
+                resultCommand.setFileAddress(extractFileAddress(commandCode));
             }
 
             void addNameBitaddrFileaddrToResult(CommandNames commandName)
             {
                 resultCommand.setCommandName(commandName);
                 resultCommand.setBitAddress(extractBitAddress(commandCode));
-                resultCommand.setFileAdress(extractFileAddress(commandCode));
+                resultCommand.setFileAddress(extractFileAddress(commandCode));
             }
 
             void addNameFileToResult(CommandNames commandName)
             {
                 resultCommand.setCommandName(commandName);
-                resultCommand.setFileAdress(extractFileAddress(commandCode));
+                resultCommand.setFileAddress(extractFileAddress(commandCode));
             }
 
             void addNameLiteralToResult(CommandNames commandName)

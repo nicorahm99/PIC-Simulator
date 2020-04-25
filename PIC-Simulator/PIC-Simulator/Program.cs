@@ -18,5 +18,6 @@ namespace PIC_Simulator
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new GUI_Simu());
         }
+        public static readonly Memory memory = new Memory();
     }
 }

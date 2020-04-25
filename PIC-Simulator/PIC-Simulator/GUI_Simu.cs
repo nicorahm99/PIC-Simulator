@@ -31,10 +31,10 @@ namespace PIC_Simulator
             {
                 tBProgramm.AppendText(command[i].ToString() + Environment.NewLine);
             }
-            //List<string> file = parser.getFile();
-            //for (int i = 0; i < command.Count; i++)
+            //list<string> file = parser.getfile();
+            //for (int i = 0; i < command.count; i++)
             //{
-            //    tBProgramm.AppendText(file[i] + Environment.NewLine);
+            //    tbprogramm.appendtext(file[i] + environment.newline);
             //}
         }
 

@@ -46,6 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Memory.cs" />
+    <Compile Include="ROM.cs" />
+    <Compile Include="Executer.cs" />
     <Compile Include="Command.cs" />
     <Compile Include="Decoder.cs" />
     <Compile Include="Parser.cs" />
