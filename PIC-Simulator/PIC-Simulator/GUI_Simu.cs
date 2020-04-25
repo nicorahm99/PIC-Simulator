@@ -14,7 +14,8 @@ namespace PIC_Simulator
     public partial class GUI_Simu : Form
     {
         #region variables
-        Parser parser = new Parser("C:/tmp/testfile.txt");
+        string testFilePath = "C:/tmp/testfile.txt";
+        Parser parser = new Parser(testFilePath);
         #endregion
 
         public GUI_Simu()
@@ -52,11 +53,26 @@ namespace PIC_Simulator
         {
 
         }
+        #endregion
 
-        private void btnExit_Click(object sender, EventArgs e)
+        #region Toolbar
+        private void verlassenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
         }
         #endregion
+
+        private void grpBSFRW_Enter(object sender, EventArgs e)
+        {
+            try
+            {
+                var FD = new System.Windows.Forms.OpenFileDialog();
+                FD.FileName = @"C\tmp";
+                if (FD.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    string filename = FD.FileName;
+                }
+            }
+        }
     }
 }
