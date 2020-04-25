@@ -37,12 +37,12 @@ namespace PIC_Simulator
 
         public List<string> getFile()
         {
-            return this.file;
+            return file;
         }
 
         public List<int> getRom()
         {
-            return this.rom;
+            return rom;
         }
     }
 }
