@@ -3,7 +3,7 @@ using System.IO;
 
 namespace PIC_Simulator
 {
-    class Executer
+    public class Executer
     {
         public Command executeCommand(Command command)
         {

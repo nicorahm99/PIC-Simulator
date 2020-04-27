@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PIC_Simulator
 {
-    class Memory
+    public class Memory
     {
         private int[] memory = new int[81]; // addresses from 0x0c to 0x4f /-/ 0x8c to 0xcf
 
@@ -89,6 +89,14 @@ namespace PIC_Simulator
                 }
             }
             return 0;
+        }
+
+        public int getBit(int fileadress, int bitadress)
+        {
+            int reg = getFile(fileadress);
+            reg = reg & bitadress;
+            if (reg == 0) { return 0; }
+            else { return 1; }
         }
 
         public int setWReg(int value) { return wReg = value; }

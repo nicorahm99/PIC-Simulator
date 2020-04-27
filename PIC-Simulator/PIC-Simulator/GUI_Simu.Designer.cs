@@ -497,7 +497,7 @@
             this.grBSFRBit.Controls.Add(this.lblC);
             this.grBSFRBit.Location = new System.Drawing.Point(246, 28);
             this.grBSFRBit.Name = "grBSFRBit";
-            this.grBSFRBit.Size = new System.Drawing.Size(387, 144);
+            this.grBSFRBit.Size = new System.Drawing.Size(372, 144);
             this.grBSFRBit.TabIndex = 9;
             this.grBSFRBit.TabStop = false;
             this.grBSFRBit.Text = "SFR (Bit)";
@@ -813,9 +813,9 @@
             this.lblCVal.AutoSize = true;
             this.lblCVal.Location = new System.Drawing.Point(334, 36);
             this.lblCVal.Name = "lblCVal";
-            this.lblCVal.Size = new System.Drawing.Size(19, 13);
+            this.lblCVal.Size = new System.Drawing.Size(13, 13);
             this.lblCVal.TabIndex = 25;
-            this.lblCVal.Text = "00";
+            this.lblCVal.Text = "0";
             // 
             // lblStatus2
             // 
@@ -831,18 +831,18 @@
             this.lblDCVal.AutoSize = true;
             this.lblDCVal.Location = new System.Drawing.Point(293, 36);
             this.lblDCVal.Name = "lblDCVal";
-            this.lblDCVal.Size = new System.Drawing.Size(19, 13);
+            this.lblDCVal.Size = new System.Drawing.Size(13, 13);
             this.lblDCVal.TabIndex = 23;
-            this.lblDCVal.Text = "00";
+            this.lblDCVal.Text = "0";
             // 
             // lblZVal
             // 
             this.lblZVal.AutoSize = true;
             this.lblZVal.Location = new System.Drawing.Point(252, 36);
             this.lblZVal.Name = "lblZVal";
-            this.lblZVal.Size = new System.Drawing.Size(19, 13);
+            this.lblZVal.Size = new System.Drawing.Size(13, 13);
             this.lblZVal.TabIndex = 24;
-            this.lblZVal.Text = "00";
+            this.lblZVal.Text = "0";
             // 
             // lblIRP
             // 
@@ -867,9 +867,9 @@
             this.lblPDVal.AutoSize = true;
             this.lblPDVal.Location = new System.Drawing.Point(211, 36);
             this.lblPDVal.Name = "lblPDVal";
-            this.lblPDVal.Size = new System.Drawing.Size(19, 13);
+            this.lblPDVal.Size = new System.Drawing.Size(13, 13);
             this.lblPDVal.TabIndex = 22;
-            this.lblPDVal.Text = "00";
+            this.lblPDVal.Text = "0";
             // 
             // lblRP0
             // 
@@ -885,9 +885,9 @@
             this.lblTOVal.AutoSize = true;
             this.lblTOVal.Location = new System.Drawing.Point(170, 36);
             this.lblTOVal.Name = "lblTOVal";
-            this.lblTOVal.Size = new System.Drawing.Size(19, 13);
+            this.lblTOVal.Size = new System.Drawing.Size(13, 13);
             this.lblTOVal.TabIndex = 21;
-            this.lblTOVal.Text = "00";
+            this.lblTOVal.Text = "0";
             // 
             // lblTO
             // 
@@ -903,9 +903,9 @@
             this.lblRP0Val.AutoSize = true;
             this.lblRP0Val.Location = new System.Drawing.Point(129, 36);
             this.lblRP0Val.Name = "lblRP0Val";
-            this.lblRP0Val.Size = new System.Drawing.Size(19, 13);
+            this.lblRP0Val.Size = new System.Drawing.Size(13, 13);
             this.lblRP0Val.TabIndex = 20;
-            this.lblRP0Val.Text = "00";
+            this.lblRP0Val.Text = "0";
             // 
             // lblPD
             // 
@@ -921,9 +921,9 @@
             this.lblRP1Val.AutoSize = true;
             this.lblRP1Val.Location = new System.Drawing.Point(88, 36);
             this.lblRP1Val.Name = "lblRP1Val";
-            this.lblRP1Val.Size = new System.Drawing.Size(19, 13);
+            this.lblRP1Val.Size = new System.Drawing.Size(13, 13);
             this.lblRP1Val.TabIndex = 19;
-            this.lblRP1Val.Text = "00";
+            this.lblRP1Val.Text = "0";
             // 
             // lblZ
             // 
@@ -939,9 +939,9 @@
             this.lblIRPVal.AutoSize = true;
             this.lblIRPVal.Location = new System.Drawing.Point(47, 36);
             this.lblIRPVal.Name = "lblIRPVal";
-            this.lblIRPVal.Size = new System.Drawing.Size(19, 13);
+            this.lblIRPVal.Size = new System.Drawing.Size(13, 13);
             this.lblIRPVal.TabIndex = 18;
-            this.lblIRPVal.Text = "00";
+            this.lblIRPVal.Text = "0";
             // 
             // lblDC
             // 
