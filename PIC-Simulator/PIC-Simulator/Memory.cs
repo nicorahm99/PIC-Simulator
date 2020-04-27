@@ -20,18 +20,14 @@ namespace PIC_Simulator
         private int EECON2;
         #endregion
 
-        //public Memory()
-        //{
-        //}
-
         public int setFile(int fileAddress, int value)
         {
-            if (fileAddress >= 0x4f && (getStatusRP0() == 0)) // Bank 0
+            if (fileAddress <= 0x4f && (getStatusRP0() == 0)) // Bank 0
             {
                 memory[fileAddress] = value;
                 return value;
             }
-            else if (fileAddress >= 0x4f && (getStatusRP0() == 1)) // Bank 1
+            else if (fileAddress <= 0x4f && (getStatusRP0() == 1)) // Bank 1
             {
                 switch (fileAddress)
                 {
@@ -61,18 +57,13 @@ namespace PIC_Simulator
 
         public int getFile(int fileAddress)
         {
-            if (fileAddress >= 0x4f)
+            if (fileAddress <= 0x4f && (getStatusRP0() == 0)) // Bank 0
             {
                 return memory[fileAddress];
             }
-            else if (fileAddress >= 0x7f)
+            else if (fileAddress <= 0x4f && (getStatusRP0() == 1)) // Bank 1
             {
-                return 0;
-            }
-            else if (fileAddress >= 0xcf)
-            {
-                int newFileAddress = fileAddress - 0x7f;
-                switch (newFileAddress)
+                switch (fileAddress)
                 {
                     case 0x01:
                         return OPTION;
@@ -85,17 +76,17 @@ namespace PIC_Simulator
                     case 0x09:
                         return EECON2;
                     default:
-                        return memory[newFileAddress];
+                        return memory[fileAddress];
                 }
             }
             return 0;
         }
 
-        public int getBit(int fileadress, int bitadress)
+        public int getBit(int fileadress, int bitadress) // Bitaddress like : 0-7
         {
             int reg = getFile(fileadress);
-            reg = reg & bitadress;
-            if (reg == 0) { return 0; }
+            int result = reg & (0x1 << bitadress);
+            if (result == 0) { return 0; }
             else { return 1; }
         }
 
@@ -104,7 +95,7 @@ namespace PIC_Simulator
 
         public int getStatusRP0()
         {
-            return (memory[0x03] & 0x20) >> 5;
+            return getBit(0x03, 5);
         }
 
     }
