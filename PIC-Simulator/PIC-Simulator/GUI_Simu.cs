@@ -52,7 +52,11 @@ namespace PIC_Simulator
         #endregion
 
         #region init
-
+        public Parser parser = new Parser();
+        public Decoder decoder = new Decoder();
+        public Executer executer = new Executer();
+        public ROM rom = new ROM();
+        public static readonly Memory memory = new Memory();
 
         string helpMsg = "DS PIC16F84/CR84 - Simulator" + Environment.NewLine + "Dominik Lange & Nico Rahm" + Environment.NewLine + "25.04.2020" + Environment.NewLine + "Version 1.0";
 
@@ -83,39 +87,41 @@ namespace PIC_Simulator
         #region helpfunctions
         private void refreshSRF()
         {
-            lblIRPVal.Text = Program.memory.getBit(0x3, 0).ToString();
-            lblRP1Val.Text = Program.memory.getBit(0x3, 1).ToString();
-            lblRP0Val.Text = Program.memory.getBit(0x3, 2).ToString();
-            lblTOVal.Text = Program.memory.getBit(0x3, 3).ToString();
-            lblPDVal.Text = Program.memory.getBit(0x3, 4).ToString();
-            lblZVal.Text = Program.memory.getBit(0x3, 5).ToString();
-            lblDCVal.Text = Program.memory.getBit(0x3, 6).ToString();
-            lblCVal.Text = Program.memory.getBit(0x3, 7).ToString();
+            lblIRPVal.Text = memory.getBit(0x3, 0).ToString();
+            lblRP1Val.Text = memory.getBit(0x3, 1).ToString();
+            lblRP0Val.Text = memory.getBit(0x3, 2).ToString();
+            lblTOVal.Text = memory.getBit(0x3, 3).ToString();
+            lblPDVal.Text = memory.getBit(0x3, 4).ToString();
+            lblZVal.Text = memory.getBit(0x3, 5).ToString();
+            lblDCVal.Text = memory.getBit(0x3, 6).ToString();
+            lblCVal.Text = memory.getBit(0x3, 7).ToString();
 
-            lblRPuVal.Text = Program.memory.getBit(0x81, 0).ToString();
-            lblIEgVal.Text = Program.memory.getBit(0x81, 1).ToString();
-            lblTCsVal.Text = Program.memory.getBit(0x81, 2).ToString();
-            lblTSeVal.Text = Program.memory.getBit(0x81, 3).ToString();
-            lblPSAVal.Text = Program.memory.getBit(0x81, 4).ToString();
-            lblPS2Val.Text = Program.memory.getBit(0x81, 5).ToString();
-            lblPS1Val.Text = Program.memory.getBit(0x81, 6).ToString();
-            lblPS0Val.Text = Program.memory.getBit(0x81, 7).ToString();
+            lblRPuVal.Text = memory.getBit(0x81, 0).ToString();
+            lblIEgVal.Text = memory.getBit(0x81, 1).ToString();
+            lblTCsVal.Text = memory.getBit(0x81, 2).ToString();
+            lblTSeVal.Text = memory.getBit(0x81, 3).ToString();
+            lblPSAVal.Text = memory.getBit(0x81, 4).ToString();
+            lblPS2Val.Text = memory.getBit(0x81, 5).ToString();
+            lblPS1Val.Text = memory.getBit(0x81, 6).ToString();
+            lblPS0Val.Text = memory.getBit(0x81, 7).ToString();
 
-            lblGIEVal.Text = Program.memory.getBit(0xB, 0).ToString();
-            lblEIEVal.Text = Program.memory.getBit(0xB, 1).ToString();
-            lblTIEVal.Text = Program.memory.getBit(0xB, 2).ToString();
-            lblIEVal.Text = Program.memory.getBit(0xB, 3).ToString();
-            lblRIEVal.Text = Program.memory.getBit(0xB, 4).ToString();
-            lblTIFVal.Text = Program.memory.getBit(0xB, 5).ToString();
-            lblIFVal.Text = Program.memory.getBit(0xB, 6).ToString();
-            lblRIFVal.Text = Program.memory.getBit(0xB, 7).ToString();
+            lblGIEVal.Text = memory.getBit(0xB, 0).ToString();
+            lblEIEVal.Text = memory.getBit(0xB, 1).ToString();
+            lblTIEVal.Text = memory.getBit(0xB, 2).ToString();
+            lblIEVal.Text = memory.getBit(0xB, 3).ToString();
+            lblRIEVal.Text = memory.getBit(0xB, 4).ToString();
+            lblTIFVal.Text = memory.getBit(0xB, 5).ToString();
+            lblIFVal.Text = memory.getBit(0xB, 6).ToString();
+            lblRIFVal.Text = memory.getBit(0xB, 7).ToString();
         }
         #endregion
 
         #region Control-Buttons
         private void btnStart_Click(object sender, EventArgs e)
         {
-            
+            memory.setFile(0xD, 4);
+            int test = executer.test(0xD);
+            MessageBox.Show(test.ToString());
         }
 
         private void btnStop_Click(object sender, EventArgs e)
@@ -148,7 +154,7 @@ namespace PIC_Simulator
                 //FD.FileName = @""; //start in direction ...
                 if (FD.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
-                    Program.parser.setFilePath(FD.FileName);
+                    parser.setFilePath(FD.FileName);
                 }
             }
             catch (Exception ex)
@@ -156,9 +162,9 @@ namespace PIC_Simulator
                 MessageBox.Show(ex.ToString());
             }
 
-            Program.rom.setRom(Program.parser.getRom());
+            rom.setRom(parser.getRom());
 
-            List<string> file = Program.parser.getFile();
+            List<string> file = parser.getFile();
             for (int i = 0; i < file.Count; i++)
             {
                 tBProgramm.AppendText(file[i] + Environment.NewLine);

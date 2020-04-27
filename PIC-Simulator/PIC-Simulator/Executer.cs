@@ -271,16 +271,16 @@ namespace PIC_Simulator
         }
         private int bitSetFile(int fileAddress, int bitAddress)
         {
-            int registerContent = Program.memory.getFile(fileAddress);
+            int registerContent = GUI_Simu.memory.getFile(fileAddress);
             registerContent |= 1 << bitAddress;
-            return Program.memory.setFile(fileAddress, registerContent);
+            return GUI_Simu.memory.setFile(fileAddress, registerContent);
         }
 
         private int bitClearFile(int fileAddress, int bitAddress)
         {
-            int registerContent = Program.memory.getFile(fileAddress);
+            int registerContent = GUI_Simu.memory.getFile(fileAddress);
             registerContent &= ~(1 << bitAddress);
-            return Program.memory.setFile(fileAddress, registerContent);
+            return GUI_Simu.memory.setFile(fileAddress, registerContent);
         }
         #endregion
 
@@ -371,20 +371,25 @@ namespace PIC_Simulator
         {
             if (isResultWrittenToW)
             {
-                return Program.memory.setWReg(result);
+                return GUI_Simu.memory.setWReg(result);
             }
-            return Program.memory.setFile(fileAddress, result);
+            return GUI_Simu.memory.setFile(fileAddress, result);
         }
 
         private int getWReg()
         {
-            return Program.memory.getWReg();
+            return GUI_Simu.memory.getWReg();
         }
 
         private int getFile(int fileAddress)
         {
-            return Program.memory.getFile(fileAddress);
+            return GUI_Simu.memory.getFile(fileAddress);
         }
         #endregion
+
+        public int test(int adress)
+        {
+            return GUI_Simu.memory.getFile(adress);
+        }
     }
 }
