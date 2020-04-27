@@ -20,9 +20,9 @@ namespace PIC_Simulator
         private int EECON2;
         #endregion
 
-        public Memory()
-        {
-        }
+        //public Memory()
+        //{
+        //}
 
         public int setFile(int fileAddress, int value)
         {

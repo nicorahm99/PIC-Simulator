@@ -25,7 +25,7 @@ namespace PIC_Simulator
         {
             try
             {
-                file = File.ReadAllLines(this.filePath).ToList();
+                file = File.ReadAllLines(filePath).ToList();
 
                 foreach (string line in file)
                 {

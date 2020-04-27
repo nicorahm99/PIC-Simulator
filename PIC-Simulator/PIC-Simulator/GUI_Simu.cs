@@ -15,6 +15,11 @@ namespace PIC_Simulator
     {
         #region init
         Parser parser = new Parser();
+        Decoder decoder = new Decoder();
+        Executer executer = new Executer();
+        ROM rom = new ROM();
+        Memory memory = new Memory();
+
         string helpMsg = "PIC Simulator" + Environment.NewLine + "Dominik Lange & Nico Rahm" + Environment.NewLine + "25.04.2020" + Environment.NewLine + "Version 1.0";
 
         private void initialisation()
@@ -36,23 +41,14 @@ namespace PIC_Simulator
 
         private void GUI_Simu_close(object sender, FormClosingEventArgs e)
         {
-
+            
         }
         #endregion
 
         #region Control-Buttons
         private void btnStart_Click(object sender, EventArgs e)
         {
-            List<int> command = parser.getRom();
-            for (int i = 0; i < command.Count; i++)
-            {
-                tBProgramm.AppendText(command[i].ToString() + Environment.NewLine);
-            }
-            //list<string> file = parser.getfile();
-            //for (int i = 0; i < command.count; i++)
-            //{
-            //    tbprogramm.appendtext(file[i] + environment.newline);
-            //}
+            
         }
 
         private void btnStop_Click(object sender, EventArgs e)
@@ -86,12 +82,19 @@ namespace PIC_Simulator
                 if (FD.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
                     parser.setFilePath(FD.FileName);
-                    MessageBox.Show("done");
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
+            }
+
+            rom.setRom(parser.getRom());
+
+            List<string> file = parser.getFile();
+            for (int i = 0; i < file.Count; i++)
+            {
+                tBProgramm.AppendText(file[i] + Environment.NewLine);
             }
         }
 

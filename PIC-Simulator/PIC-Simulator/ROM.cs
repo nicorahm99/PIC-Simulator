@@ -10,7 +10,7 @@ namespace PIC_Simulator
     {
         private int[] rom = new int[1024];
 
-        public ROM(List<int> rom)
+        public void setRom(List<int> rom)
         {
             this.rom = rom.ToArray();
         }
