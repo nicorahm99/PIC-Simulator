@@ -386,10 +386,5 @@ namespace PIC_Simulator
             return GUI_Simu.memory.getFile(fileAddress);
         }
         #endregion
-
-        public int test(int adress)
-        {
-            return GUI_Simu.memory.getFile(adress);
-        }
     }
 }

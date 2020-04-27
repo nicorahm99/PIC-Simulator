@@ -119,9 +119,7 @@ namespace PIC_Simulator
         #region Control-Buttons
         private void btnStart_Click(object sender, EventArgs e)
         {
-            memory.setFile(0xD, 4);
-            int test = executer.test(0xD);
-            MessageBox.Show(test.ToString());
+
         }
 
         private void btnStop_Click(object sender, EventArgs e)

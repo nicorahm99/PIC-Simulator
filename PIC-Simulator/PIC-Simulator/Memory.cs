@@ -95,7 +95,7 @@ namespace PIC_Simulator
 
         public int getStatusRP0()
         {
-            return getBit(0x03, 5);
+            return memory[0x3] & 0x20;
         }
 
     }
