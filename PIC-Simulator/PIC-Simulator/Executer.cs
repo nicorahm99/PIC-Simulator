@@ -70,6 +70,54 @@ namespace PIC_Simulator
                 case CommandNames.BSF:
                     bsF(command.getFileAddress(), command.getBitAddress());
                     break;
+                case CommandNames.BTFSC:
+                    btFsc(command.getFileAddress(), command.getBitAddress());
+                    break;
+                case CommandNames.BTFSS:
+                    btFss(command.getFileAddress(), command.getBitAddress());
+                    break;
+                case CommandNames.ADDLW:
+                    addLW(command.getLiteral());
+                    break;
+                case CommandNames.ANDLW:
+                    andLW(command.getLiteral());
+                    break;
+                case CommandNames.CALL:
+                    call(command.getLiteral());
+                    break;
+                case CommandNames.CLRWDT:
+                    clrWdT();
+                    break;
+                case CommandNames.GOTO:
+                    _goto(command.getLiteral());
+                    break;
+                case CommandNames.IORLW:
+                    iOrLW(command.getLiteral());
+                    break;
+                case CommandNames.MOVLW:
+                    movLW(command.getLiteral());
+                    break;
+                case CommandNames.RETFIE:
+                    retfIE();
+                    break;
+                case CommandNames.RETLW:
+                    retLW(command.getLiteral());
+                    break;
+                case CommandNames.RETURN:
+                    _return();
+                    break;
+                case CommandNames.SLEEP:
+                    sleep();
+                    break;
+                case CommandNames.SUBLW:
+                    subLW(command.getLiteral());
+                    break;
+                case CommandNames.XORLW:
+                    xOrLW(command.getLiteral());
+                    break;
+                default:
+                    // ERROR
+                    break;
             }
             return command;
         }
@@ -331,7 +379,7 @@ namespace PIC_Simulator
             return literal;
         }
 
-        private int andLw(int literal)
+        private int andLW(int literal)
         {
             int result = getWReg() & literal;
             setZeroFlagIfNeeded(result);
