@@ -64,6 +64,12 @@ namespace PIC_Simulator
                 case CommandNames.XORWF:
                     xOrWF(command.getDestinationSelect(), command.getFileAddress());
                     break;
+                case CommandNames.BCF:
+                    bcF(command.getFileAddress(), command.getBitAddress());
+                    break;
+                case CommandNames.BSF:
+                    bsF(command.getFileAddress(), command.getBitAddress());
+                    break;
             }
             return command;
         }
@@ -269,18 +275,167 @@ namespace PIC_Simulator
             writeResultToRightDestination(result, isResultWrittenToW, fileAddress);
             return fileAddress;
         }
-        private int bitSetFile(int fileAddress, int bitAddress)
+        
+        private int bcF(int fileAddress, int bitAddress)
+        {
+            int registerContent = GUI_Simu.memory.getFile(fileAddress);
+            registerContent &= ~(1 << bitAddress);
+            return GUI_Simu.memory.setFile(fileAddress, registerContent);
+        }
+        
+        private int bsF(int fileAddress, int bitAddress)
         {
             int registerContent = GUI_Simu.memory.getFile(fileAddress);
             registerContent |= 1 << bitAddress;
             return GUI_Simu.memory.setFile(fileAddress, registerContent);
         }
 
-        private int bitClearFile(int fileAddress, int bitAddress)
+        private int btFsc(int fileAddress, int bitAddress)
         {
             int registerContent = GUI_Simu.memory.getFile(fileAddress);
-            registerContent &= ~(1 << bitAddress);
-            return GUI_Simu.memory.setFile(fileAddress, registerContent);
+            registerContent |= 1 << bitAddress;
+            if (registerContent == 0)
+            {
+                //skip next command in ROM -- PC + 2
+            }
+            return fileAddress;
+        }
+
+        private int btFss(int fileAddress, int bitAddress)
+        {
+            int registerContent = GUI_Simu.memory.getFile(fileAddress);
+            registerContent |= 1 << bitAddress;
+            if (registerContent != 0)
+            {
+                //skip next command in ROM -- PC + 2
+            }
+            return fileAddress;
+        }
+
+        private int addLW(int literal)
+        {
+            int wContent = getWReg();
+            int result = wContent + literal;
+            int fourBitResult = (wContent & 0xf) + (literal & 0xf);
+            setCarryFlagIfNeeded(result);
+            if (result < 255)
+            {
+                result -= 256;
+            }
+            if (fourBitResult < 15)
+            {
+                setDigitCarryFlag();
+            }
+            setZeroFlagIfNeeded(result);
+            writeResultToRightDestination(result, true, 0);
+            return literal;
+        }
+
+        private int andLw(int literal)
+        {
+            int result = getWReg() & literal;
+            setZeroFlagIfNeeded(result);
+            writeResultToRightDestination(result, true, 0);
+            return literal;
+        }
+
+        private int call(int address)
+        {
+            //TODO push PC to stack
+            _goto(address);
+            return address;
+        }
+
+        private int clrWdT()
+        {
+            //TODO clear watchdog Timer
+            return 0;
+        }
+
+        private int _goto(int address)
+        {
+            //PC push address
+            return address;
+        }
+
+        private int iOrLW(int literal) 
+        {
+            int result = getWReg() | literal;
+            if (result == 0) // inverted ZeroFlag --> see Datenblatt
+            {
+                setZeroFlagTo(0);
+            }
+            else
+            {
+                setZeroFlagTo(1);
+            }
+            writeResultToRightDestination(result, true, 0);
+            return literal;
+        }
+
+        private int movLW(int literal)
+        {
+            setZeroFlagIfNeeded(literal);
+            writeResultToRightDestination(literal, true, 0);
+            return literal;
+        }
+
+        private int retfIE()
+        {
+            // Return from Interrupt
+            // Set GIE Flag
+            // POP Stack // Load Top of Stack (TOS) to PC
+            return 0;
+        }
+
+        private int retLW(int literal)
+        {
+            writeResultToRightDestination(literal, true, 0);
+            // TOS -> PC
+            return literal;
+        }
+
+        private int _return()
+        {
+            // TOS -> PC
+            return 0;
+        }
+
+        private int sleep()
+        {
+            //00h → WDT,
+            //0 → WDT prescaler,
+            //1 → TO,
+            //0 → PD
+            return 0;
+        }
+
+
+        private int subLW(int literal)
+        {
+            int wContent = getWReg();
+            int result = literal - wContent;
+            int fourBitResult = (literal & 0xf) - (wContent & 0xf);
+            setCarryFlagForSub(result);
+            if (result > 0)
+            {
+                result += 256;
+            }
+            if (fourBitResult < 15)
+            {
+                setDigitCarryFlag();
+            }
+            setZeroFlagIfNeeded(result);
+            writeResultToRightDestination(result, true, 0);
+            return literal;
+        }
+
+        private int xOrLW(int literal) 
+        {
+            int result = literal ^ getWReg();
+            setZeroFlagIfNeeded(result);
+            writeResultToRightDestination(result, true, 0);
+            return literal;
         }
         #endregion
 
@@ -289,11 +444,11 @@ namespace PIC_Simulator
         {
             if (value == 0)
             {
-                bitClearFile(0x03, 2);
+                bcF(0x03, 2);
             }
             else
             {
-                bitSetFile(0x03, 2);
+                bsF(0x03, 2);
             }
         }
 
@@ -313,11 +468,11 @@ namespace PIC_Simulator
         {
             if (value == 0)
             {
-                bitClearFile(0x03, 0);
+                bcF(0x03, 0);
             }
             else
             {
-                bitSetFile(0x03, 0);
+                bsF(0x03, 0);
             }
         }
 
@@ -354,11 +509,11 @@ namespace PIC_Simulator
         {
             if (value == 0)
             {
-                bitClearFile(0x03, 0);
+                bcF(0x03, 0);
             }
             else
             {
-                bitSetFile(0x03, 0);
+                bsF(0x03, 0);
             }
         }
 
