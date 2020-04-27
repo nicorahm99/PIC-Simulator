@@ -1,4 +1,5 @@
 ﻿using System.Deployment.Application;
+using System.Dynamic;
 using System.IO;
 
 namespace PIC_Simulator
@@ -70,13 +71,19 @@ namespace PIC_Simulator
         #region command functions
         private int addWF(bool isResultWrittenToW, int fileAddress)
         {
-            int result = getWReg() + getFile(fileAddress);
+            int wContent = getWReg();
+            int fileContent = getFile(fileAddress);
+            int result = wContent + fileContent;
+            int fourBitResult = (wContent & 0xf) + (fileContent & 0xf);
+            setCarryFlagIfNeeded(result);
             if (result < 255)
             {
                 result -= 256;
-                setCarryFlag();
             }
-            //TODO DC Flag
+            if (fourBitResult < 15)
+            {
+                setDigitCarryFlag();
+            }
             setZeroFlagIfNeeded(result);
             writeResultToRightDestination(result, isResultWrittenToW, fileAddress);
             return fileAddress;
@@ -164,9 +171,16 @@ namespace PIC_Simulator
 
         private int iOrWF(bool isResultWrittenToW, int fileAddress)
         {
-            //TODO check ZeroFlag setting
             int result = getWReg() | getFile(fileAddress);
-            setZeroFlagIfNeeded(result);
+            // Inverted Zeroflag Setting
+            if (result == 0)
+            {
+                setZeroFlagTo(0);
+            }
+            else
+            {
+                setZeroFlagTo(1);
+            }
             writeResultToRightDestination(result, isResultWrittenToW, fileAddress);
             return fileAddress;
         }
@@ -220,14 +234,19 @@ namespace PIC_Simulator
 
         private int subWF(bool isResultWrittenToW, int fileAddress)
         {
-            int result = getFile(fileAddress) - getWReg();
+            int wContent = getWReg();
+            int fileContent = getFile(fileAddress);
+            int result = fileContent - wContent;
+            int fourBitResult = (fileContent & 0xf) - (wContent & 0xf);
+            setCarryFlagForSub(result);
             if (result > 0)
             {
                 result += 256;
-                setCarryFlag();
             }
-            //TODO DC Flag
-            //TODO check zeroFlag setting
+            if (fourBitResult < 15)
+            {
+                setDigitCarryFlag();
+            }
             setZeroFlagIfNeeded(result);
             writeResultToRightDestination(result, isResultWrittenToW, fileAddress);
             return fileAddress;
@@ -284,6 +303,10 @@ namespace PIC_Simulator
             {
                 setZeroFlagTo(1);
             }
+            else
+            {
+                setZeroFlagTo(0);
+            }
         }
 
         private void setCarryFlagTo(int value)
@@ -298,9 +321,50 @@ namespace PIC_Simulator
             }
         }
 
+        private void setCarryFlagIfNeeded(int result)
+        {
+            if (result > 255)
+            {
+                setCarryFlagTo(1);
+            }
+            else
+            {
+                setCarryFlagTo(0);
+            }
+        }
+
+        private void setCarryFlagForSub(int result)
+        {
+            if (result <= 255 && result >= 0)
+            {
+                setCarryFlagTo(1);
+            }
+            else
+            {
+                setCarryFlagTo(0);
+            }
+        }
+
         private void setCarryFlag()
         {
             setCarryFlagTo(1);
+        }
+
+        private void setDigitCarryFlagTo(int value)
+        {
+            if (value == 0)
+            {
+                bitClearFile(0x03, 0);
+            }
+            else
+            {
+                bitSetFile(0x03, 0);
+            }
+        }
+
+        private void setDigitCarryFlag()
+        {
+            setDigitCarryFlagTo(1);
         }
 
         private int writeResultToRightDestination(int result, bool isResultWrittenToW, int fileAddress)
