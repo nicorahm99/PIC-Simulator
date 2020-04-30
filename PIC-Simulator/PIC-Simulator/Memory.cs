@@ -12,7 +12,7 @@ namespace PIC_Simulator
 
         private int wReg = 0;
 
-        private Stack<int> stack = new Stack<int>;
+        private Stack<int> stack = new Stack<int>();
 
         #region special function Register on BANK 2
         private int OPTION;
