@@ -974,7 +974,7 @@
             this.lVMemory.HideSelection = false;
             this.lVMemory.Location = new System.Drawing.Point(0, 19);
             this.lVMemory.Name = "lVMemory";
-            this.lVMemory.Size = new System.Drawing.Size(394, 241);
+            this.lVMemory.Size = new System.Drawing.Size(420, 241);
             this.lVMemory.TabIndex = 10;
             this.lVMemory.UseCompatibleStateImageBehavior = false;
             this.lVMemory.View = System.Windows.Forms.View.SmallIcon;
@@ -984,7 +984,7 @@
             this.grpBMemory.Controls.Add(this.lVMemory);
             this.grpBMemory.Location = new System.Drawing.Point(518, 178);
             this.grpBMemory.Name = "grpBMemory";
-            this.grpBMemory.Size = new System.Drawing.Size(394, 260);
+            this.grpBMemory.Size = new System.Drawing.Size(420, 260);
             this.grpBMemory.TabIndex = 11;
             this.grpBMemory.TabStop = false;
             this.grpBMemory.Text = "Memory";

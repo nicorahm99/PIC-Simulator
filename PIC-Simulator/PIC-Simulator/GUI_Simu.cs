@@ -118,20 +118,22 @@ namespace PIC_Simulator
 
         public void refreshMemory()
         {
+            //Clear all items
+            lVMemory.Items.Clear();
+
+            //rebuild listView
             string firstrow = "Adr. | +00 | +01 | +02 | +03 | +04 | +05 | +06 | +07 |";
             lVMemory.Items.Add(firstrow);
             for (int i = 1; i<32; i ++)
             {
-                string adr = (i * 8).ToString("X"); //int to hex string
+                string adr = (i * 8).ToString("X"); //convert adress integer to hex string
                 if (adr.Length < 2) { adr = "0" + adr; }
                 string newrow = adr + "   |";
-                //int intAgain = int.Parse(hexValue, System.Globalization.NumberStyles.HexNumber); //back to int
                 for (int j = 0; j<8; j++)
                 {
                     newrow += "  " + memory.getBit((i * 8), j).ToString() + "  |";
                 }
                 lVMemory.Items.Add(newrow);
-                //MessageBox.Show(newrow);
             }
         }
         #endregion
@@ -139,7 +141,7 @@ namespace PIC_Simulator
         #region Control-Buttons
         private void btnStart_Click(object sender, EventArgs e)
         {
-            refreshMemory();
+            
         }
 
         private void btnStop_Click(object sender, EventArgs e)
