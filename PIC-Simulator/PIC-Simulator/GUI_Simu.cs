@@ -62,7 +62,8 @@ namespace PIC_Simulator
 
         private void initialisation()
         {
-
+            refreshMemory();
+            refreshSRF();
         }
         #endregion
 
