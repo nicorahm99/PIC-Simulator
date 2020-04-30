@@ -12,6 +12,8 @@ namespace PIC_Simulator
 
         private int wReg = 0;
 
+        private Stack<int> stack = new Stack<int>;
+
         #region special function Register on BANK 2
         private int OPTION;
         private int TRISA;
@@ -96,6 +98,21 @@ namespace PIC_Simulator
         public int getStatusRP0()
         {
             return memory[0x3] & 0x20;
+        }
+
+        public int readStack()
+        {
+            return stack.Peek();
+        }
+
+        public void pushStack(int item)
+        {
+            stack.Push(item);
+        }
+
+        public void popStack()
+        {
+            stack.Pop();
         }
 
     }
