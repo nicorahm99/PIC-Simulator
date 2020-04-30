@@ -115,5 +115,39 @@ namespace PIC_Simulator
             stack.Pop();
         }
 
+        public void incPC()
+        {
+            int pc = getFile(0x02);
+            pc++;
+            if (pc > 255)
+            {
+                pc = 0;
+                incPCLatch();
+            }
+            setFile(0x02, pc);
+        }
+
+        private void incPCLatch()
+        {
+            int pcLatch = getFile(0x0a);
+            pcLatch++;
+            if (pcLatch > 31)
+            {
+                pcLatch = 0;
+            }
+            setFile(0x0a, pcLatch);
+        }
+
+        public int getFullPC()
+        {
+            return (getFile(0x0a) << 8) | getFile(0x2);
+        }
+
+        public void setFullPC(int value)
+        {
+            setFile(0x02, (value & 0xff));
+            int pcLatch = ((value & 0x1f00) >> 8);
+            setFile(0x0a, pcLatch);
+        }
     }
 }
