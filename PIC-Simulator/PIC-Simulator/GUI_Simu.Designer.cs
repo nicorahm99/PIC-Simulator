@@ -113,11 +113,14 @@
             this.lblIRPVal = new System.Windows.Forms.Label();
             this.lblDC = new System.Windows.Forms.Label();
             this.lblC = new System.Windows.Forms.Label();
+            this.lVMemory = new System.Windows.Forms.ListView();
+            this.grpBMemory = new System.Windows.Forms.GroupBox();
             this.grpBSFRW.SuspendLayout();
             this.grpBProgramm.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.grpBControls.SuspendLayout();
             this.grBSFRBit.SuspendLayout();
+            this.grpBMemory.SuspendLayout();
             this.SuspendLayout();
             // 
             // grpBSFRW
@@ -314,7 +317,7 @@
             this.grpBProgramm.Controls.Add(this.tBProgramm);
             this.grpBProgramm.Location = new System.Drawing.Point(12, 178);
             this.grpBProgramm.Name = "grpBProgramm";
-            this.grpBProgramm.Size = new System.Drawing.Size(534, 260);
+            this.grpBProgramm.Size = new System.Drawing.Size(500, 260);
             this.grpBProgramm.TabIndex = 1;
             this.grpBProgramm.TabStop = false;
             this.grpBProgramm.Text = "Programm";
@@ -329,7 +332,7 @@
             this.tBProgramm.Name = "tBProgramm";
             this.tBProgramm.ReadOnly = true;
             this.tBProgramm.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.tBProgramm.Size = new System.Drawing.Size(534, 241);
+            this.tBProgramm.Size = new System.Drawing.Size(500, 241);
             this.tBProgramm.TabIndex = 3;
             // 
             // toolStrip1
@@ -340,7 +343,7 @@
             this.tSBtnHilfe});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(892, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(1024, 25);
             this.toolStrip1.TabIndex = 2;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -435,9 +438,9 @@
             this.grpBControls.Controls.Add(this.btnStart);
             this.grpBControls.Controls.Add(this.btnStep);
             this.grpBControls.Controls.Add(this.btnStop);
-            this.grpBControls.Location = new System.Drawing.Point(792, 286);
+            this.grpBControls.Location = new System.Drawing.Point(924, 28);
             this.grpBControls.Name = "grpBControls";
-            this.grpBControls.Size = new System.Drawing.Size(88, 152);
+            this.grpBControls.Size = new System.Drawing.Size(88, 144);
             this.grpBControls.TabIndex = 8;
             this.grpBControls.TabStop = false;
             this.grpBControls.Text = "Controls";
@@ -961,11 +964,37 @@
             this.lblC.TabIndex = 17;
             this.lblC.Text = "C";
             // 
+            // lVMemory
+            // 
+            this.lVMemory.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lVMemory.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lVMemory.GridLines = true;
+            this.lVMemory.HideSelection = false;
+            this.lVMemory.Location = new System.Drawing.Point(0, 19);
+            this.lVMemory.Name = "lVMemory";
+            this.lVMemory.Size = new System.Drawing.Size(394, 241);
+            this.lVMemory.TabIndex = 10;
+            this.lVMemory.UseCompatibleStateImageBehavior = false;
+            this.lVMemory.View = System.Windows.Forms.View.SmallIcon;
+            // 
+            // grpBMemory
+            // 
+            this.grpBMemory.Controls.Add(this.lVMemory);
+            this.grpBMemory.Location = new System.Drawing.Point(518, 178);
+            this.grpBMemory.Name = "grpBMemory";
+            this.grpBMemory.Size = new System.Drawing.Size(394, 260);
+            this.grpBMemory.TabIndex = 11;
+            this.grpBMemory.TabStop = false;
+            this.grpBMemory.Text = "Memory";
+            // 
             // GUI_Simu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(892, 450);
+            this.ClientSize = new System.Drawing.Size(1024, 616);
+            this.Controls.Add(this.grpBMemory);
             this.Controls.Add(this.grBSFRBit);
             this.Controls.Add(this.grpBControls);
             this.Controls.Add(this.toolStrip1);
@@ -984,6 +1013,7 @@
             this.grpBControls.ResumeLayout(false);
             this.grBSFRBit.ResumeLayout(false);
             this.grBSFRBit.PerformLayout();
+            this.grpBMemory.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1075,6 +1105,8 @@
         private System.Windows.Forms.ToolStripMenuItem verlassenToolStripMenuItem;
         private System.Windows.Forms.ToolStripDropDownButton tSDropDownEinstellungen;
         private System.Windows.Forms.ToolStripButton tSBtnHilfe;
+        private System.Windows.Forms.ListView lVMemory;
+        private System.Windows.Forms.GroupBox grpBMemory;
     }
 }
 
