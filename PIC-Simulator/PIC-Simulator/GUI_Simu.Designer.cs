@@ -115,12 +115,21 @@
             this.lblC = new System.Windows.Forms.Label();
             this.lVMemory = new System.Windows.Forms.ListView();
             this.grpBMemory = new System.Windows.Forms.GroupBox();
+            this.grpBTiming = new System.Windows.Forms.GroupBox();
+            this.lblQuarz = new System.Windows.Forms.Label();
+            this.cmbBQuarz = new System.Windows.Forms.ComboBox();
+            this.lblWdogVal = new System.Windows.Forms.Label();
+            this.lblWdog = new System.Windows.Forms.Label();
+            this.chckBWatchdog = new System.Windows.Forms.CheckBox();
+            this.lblLaufztVal = new System.Windows.Forms.Label();
+            this.lblLaufzt = new System.Windows.Forms.Label();
             this.grpBSFRW.SuspendLayout();
             this.grpBProgramm.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.grpBControls.SuspendLayout();
             this.grBSFRBit.SuspendLayout();
             this.grpBMemory.SuspendLayout();
+            this.grpBTiming.SuspendLayout();
             this.SuspendLayout();
             // 
             // grpBSFRW
@@ -989,11 +998,98 @@
             this.grpBMemory.TabStop = false;
             this.grpBMemory.Text = "Memory";
             // 
+            // grpBTiming
+            // 
+            this.grpBTiming.Controls.Add(this.lblQuarz);
+            this.grpBTiming.Controls.Add(this.cmbBQuarz);
+            this.grpBTiming.Controls.Add(this.lblWdogVal);
+            this.grpBTiming.Controls.Add(this.lblWdog);
+            this.grpBTiming.Controls.Add(this.chckBWatchdog);
+            this.grpBTiming.Controls.Add(this.lblLaufztVal);
+            this.grpBTiming.Controls.Add(this.lblLaufzt);
+            this.grpBTiming.Location = new System.Drawing.Point(772, 28);
+            this.grpBTiming.Name = "grpBTiming";
+            this.grpBTiming.Size = new System.Drawing.Size(126, 144);
+            this.grpBTiming.TabIndex = 12;
+            this.grpBTiming.TabStop = false;
+            this.grpBTiming.Text = "Timing";
+            // 
+            // lblQuarz
+            // 
+            this.lblQuarz.AutoSize = true;
+            this.lblQuarz.Location = new System.Drawing.Point(6, 46);
+            this.lblQuarz.Name = "lblQuarz";
+            this.lblQuarz.Size = new System.Drawing.Size(69, 13);
+            this.lblQuarz.TabIndex = 15;
+            this.lblQuarz.Text = "Quarz (MHz):";
+            // 
+            // cmbBQuarz
+            // 
+            this.cmbBQuarz.FormattingEnabled = true;
+            this.cmbBQuarz.Items.AddRange(new object[] {
+            "04",
+            "08",
+            "16",
+            "32",
+            "64"});
+            this.cmbBQuarz.Location = new System.Drawing.Point(75, 43);
+            this.cmbBQuarz.Name = "cmbBQuarz";
+            this.cmbBQuarz.Size = new System.Drawing.Size(45, 21);
+            this.cmbBQuarz.TabIndex = 13;
+            this.cmbBQuarz.Text = "32";
+            // 
+            // lblWdogVal
+            // 
+            this.lblWdogVal.AutoSize = true;
+            this.lblWdogVal.Location = new System.Drawing.Point(72, 110);
+            this.lblWdogVal.Name = "lblWdogVal";
+            this.lblWdogVal.Size = new System.Drawing.Size(13, 13);
+            this.lblWdogVal.TabIndex = 13;
+            this.lblWdogVal.Text = "0";
+            // 
+            // lblWdog
+            // 
+            this.lblWdog.AutoSize = true;
+            this.lblWdog.Location = new System.Drawing.Point(6, 110);
+            this.lblWdog.Name = "lblWdog";
+            this.lblWdog.Size = new System.Drawing.Size(60, 13);
+            this.lblWdog.TabIndex = 14;
+            this.lblWdog.Text = "Watchdog:";
+            // 
+            // chckBWatchdog
+            // 
+            this.chckBWatchdog.AutoSize = true;
+            this.chckBWatchdog.Location = new System.Drawing.Point(9, 90);
+            this.chckBWatchdog.Name = "chckBWatchdog";
+            this.chckBWatchdog.Size = new System.Drawing.Size(76, 17);
+            this.chckBWatchdog.TabIndex = 2;
+            this.chckBWatchdog.Text = "Watchdog";
+            this.chckBWatchdog.UseVisualStyleBackColor = true;
+            // 
+            // lblLaufztVal
+            // 
+            this.lblLaufztVal.AutoSize = true;
+            this.lblLaufztVal.Location = new System.Drawing.Point(72, 25);
+            this.lblLaufztVal.Name = "lblLaufztVal";
+            this.lblLaufztVal.Size = new System.Drawing.Size(13, 13);
+            this.lblLaufztVal.TabIndex = 1;
+            this.lblLaufztVal.Text = "0";
+            // 
+            // lblLaufzt
+            // 
+            this.lblLaufzt.AutoSize = true;
+            this.lblLaufzt.Location = new System.Drawing.Point(6, 25);
+            this.lblLaufzt.Name = "lblLaufzt";
+            this.lblLaufzt.Size = new System.Drawing.Size(47, 13);
+            this.lblLaufzt.TabIndex = 0;
+            this.lblLaufzt.Text = "Laufzeit:";
+            // 
             // GUI_Simu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1024, 616);
+            this.Controls.Add(this.grpBTiming);
             this.Controls.Add(this.grpBMemory);
             this.Controls.Add(this.grBSFRBit);
             this.Controls.Add(this.grpBControls);
@@ -1014,6 +1110,8 @@
             this.grBSFRBit.ResumeLayout(false);
             this.grBSFRBit.PerformLayout();
             this.grpBMemory.ResumeLayout(false);
+            this.grpBTiming.ResumeLayout(false);
+            this.grpBTiming.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1107,6 +1205,14 @@
         private System.Windows.Forms.ToolStripButton tSBtnHilfe;
         private System.Windows.Forms.ListView lVMemory;
         private System.Windows.Forms.GroupBox grpBMemory;
+        private System.Windows.Forms.GroupBox grpBTiming;
+        private System.Windows.Forms.Label lblWdog;
+        private System.Windows.Forms.CheckBox chckBWatchdog;
+        private System.Windows.Forms.Label lblLaufztVal;
+        private System.Windows.Forms.Label lblLaufzt;
+        private System.Windows.Forms.Label lblWdogVal;
+        private System.Windows.Forms.Label lblQuarz;
+        private System.Windows.Forms.ComboBox cmbBQuarz;
     }
 }
 

@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EEPROM.cs" />
+    <Compile Include="Controller.cs" />
     <Compile Include="Memory.cs" />
     <Compile Include="ROM.cs" />
     <Compile Include="Executer.cs" />

@@ -52,6 +52,7 @@ namespace PIC_Simulator
         #endregion
 
         #region init
+
         public static readonly Parser parser = new Parser();
         public static readonly Decoder decoder = new Decoder();
         public static readonly Executer executer = new Executer();
@@ -80,7 +81,7 @@ namespace PIC_Simulator
 
         private void GUI_Simu_close(object sender, FormClosingEventArgs e)
         {
-            
+
         }
         #endregion
 
@@ -124,12 +125,12 @@ namespace PIC_Simulator
             //rebuild listView
             string firstrow = "Adr. | +00 | +01 | +02 | +03 | +04 | +05 | +06 | +07 |";
             lVMemory.Items.Add(firstrow);
-            for (int i = 0; i<32; i ++)
+            for (int i = 0; i < 32; i++)
             {
                 string adr = (i * 8).ToString("X"); //convert adress integer to hex string
                 if (adr.Length < 2) { adr = "0" + adr; }
                 string newrow = adr + "   |";
-                for (int j = 0; j<8; j++)
+                for (int j = 0; j < 8; j++)
                 {
                     newrow += "  " + memory.getFile((i * 8) + j).ToString() + "  |";
                 }
@@ -141,22 +142,22 @@ namespace PIC_Simulator
         #region Control-Buttons
         private void btnStart_Click(object sender, EventArgs e)
         {
-
+            
         }
 
         private void btnStop_Click(object sender, EventArgs e)
         {
-
+            
         }
 
         private void btnReset_Click(object sender, EventArgs e)
         {
-
+            
         }
 
         private void btnStep_Click(object sender, EventArgs e)
         {
-
+            
         }
         #endregion
 
