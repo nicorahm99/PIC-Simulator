@@ -43,10 +43,10 @@ namespace PIC_Simulator
                         TRISB = value;
                         break;
                     case 0x08:
-                        EECON1 = value;
+                        setEECON1(value);
                         break;
                     case 0x09:
-                        EECON2 = value;
+                        setEECON2(value);
                         break;
                     default:
                         memory[fileAddress] = value;
@@ -83,6 +83,8 @@ namespace PIC_Simulator
             }
             return 0;
         }
+
+        #region help functions
 
         public int getBit(int fileadress, int bitadress) // Bitaddress like : 0-7
         {
@@ -164,5 +166,29 @@ namespace PIC_Simulator
             }
             setFile(statusRegister, registerContent);
         }
+
+        private void setEECON1(int value)
+        {
+            if ((value & 0x2) != 0 && (value & 0x4) != 0)
+            {
+                GUI_Simu.eeprom.writeToEEPROM();
+            }
+            else if ((value & 0x1) != 0)
+            {
+                GUI_Simu.eeprom.readFromEEPROM();
+            }
+            EECON1 = value;
+        }
+
+        private void setEECON2(int value)
+        {
+            if (EECON2 == 0x55 && value == 0xaa)
+            {
+                GUI_Simu.eeprom.setStateMachineTriggered();
+            }
+            EECON2 = value;
+        }
+
+        #endregion
     }
 }

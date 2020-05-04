@@ -7,28 +7,38 @@ using System.Threading.Tasks;
 
 namespace PIC_Simulator
 {
-    class EEPROM
+    public class EEPROM
     {
+        // TODO set WRERR Flag
+        
         private int[] eeprom = new int[256];
         private bool isStateMachineTriggered = false;
         
-        public void writeToEEPROM(int value, int address)
+        public void writeToEEPROM()
         {
+            int address = GUI_Simu.memory.getFile(0x09);
+            int value = GUI_Simu.memory.getFile(0x08);
             if (address <= 64 && isStateMachineTriggered)
             {
                 eeprom[address] = value;
                 isStateMachineTriggered = false;
-                clearWriteBit();
+                clearWriteBitSetInetrruptFlag();
             }
         }
 
-        public int readFromEEPROM(int address) 
+        public void readFromEEPROM() 
         {
+            int address = GUI_Simu.memory.getFile(0x09);
             if (address <= 64)
             {
-                return eeprom[address];
+                GUI_Simu.memory.setFile(0x08, eeprom[address]);
+                clearReadBitSetInetrruptFlag();
             }
-            return 0;
+        }
+
+        public void setStateMachineTriggered()
+        {
+            isStateMachineTriggered = true;
         }
 
         private void clearBit(int bitAddress)
@@ -36,16 +46,17 @@ namespace PIC_Simulator
             GUI_Simu.memory.setMemoryBankTo(1);
             int eecon1 = GUI_Simu.memory.getFile(0x08);
             eecon1 &= ~(1 << bitAddress);
+            eecon1 += 0x10;
             GUI_Simu.memory.setFile(0x08, eecon1);
             GUI_Simu.memory.setMemoryBankTo(0);
         }
 
-        private void clearWriteBit()
+        private void clearWriteBitSetInetrruptFlag()
         {
             clearBit(1);
         }
 
-        private void clearReadBit()
+        private void clearReadBitSetInetrruptFlag()
         {
             clearBit(0);
         }
