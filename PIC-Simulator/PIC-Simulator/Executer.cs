@@ -6,7 +6,7 @@ namespace PIC_Simulator
 {
     public class Executer
     {
-        public Command executeCommand(Command command)
+        public void executeCommand(Command command)
         {
             switch (command.getCommandName())
             {
@@ -119,7 +119,6 @@ namespace PIC_Simulator
                     // ERROR
                     break;
             }
-            return command;
         }
 
         #region command functions
