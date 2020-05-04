@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EEPROM.cs" />
     <Compile Include="Memory.cs" />
     <Compile Include="ROM.cs" />
     <Compile Include="Executer.cs" />

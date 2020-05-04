@@ -38,6 +38,7 @@ namespace PIC_Simulator
                         rom.Add(int.Parse(commandCode, System.Globalization.NumberStyles.HexNumber));
                     }
                 }
+                GUI_Simu.rom.setRom(rom);
             }
             catch (Exception ex) //invalid filepath
             {

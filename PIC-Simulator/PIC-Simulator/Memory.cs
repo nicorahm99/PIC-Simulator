@@ -149,5 +149,20 @@ namespace PIC_Simulator
             int pcLatch = ((value & 0x1f00) >> 8);
             setFile(0x0a, pcLatch);
         }
+
+        public void setMemoryBankTo(int value)
+        {
+            int statusRegister = 0x03;
+            int registerContent = getFile(statusRegister);
+            if (value == 0)
+            {
+                registerContent &= ~(1 << 5);
+            }
+            else
+            {
+                registerContent |= 1 << 5;
+            }
+            setFile(statusRegister, registerContent);
+        }
     }
 }

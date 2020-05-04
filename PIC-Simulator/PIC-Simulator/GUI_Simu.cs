@@ -52,10 +52,10 @@ namespace PIC_Simulator
         #endregion
 
         #region init
-        public Parser parser = new Parser();
-        public Decoder decoder = new Decoder();
-        public Executer executer = new Executer();
-        public ROM rom = new ROM();
+        public static readonly Parser parser = new Parser();
+        public static readonly Decoder decoder = new Decoder();
+        public static readonly Executer executer = new Executer();
+        public static readonly ROM rom = new ROM();
         public static readonly Memory memory = new Memory();
 
         string helpMsg = "DS PIC16F84/CR84 - Simulator" + Environment.NewLine + "Dominik Lange & Nico Rahm" + Environment.NewLine + "25.04.2020" + Environment.NewLine + "Version 1.0";
