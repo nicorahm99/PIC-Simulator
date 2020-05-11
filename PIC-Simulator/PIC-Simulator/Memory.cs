@@ -112,9 +112,11 @@ namespace PIC_Simulator
             stack.Push(item);
         }
 
-        public void popStack()
+        public int popStack()
         {
+            int item = stack.Peek();
             stack.Pop();
+            return item;
         }
 
         public void incPC()
@@ -142,13 +144,13 @@ namespace PIC_Simulator
 
         public int getFullPC()
         {
-            return (getFile(0x0a) << 8) | getFile(0x2);
+            return ((getFile(0x0a) & 0x7) << 8) | getFile(0x2);
         }
 
         public void setFullPC(int value)
         {
             setFile(0x02, (value & 0xff));
-            int pcLatch = ((value & 0x1f00) >> 8);
+            int pcLatch = ((value & 0x700) >> 8);
             setFile(0x0a, pcLatch);
         }
 

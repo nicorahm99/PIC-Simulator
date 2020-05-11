@@ -388,7 +388,7 @@ namespace PIC_Simulator
 
         private int call(int address)
         {
-            //TODO push PC to stack
+            pushPcToStack();
             _goto(address);
             return address;
         }
@@ -401,7 +401,8 @@ namespace PIC_Simulator
 
         private int _goto(int address)
         {
-            //PC push address
+            //TODO check if adress - 1 is needed.
+            GUI_Simu.memory.setFullPC(address);
             return address;
         }
 
@@ -429,22 +430,24 @@ namespace PIC_Simulator
 
         private int retfIE()
         {
-            // Return from Interrupt
-            // Set GIE Flag
-            // POP Stack // Load Top of Stack (TOS) to PC
+            bsF(0xb, 7);
+            popStackToPc();
+            // check if PC - 1 is needed
             return 0;
         }
 
         private int retLW(int literal)
         {
             writeResultToRightDestination(literal, true, 0);
-            // TOS -> PC
+            popStackToPc();
+            // check if PC - 1 is needed
             return literal;
         }
 
         private int _return()
         {
-            // TOS -> PC
+            popStackToPc();
+            // check if PC - 1 is needed
             return 0;
         }
 
@@ -452,8 +455,15 @@ namespace PIC_Simulator
         {
             //00h → WDT,
             //0 → WDT prescaler,
+            GUI_Simu.memory.setMemoryBankTo(1);
+            bcF(0x1, 0);
+            bcF(0x1, 1);
+            bcF(0x1, 2);
+            GUI_Simu.memory.setMemoryBankTo(0);
             //1 → TO,
+            bsF(0x3, 4);
             //0 → PD
+            bcF(0x3, 3);
             return 0;
         }
 
@@ -586,6 +596,16 @@ namespace PIC_Simulator
         private int getFile(int fileAddress)
         {
             return GUI_Simu.memory.getFile(fileAddress);
+        }
+
+        private void pushPcToStack()
+        {
+            GUI_Simu.memory.pushStack(GUI_Simu.memory.getFullPC());
+        }
+
+        private void popStackToPc()
+        {
+            GUI_Simu.memory.setFullPC(GUI_Simu.memory.popStack());
         }
         #endregion
     }
