@@ -15,40 +15,65 @@ namespace PIC_Simulator
     public partial class GUI_Simu : Form
     {
         #region defines & dicts
-        Dictionary<string, int> status = new Dictionary<string, int>()
+        //If there is the need to use meaningful names
+        //Dictionary<string, int> status = new Dictionary<string, int>() //bits in status reg
+        //{
+        //    {  "lblIRPVal", 0},
+        //    {  "lblRP1Val", 1},
+        //    {  "lblRP0Val", 2},
+        //    {  "lblTOVal", 3},
+        //    {  "lblPDVal", 4},
+        //    {  "lblZVal", 5},
+        //    {  "lblDCVal", 6},
+        //    {  "lblCVal", 7},
+        //};
+
+        //Dictionary<string, int> option = new Dictionary<string, int>() //bits in option reg
+        //{
+        //    {  "lblRPuVal", 0},
+        //    {  "lblIEgVal", 1},
+        //    {  "lblTCsVal", 2},
+        //    {  "lblTSeVal", 3},
+        //    {  "lblPSAVal", 4},
+        //    {  "lblPS2Val", 5},
+        //    {  "lblPS1Val", 6},
+        //    {  "lblPS0Val", 7},
+        //};
+
+        //Dictionary<string, int> intcon = new Dictionary<string, int>() //bits in intcon reg
+        //{
+        //    {  "lblGIEVal", 0},
+        //    {  "lblEIEVal", 1},
+        //    {  "lblTIEVal", 2},
+        //    {  "lblIEVal", 3},
+        //    {  "lblRIEVal", 4},
+        //    {  "lblTIFVal", 5},
+        //    {  "lblIFVal", 6},
+        //    {  "lblRIFVal", 7},
+        //};
+
+        Dictionary<int, string> prescalerTMR0 = new Dictionary<int, string>() //prescaler with TMR0 Rate
         {
-            {  "lblIRPVal", 0},
-            {  "lblRP1Val", 1},
-            {  "lblRP0Val", 2},
-            {  "lblTOVal", 3},
-            {  "lblPDVal", 4},
-            {  "lblZVal", 5},
-            {  "lblDCVal", 6},
-            {  "lblCVal", 7},
+            {  0, "1 : 2"},
+            {  1, "1 : 4"},
+            {  2, "1 : 8"},
+            {  3, "1 : 16"},
+            {  4, "1 : 32"},
+            {  5, "1 : 64"},
+            {  6, "1 : 128"},
+            {  7, "1 : 256"},
         };
 
-        Dictionary<string, int> option = new Dictionary<string, int>()
+        Dictionary<int, string> prescalerWDT = new Dictionary<int, string>() //prescaler with WDT Rate
         {
-            {  "lblRPuVal", 0},
-            {  "lblIEgVal", 1},
-            {  "lblTCsVal", 2},
-            {  "lblTSeVal", 3},
-            {  "lblPSAVal", 4},
-            {  "lblPS2Val", 5},
-            {  "lblPS1Val", 6},
-            {  "lblPS0Val", 7},
-        };
-
-        Dictionary<string, int> intcon = new Dictionary<string, int>()
-        {
-            {  "lblGIEVal", 0},
-            {  "lblEIEVal", 1},
-            {  "lblTIEVal", 2},
-            {  "lblIEVal", 3},
-            {  "lblRIEVal", 4},
-            {  "lblTIFVal", 5},
-            {  "lblIFVal", 6},
-            {  "lblRIFVal", 7},
+            {  0, "1 : 1"},
+            {  1, "1 : 2"},
+            {  2, "1 : 4"},
+            {  3, "1 : 8"},
+            {  4, "1 : 16"},
+            {  5, "1 : 32"},
+            {  6, "1 : 64"},
+            {  7, "1 : 128"},
         };
         #endregion
 
@@ -66,8 +91,8 @@ namespace PIC_Simulator
 
         private void initialisation()
         {
-            refreshMemory();
-            refreshSFR();
+            initMemory();
+            refreshSFR_b();
         }
         #endregion
 
@@ -94,50 +119,72 @@ namespace PIC_Simulator
             controller.reset_taktCount();
             //reset memory
             refreshMemory();
-            refreshSFR();
+            refreshSFR_b();
+            reset_Timing();
         }
 
         //------------------------------------------------GUI------------------------------------------------------------------------
 
-        #region SFR
-        private void refreshSFR()
+        #region SFR(Bit)
+        private void refreshSFR_b()
         {
-            lblIRPVal.Text = memory.getBit(0x3, 0).ToString();
-            lblRP1Val.Text = memory.getBit(0x3, 1).ToString();
-            lblRP0Val.Text = memory.getBit(0x3, 2).ToString();
-            lblTOVal.Text = memory.getBit(0x3, 3).ToString();
-            lblPDVal.Text = memory.getBit(0x3, 4).ToString();
-            lblZVal.Text = memory.getBit(0x3, 5).ToString();
-            lblDCVal.Text = memory.getBit(0x3, 6).ToString();
-            lblCVal.Text = memory.getBit(0x3, 7).ToString();
+            lblIRPVal.Text = memory.getBit(0x3, 7).ToString();
+            lblRP1Val.Text = memory.getBit(0x3, 6).ToString();
+            lblRP0Val.Text = memory.getBit(0x3, 5).ToString();
+            lblTOVal.Text = memory.getBit(0x3, 4).ToString();
+            lblPDVal.Text = memory.getBit(0x3, 3).ToString();
+            lblZVal.Text = memory.getBit(0x3, 2).ToString();
+            lblDCVal.Text = memory.getBit(0x3, 1).ToString();
+            lblCVal.Text = memory.getBit(0x3, 0).ToString();
 
-            lblRPuVal.Text = memory.getBit(0x81, 0).ToString();
-            lblIEgVal.Text = memory.getBit(0x81, 1).ToString();
-            lblTCsVal.Text = memory.getBit(0x81, 2).ToString();
-            lblTSeVal.Text = memory.getBit(0x81, 3).ToString();
-            lblPSAVal.Text = memory.getBit(0x81, 4).ToString();
-            lblPS2Val.Text = memory.getBit(0x81, 5).ToString();
-            lblPS1Val.Text = memory.getBit(0x81, 6).ToString();
-            lblPS0Val.Text = memory.getBit(0x81, 7).ToString();
+            lblRPuVal.Text = memory.getBit(0x81, 7).ToString();
+            lblIEgVal.Text = memory.getBit(0x81, 6).ToString();
+            lblTCsVal.Text = memory.getBit(0x81, 5).ToString();
+            lblTSeVal.Text = memory.getBit(0x81, 4).ToString();
+            lblPSAVal.Text = memory.getBit(0x81, 3).ToString();
+            lblPS2Val.Text = memory.getBit(0x81, 2).ToString();
+            lblPS1Val.Text = memory.getBit(0x81, 1).ToString();
+            lblPS0Val.Text = memory.getBit(0x81, 0).ToString();
 
-            lblGIEVal.Text = memory.getBit(0xB, 0).ToString();
-            lblEIEVal.Text = memory.getBit(0xB, 1).ToString();
-            lblTIEVal.Text = memory.getBit(0xB, 2).ToString();
-            lblIEVal.Text = memory.getBit(0xB, 3).ToString();
-            lblRIEVal.Text = memory.getBit(0xB, 4).ToString();
-            lblTIFVal.Text = memory.getBit(0xB, 5).ToString();
-            lblIFVal.Text = memory.getBit(0xB, 6).ToString();
-            lblRIFVal.Text = memory.getBit(0xB, 7).ToString();
+            lblGIEVal.Text = memory.getBit(0xB, 7).ToString();
+            lblEIEVal.Text = memory.getBit(0xB, 6).ToString();
+            lblTIEVal.Text = memory.getBit(0xB, 5).ToString();
+            lblIEVal.Text = memory.getBit(0xB, 4).ToString();
+            lblRIEVal.Text = memory.getBit(0xB, 3).ToString();
+            lblTIFVal.Text = memory.getBit(0xB, 2).ToString();
+            lblIFVal.Text = memory.getBit(0xB, 1).ToString();
+            lblRIFVal.Text = memory.getBit(0xB, 0).ToString();
+        }
+        #endregion
+
+        #region SFR+W
+        public string getPrescaler()
+        {
+            int optionFile = memory.getFile(0x81);
+            optionFile = optionFile & 3;
+            string presaler = prescalerWDT[optionFile];
+            return presaler;
+        }
+        
+        public void refreshSFRW()
+        {
+            lblWRegVal.Text = memory.getWReg().ToString();
+            lblPCLVal.Text = memory.getFile(0x02).ToString();
+            lblPCLATHVal.Text = memory.getFile(0x0A).ToString();
+            lblPCLinternVal.Text = memory.getFile(0x02).ToString();
+            lblStatusVal.Text = memory.getFile(0x03).ToString();
+            lblFSRVal.Text = memory.getFile(0x04).ToString();
+
+            lblOptionVal.Text = memory.getFile(0x81).ToString();
+            lblVorteilerVal.Text = getPrescaler();
+            //lblTimer0Val.Text = ;
         }
         #endregion
 
         #region Memory
-        public void refreshMemory()
+        public void initMemory()
         {
-            //Clear all items
-            lVMemory.Items.Clear();
-
-            //rebuild listView
+            //build listView
             string firstrow = "Adr. | +00 | +01 | +02 | +03 | +04 | +05 | +06 | +07 |";
             lVMemory.Items.Add(firstrow);
             for (int i = 0; i < 32; i++)
@@ -150,6 +197,21 @@ namespace PIC_Simulator
                     newrow += "  " + memory.getFile((i * 8) + j).ToString() + "  |";
                 }
                 lVMemory.Items.Add(newrow);
+            }
+        }
+        public void refreshMemory()
+        {
+            //rebuild listView
+            for (int i = 0; i < 32; i++)
+            {
+                string adr = (i * 8).ToString("X"); //convert adress integer to hex string
+                if (adr.Length < 2) { adr = "0" + adr; }
+                string newrow = adr + "   |";
+                for (int j = 0; j < 8; j++)
+                {
+                    newrow += "  " + memory.getFile((i * 8) + j).ToString() + "  |";
+                }
+                lVMemory.Items[i + 1].Text = newrow;
             }
         }
         #endregion
@@ -220,7 +282,7 @@ namespace PIC_Simulator
             {
                 tBProgramm.AppendText(file[i] + Environment.NewLine);
             }
-            refreshSFR();
+            refreshSFR_b();
         }
 
         private void tSBtnHilfe_Click(object sender, EventArgs e)
@@ -234,6 +296,8 @@ namespace PIC_Simulator
         {
             controller.step();
             setLaufzeit(controller.get_taktCount());
+            refreshMemory();
+            refreshSFR_b();
         }
         #endregion
     }

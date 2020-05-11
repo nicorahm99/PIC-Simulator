@@ -1088,6 +1088,7 @@
             // 
             // tWorkingInterval
             // 
+            this.tWorkingInterval.Interval = 10;
             this.tWorkingInterval.Tick += new System.EventHandler(this.tWorkingInterval_Tick);
             // 
             // GUI_Simu
