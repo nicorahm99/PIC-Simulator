@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GUI_Simu));
             this.grpBSFRW = new System.Windows.Forms.GroupBox();
             this.lblTimer0Val = new System.Windows.Forms.Label();
@@ -123,6 +124,7 @@
             this.chckBWatchdog = new System.Windows.Forms.CheckBox();
             this.lblLaufztVal = new System.Windows.Forms.Label();
             this.lblLaufzt = new System.Windows.Forms.Label();
+            this.tWorkingInterval = new System.Windows.Forms.Timer(this.components);
             this.grpBSFRW.SuspendLayout();
             this.grpBProgramm.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -1080,9 +1082,13 @@
             this.lblLaufzt.AutoSize = true;
             this.lblLaufzt.Location = new System.Drawing.Point(6, 25);
             this.lblLaufzt.Name = "lblLaufzt";
-            this.lblLaufzt.Size = new System.Drawing.Size(47, 13);
+            this.lblLaufzt.Size = new System.Drawing.Size(69, 13);
             this.lblLaufzt.TabIndex = 0;
-            this.lblLaufzt.Text = "Laufzeit:";
+            this.lblLaufzt.Text = "Laufzeit (ms):";
+            // 
+            // tWorkingInterval
+            // 
+            this.tWorkingInterval.Tick += new System.EventHandler(this.tWorkingInterval_Tick);
             // 
             // GUI_Simu
             // 
@@ -1213,6 +1219,7 @@
         private System.Windows.Forms.Label lblWdogVal;
         private System.Windows.Forms.Label lblQuarz;
         private System.Windows.Forms.ComboBox cmbBQuarz;
+        private System.Windows.Forms.Timer tWorkingInterval;
     }
 }
 

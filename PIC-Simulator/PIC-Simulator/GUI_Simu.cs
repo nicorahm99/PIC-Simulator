@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -59,13 +60,14 @@ namespace PIC_Simulator
         public static readonly ROM rom = new ROM();
         public static readonly Memory memory = new Memory();
         public static readonly EEPROM eeprom = new EEPROM();
+        public static readonly Controller controller = new Controller();
 
         string helpMsg = "DS PIC16F84/CR84 - Simulator" + Environment.NewLine + "Dominik Lange & Nico Rahm" + Environment.NewLine + "25.04.2020" + Environment.NewLine + "Version 1.0";
 
         private void initialisation()
         {
             refreshMemory();
-            refreshSRF();
+            refreshSFR();
         }
         #endregion
 
@@ -86,9 +88,19 @@ namespace PIC_Simulator
         }
         #endregion
 
+        public void reset()
+        {
+            memory.setFullPC(0);
+            controller.reset_taktCount();
+            //reset memory
+            refreshMemory();
+            refreshSFR();
+        }
 
-        #region helpfunctions
-        private void refreshSRF()
+        //------------------------------------------------GUI------------------------------------------------------------------------
+
+        #region SFR
+        private void refreshSFR()
         {
             lblIRPVal.Text = memory.getBit(0x3, 0).ToString();
             lblRP1Val.Text = memory.getBit(0x3, 1).ToString();
@@ -117,7 +129,9 @@ namespace PIC_Simulator
             lblIFVal.Text = memory.getBit(0xB, 6).ToString();
             lblRIFVal.Text = memory.getBit(0xB, 7).ToString();
         }
+        #endregion
 
+        #region Memory
         public void refreshMemory()
         {
             //Clear all items
@@ -140,20 +154,35 @@ namespace PIC_Simulator
         }
         #endregion
 
+        #region Timing
+        public void reset_Timing()
+        {
+            lblLaufztVal.Text = "0";
+            //Watchdog
+        }
+
+        public void setLaufzeit(int val)
+        {
+            string ms = (val / Convert.ToInt16(cmbBQuarz.Text)).ToString();
+            lblLaufztVal.Text = ms;
+        }
+        #endregion
+
         #region Control-Buttons
         private void btnStart_Click(object sender, EventArgs e)
         {
-            
+            tWorkingInterval.Enabled = true;
         }
 
         private void btnStop_Click(object sender, EventArgs e)
         {
-            
+            tWorkingInterval.Enabled = false;
         }
 
         private void btnReset_Click(object sender, EventArgs e)
         {
-            
+            tWorkingInterval.Enabled = false;
+            reset();
         }
 
         private void btnStep_Click(object sender, EventArgs e)
@@ -191,12 +220,20 @@ namespace PIC_Simulator
             {
                 tBProgramm.AppendText(file[i] + Environment.NewLine);
             }
-            refreshSRF();
+            refreshSFR();
         }
 
         private void tSBtnHilfe_Click(object sender, EventArgs e)
         {
             MessageBox.Show(helpMsg);
+        }
+        #endregion
+
+        #region timer
+        private void tWorkingInterval_Tick(object sender, EventArgs e)
+        {
+            controller.step();
+            setLaufzeit(controller.get_taktCount());
         }
         #endregion
     }
