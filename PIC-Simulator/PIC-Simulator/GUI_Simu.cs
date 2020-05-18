@@ -86,6 +86,8 @@ namespace PIC_Simulator
         public static readonly Memory memory = new Memory();
         public static readonly EEPROM eeprom = new EEPROM();
         public static readonly Controller controller = new Controller();
+        public static readonly InterruptController interruptController = new InterruptController();
+
 
         string helpMsg = "DS PIC16F84/CR84 - Simulator" + Environment.NewLine + "Dominik Lange & Nico Rahm" + Environment.NewLine + "25.04.2020" + Environment.NewLine + "Version 1.0";
 

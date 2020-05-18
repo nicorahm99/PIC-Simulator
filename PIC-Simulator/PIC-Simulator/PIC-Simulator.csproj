@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="InterruptController.cs" />
     <Compile Include="EEPROM.cs" />
     <Compile Include="Controller.cs" />
     <Compile Include="Memory.cs" />
