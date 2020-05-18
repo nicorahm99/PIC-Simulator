@@ -125,6 +125,38 @@
             this.lblLaufztVal = new System.Windows.Forms.Label();
             this.lblLaufzt = new System.Windows.Forms.Label();
             this.tWorkingInterval = new System.Windows.Forms.Timer(this.components);
+            this.grpBPortA = new System.Windows.Forms.GroupBox();
+            this.chckBPortAPin4 = new System.Windows.Forms.CheckBox();
+            this.lblPinA = new System.Windows.Forms.Label();
+            this.chckBPortAPin3 = new System.Windows.Forms.CheckBox();
+            this.chckBPortAPin2 = new System.Windows.Forms.CheckBox();
+            this.lblTrisA = new System.Windows.Forms.Label();
+            this.chckBPortAPin1 = new System.Windows.Forms.CheckBox();
+            this.chckBPortATris4 = new System.Windows.Forms.CheckBox();
+            this.chckBPortAPin0 = new System.Windows.Forms.CheckBox();
+            this.chckBPortATris0 = new System.Windows.Forms.CheckBox();
+            this.chckBPortATris3 = new System.Windows.Forms.CheckBox();
+            this.chckBPortATris1 = new System.Windows.Forms.CheckBox();
+            this.chckBPortATris2 = new System.Windows.Forms.CheckBox();
+            this.grpBPortB = new System.Windows.Forms.GroupBox();
+            this.chckBPortBPin7 = new System.Windows.Forms.CheckBox();
+            this.chckBPortBPin6 = new System.Windows.Forms.CheckBox();
+            this.chckBPortBTris7 = new System.Windows.Forms.CheckBox();
+            this.chckBPortBPin5 = new System.Windows.Forms.CheckBox();
+            this.chckBPortBTris6 = new System.Windows.Forms.CheckBox();
+            this.chckBPortBPin4 = new System.Windows.Forms.CheckBox();
+            this.chckBPortBTris5 = new System.Windows.Forms.CheckBox();
+            this.chckBPortBPin3 = new System.Windows.Forms.CheckBox();
+            this.chckBPortBTris4 = new System.Windows.Forms.CheckBox();
+            this.chckBPortBPin2 = new System.Windows.Forms.CheckBox();
+            this.chckBPortBTris3 = new System.Windows.Forms.CheckBox();
+            this.chckBPortBPin1 = new System.Windows.Forms.CheckBox();
+            this.chckBPortBTris2 = new System.Windows.Forms.CheckBox();
+            this.chckBPortBPin0 = new System.Windows.Forms.CheckBox();
+            this.chckBPortBTris1 = new System.Windows.Forms.CheckBox();
+            this.chckBPortBTris0 = new System.Windows.Forms.CheckBox();
+            this.lblPinB = new System.Windows.Forms.Label();
+            this.lblTrisB = new System.Windows.Forms.Label();
             this.grpBSFRW.SuspendLayout();
             this.grpBProgramm.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -132,6 +164,8 @@
             this.grBSFRBit.SuspendLayout();
             this.grpBMemory.SuspendLayout();
             this.grpBTiming.SuspendLayout();
+            this.grpBPortA.SuspendLayout();
+            this.grpBPortB.SuspendLayout();
             this.SuspendLayout();
             // 
             // grpBSFRW
@@ -373,14 +407,14 @@
             // dateiÖffnenToolStripMenuItem
             // 
             this.dateiÖffnenToolStripMenuItem.Name = "dateiÖffnenToolStripMenuItem";
-            this.dateiÖffnenToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.dateiÖffnenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.dateiÖffnenToolStripMenuItem.Text = "Datei öffnen";
             this.dateiÖffnenToolStripMenuItem.Click += new System.EventHandler(this.dateiÖffnenToolStripMenuItem_Click);
             // 
             // verlassenToolStripMenuItem
             // 
             this.verlassenToolStripMenuItem.Name = "verlassenToolStripMenuItem";
-            this.verlassenToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.verlassenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.verlassenToolStripMenuItem.Text = "verlassen";
             this.verlassenToolStripMenuItem.Click += new System.EventHandler(this.verlassenToolStripMenuItem_Click);
             // 
@@ -449,7 +483,7 @@
             this.grpBControls.Controls.Add(this.btnStart);
             this.grpBControls.Controls.Add(this.btnStep);
             this.grpBControls.Controls.Add(this.btnStop);
-            this.grpBControls.Location = new System.Drawing.Point(924, 28);
+            this.grpBControls.Location = new System.Drawing.Point(756, 28);
             this.grpBControls.Name = "grpBControls";
             this.grpBControls.Size = new System.Drawing.Size(88, 144);
             this.grpBControls.TabIndex = 8;
@@ -1009,7 +1043,7 @@
             this.grpBTiming.Controls.Add(this.chckBWatchdog);
             this.grpBTiming.Controls.Add(this.lblLaufztVal);
             this.grpBTiming.Controls.Add(this.lblLaufzt);
-            this.grpBTiming.Location = new System.Drawing.Point(772, 28);
+            this.grpBTiming.Location = new System.Drawing.Point(624, 28);
             this.grpBTiming.Name = "grpBTiming";
             this.grpBTiming.Size = new System.Drawing.Size(126, 144);
             this.grpBTiming.TabIndex = 12;
@@ -1091,11 +1125,383 @@
             this.tWorkingInterval.Interval = 10;
             this.tWorkingInterval.Tick += new System.EventHandler(this.tWorkingInterval_Tick);
             // 
+            // grpBPortA
+            // 
+            this.grpBPortA.Controls.Add(this.chckBPortAPin4);
+            this.grpBPortA.Controls.Add(this.lblPinA);
+            this.grpBPortA.Controls.Add(this.chckBPortAPin3);
+            this.grpBPortA.Controls.Add(this.chckBPortAPin2);
+            this.grpBPortA.Controls.Add(this.lblTrisA);
+            this.grpBPortA.Controls.Add(this.chckBPortAPin1);
+            this.grpBPortA.Controls.Add(this.chckBPortATris4);
+            this.grpBPortA.Controls.Add(this.chckBPortAPin0);
+            this.grpBPortA.Controls.Add(this.chckBPortATris0);
+            this.grpBPortA.Controls.Add(this.chckBPortATris3);
+            this.grpBPortA.Controls.Add(this.chckBPortATris1);
+            this.grpBPortA.Controls.Add(this.chckBPortATris2);
+            this.grpBPortA.Location = new System.Drawing.Point(12, 444);
+            this.grpBPortA.Name = "grpBPortA";
+            this.grpBPortA.Size = new System.Drawing.Size(345, 76);
+            this.grpBPortA.TabIndex = 13;
+            this.grpBPortA.TabStop = false;
+            this.grpBPortA.Text = "Port A";
+            // 
+            // chckBPortAPin4
+            // 
+            this.chckBPortAPin4.AutoSize = true;
+            this.chckBPortAPin4.Location = new System.Drawing.Point(155, 46);
+            this.chckBPortAPin4.Name = "chckBPortAPin4";
+            this.chckBPortAPin4.Size = new System.Drawing.Size(32, 17);
+            this.chckBPortAPin4.TabIndex = 26;
+            this.chckBPortAPin4.Text = "4";
+            this.chckBPortAPin4.UseVisualStyleBackColor = true;
+            this.chckBPortAPin4.CheckedChanged += new System.EventHandler(this.PortAPin4);
+            // 
+            // lblPinA
+            // 
+            this.lblPinA.AutoSize = true;
+            this.lblPinA.Location = new System.Drawing.Point(6, 47);
+            this.lblPinA.Name = "lblPinA";
+            this.lblPinA.Size = new System.Drawing.Size(22, 13);
+            this.lblPinA.TabIndex = 1;
+            this.lblPinA.Text = "Pin";
+            // 
+            // chckBPortAPin3
+            // 
+            this.chckBPortAPin3.AutoSize = true;
+            this.chckBPortAPin3.Location = new System.Drawing.Point(193, 46);
+            this.chckBPortAPin3.Name = "chckBPortAPin3";
+            this.chckBPortAPin3.Size = new System.Drawing.Size(32, 17);
+            this.chckBPortAPin3.TabIndex = 27;
+            this.chckBPortAPin3.Text = "3";
+            this.chckBPortAPin3.UseVisualStyleBackColor = true;
+            this.chckBPortAPin3.CheckedChanged += new System.EventHandler(this.PortAPin3);
+            // 
+            // chckBPortAPin2
+            // 
+            this.chckBPortAPin2.AutoSize = true;
+            this.chckBPortAPin2.Location = new System.Drawing.Point(231, 46);
+            this.chckBPortAPin2.Name = "chckBPortAPin2";
+            this.chckBPortAPin2.Size = new System.Drawing.Size(32, 17);
+            this.chckBPortAPin2.TabIndex = 28;
+            this.chckBPortAPin2.Text = "2";
+            this.chckBPortAPin2.UseVisualStyleBackColor = true;
+            this.chckBPortAPin2.CheckedChanged += new System.EventHandler(this.PortAPin2);
+            // 
+            // lblTrisA
+            // 
+            this.lblTrisA.AutoSize = true;
+            this.lblTrisA.Location = new System.Drawing.Point(6, 25);
+            this.lblTrisA.Name = "lblTrisA";
+            this.lblTrisA.Size = new System.Drawing.Size(24, 13);
+            this.lblTrisA.TabIndex = 0;
+            this.lblTrisA.Text = "Tris";
+            // 
+            // chckBPortAPin1
+            // 
+            this.chckBPortAPin1.AutoSize = true;
+            this.chckBPortAPin1.Location = new System.Drawing.Point(269, 46);
+            this.chckBPortAPin1.Name = "chckBPortAPin1";
+            this.chckBPortAPin1.Size = new System.Drawing.Size(32, 17);
+            this.chckBPortAPin1.TabIndex = 29;
+            this.chckBPortAPin1.Text = "1";
+            this.chckBPortAPin1.UseVisualStyleBackColor = true;
+            this.chckBPortAPin1.CheckedChanged += new System.EventHandler(this.PortAPin1);
+            // 
+            // chckBPortATris4
+            // 
+            this.chckBPortATris4.AutoSize = true;
+            this.chckBPortATris4.Enabled = false;
+            this.chckBPortATris4.Location = new System.Drawing.Point(155, 25);
+            this.chckBPortATris4.Name = "chckBPortATris4";
+            this.chckBPortATris4.Size = new System.Drawing.Size(32, 17);
+            this.chckBPortATris4.TabIndex = 26;
+            this.chckBPortATris4.Text = "4";
+            this.chckBPortATris4.UseVisualStyleBackColor = true;
+            // 
+            // chckBPortAPin0
+            // 
+            this.chckBPortAPin0.AutoSize = true;
+            this.chckBPortAPin0.Location = new System.Drawing.Point(307, 46);
+            this.chckBPortAPin0.Name = "chckBPortAPin0";
+            this.chckBPortAPin0.Size = new System.Drawing.Size(32, 17);
+            this.chckBPortAPin0.TabIndex = 22;
+            this.chckBPortAPin0.Text = "0";
+            this.chckBPortAPin0.UseVisualStyleBackColor = true;
+            this.chckBPortAPin0.CheckedChanged += new System.EventHandler(this.PortAPin0);
+            // 
+            // chckBPortATris0
+            // 
+            this.chckBPortATris0.AutoSize = true;
+            this.chckBPortATris0.Enabled = false;
+            this.chckBPortATris0.Location = new System.Drawing.Point(307, 25);
+            this.chckBPortATris0.Name = "chckBPortATris0";
+            this.chckBPortATris0.Size = new System.Drawing.Size(32, 17);
+            this.chckBPortATris0.TabIndex = 22;
+            this.chckBPortATris0.Text = "0";
+            this.chckBPortATris0.UseVisualStyleBackColor = true;
+            // 
+            // chckBPortATris3
+            // 
+            this.chckBPortATris3.AutoSize = true;
+            this.chckBPortATris3.Enabled = false;
+            this.chckBPortATris3.Location = new System.Drawing.Point(193, 25);
+            this.chckBPortATris3.Name = "chckBPortATris3";
+            this.chckBPortATris3.Size = new System.Drawing.Size(32, 17);
+            this.chckBPortATris3.TabIndex = 27;
+            this.chckBPortATris3.Text = "3";
+            this.chckBPortATris3.UseVisualStyleBackColor = true;
+            // 
+            // chckBPortATris1
+            // 
+            this.chckBPortATris1.AutoSize = true;
+            this.chckBPortATris1.Enabled = false;
+            this.chckBPortATris1.Location = new System.Drawing.Point(269, 25);
+            this.chckBPortATris1.Name = "chckBPortATris1";
+            this.chckBPortATris1.Size = new System.Drawing.Size(32, 17);
+            this.chckBPortATris1.TabIndex = 29;
+            this.chckBPortATris1.Text = "1";
+            this.chckBPortATris1.UseVisualStyleBackColor = true;
+            // 
+            // chckBPortATris2
+            // 
+            this.chckBPortATris2.AutoSize = true;
+            this.chckBPortATris2.Enabled = false;
+            this.chckBPortATris2.Location = new System.Drawing.Point(231, 25);
+            this.chckBPortATris2.Name = "chckBPortATris2";
+            this.chckBPortATris2.Size = new System.Drawing.Size(32, 17);
+            this.chckBPortATris2.TabIndex = 28;
+            this.chckBPortATris2.Text = "2";
+            this.chckBPortATris2.UseVisualStyleBackColor = true;
+            // 
+            // grpBPortB
+            // 
+            this.grpBPortB.Controls.Add(this.chckBPortBPin7);
+            this.grpBPortB.Controls.Add(this.chckBPortBPin6);
+            this.grpBPortB.Controls.Add(this.chckBPortBTris7);
+            this.grpBPortB.Controls.Add(this.chckBPortBPin5);
+            this.grpBPortB.Controls.Add(this.chckBPortBTris6);
+            this.grpBPortB.Controls.Add(this.chckBPortBPin4);
+            this.grpBPortB.Controls.Add(this.chckBPortBTris5);
+            this.grpBPortB.Controls.Add(this.chckBPortBPin3);
+            this.grpBPortB.Controls.Add(this.chckBPortBTris4);
+            this.grpBPortB.Controls.Add(this.chckBPortBPin2);
+            this.grpBPortB.Controls.Add(this.chckBPortBTris3);
+            this.grpBPortB.Controls.Add(this.chckBPortBPin1);
+            this.grpBPortB.Controls.Add(this.chckBPortBTris2);
+            this.grpBPortB.Controls.Add(this.chckBPortBPin0);
+            this.grpBPortB.Controls.Add(this.chckBPortBTris1);
+            this.grpBPortB.Controls.Add(this.chckBPortBTris0);
+            this.grpBPortB.Controls.Add(this.lblPinB);
+            this.grpBPortB.Controls.Add(this.lblTrisB);
+            this.grpBPortB.Location = new System.Drawing.Point(12, 526);
+            this.grpBPortB.Name = "grpBPortB";
+            this.grpBPortB.Size = new System.Drawing.Size(345, 75);
+            this.grpBPortB.TabIndex = 14;
+            this.grpBPortB.TabStop = false;
+            this.grpBPortB.Text = "Port B";
+            // 
+            // chckBPortBPin7
+            // 
+            this.chckBPortBPin7.AutoSize = true;
+            this.chckBPortBPin7.Location = new System.Drawing.Point(41, 45);
+            this.chckBPortBPin7.Name = "chckBPortBPin7";
+            this.chckBPortBPin7.Size = new System.Drawing.Size(32, 17);
+            this.chckBPortBPin7.TabIndex = 31;
+            this.chckBPortBPin7.Text = "7";
+            this.chckBPortBPin7.UseVisualStyleBackColor = true;
+            this.chckBPortBPin7.CheckedChanged += new System.EventHandler(this.PortBPin7);
+            // 
+            // chckBPortBPin6
+            // 
+            this.chckBPortBPin6.AutoSize = true;
+            this.chckBPortBPin6.Location = new System.Drawing.Point(79, 45);
+            this.chckBPortBPin6.Name = "chckBPortBPin6";
+            this.chckBPortBPin6.Size = new System.Drawing.Size(32, 17);
+            this.chckBPortBPin6.TabIndex = 32;
+            this.chckBPortBPin6.Text = "6";
+            this.chckBPortBPin6.UseVisualStyleBackColor = true;
+            this.chckBPortBPin6.CheckedChanged += new System.EventHandler(this.PortBPin6);
+            // 
+            // chckBPortBTris7
+            // 
+            this.chckBPortBTris7.AutoSize = true;
+            this.chckBPortBTris7.Enabled = false;
+            this.chckBPortBTris7.Location = new System.Drawing.Point(41, 23);
+            this.chckBPortBTris7.Name = "chckBPortBTris7";
+            this.chckBPortBTris7.Size = new System.Drawing.Size(32, 17);
+            this.chckBPortBTris7.TabIndex = 15;
+            this.chckBPortBTris7.Text = "7";
+            this.chckBPortBTris7.UseVisualStyleBackColor = true;
+            // 
+            // chckBPortBPin5
+            // 
+            this.chckBPortBPin5.AutoSize = true;
+            this.chckBPortBPin5.Location = new System.Drawing.Point(117, 45);
+            this.chckBPortBPin5.Name = "chckBPortBPin5";
+            this.chckBPortBPin5.Size = new System.Drawing.Size(32, 17);
+            this.chckBPortBPin5.TabIndex = 33;
+            this.chckBPortBPin5.Text = "5";
+            this.chckBPortBPin5.UseVisualStyleBackColor = true;
+            this.chckBPortBPin5.CheckedChanged += new System.EventHandler(this.PortBPin5);
+            // 
+            // chckBPortBTris6
+            // 
+            this.chckBPortBTris6.AutoSize = true;
+            this.chckBPortBTris6.Enabled = false;
+            this.chckBPortBTris6.Location = new System.Drawing.Point(79, 23);
+            this.chckBPortBTris6.Name = "chckBPortBTris6";
+            this.chckBPortBTris6.Size = new System.Drawing.Size(32, 17);
+            this.chckBPortBTris6.TabIndex = 16;
+            this.chckBPortBTris6.Text = "6";
+            this.chckBPortBTris6.UseVisualStyleBackColor = true;
+            // 
+            // chckBPortBPin4
+            // 
+            this.chckBPortBPin4.AutoSize = true;
+            this.chckBPortBPin4.Location = new System.Drawing.Point(155, 45);
+            this.chckBPortBPin4.Name = "chckBPortBPin4";
+            this.chckBPortBPin4.Size = new System.Drawing.Size(32, 17);
+            this.chckBPortBPin4.TabIndex = 34;
+            this.chckBPortBPin4.Text = "4";
+            this.chckBPortBPin4.UseVisualStyleBackColor = true;
+            this.chckBPortBPin4.CheckedChanged += new System.EventHandler(this.PortBPin4);
+            // 
+            // chckBPortBTris5
+            // 
+            this.chckBPortBTris5.AutoSize = true;
+            this.chckBPortBTris5.Enabled = false;
+            this.chckBPortBTris5.Location = new System.Drawing.Point(117, 23);
+            this.chckBPortBTris5.Name = "chckBPortBTris5";
+            this.chckBPortBTris5.Size = new System.Drawing.Size(32, 17);
+            this.chckBPortBTris5.TabIndex = 17;
+            this.chckBPortBTris5.Text = "5";
+            this.chckBPortBTris5.UseVisualStyleBackColor = true;
+            // 
+            // chckBPortBPin3
+            // 
+            this.chckBPortBPin3.AutoSize = true;
+            this.chckBPortBPin3.Location = new System.Drawing.Point(193, 45);
+            this.chckBPortBPin3.Name = "chckBPortBPin3";
+            this.chckBPortBPin3.Size = new System.Drawing.Size(32, 17);
+            this.chckBPortBPin3.TabIndex = 35;
+            this.chckBPortBPin3.Text = "3";
+            this.chckBPortBPin3.UseVisualStyleBackColor = true;
+            this.chckBPortBPin3.CheckedChanged += new System.EventHandler(this.PortBPin3);
+            // 
+            // chckBPortBTris4
+            // 
+            this.chckBPortBTris4.AutoSize = true;
+            this.chckBPortBTris4.Enabled = false;
+            this.chckBPortBTris4.Location = new System.Drawing.Point(155, 23);
+            this.chckBPortBTris4.Name = "chckBPortBTris4";
+            this.chckBPortBTris4.Size = new System.Drawing.Size(32, 17);
+            this.chckBPortBTris4.TabIndex = 18;
+            this.chckBPortBTris4.Text = "4";
+            this.chckBPortBTris4.UseVisualStyleBackColor = true;
+            // 
+            // chckBPortBPin2
+            // 
+            this.chckBPortBPin2.AutoSize = true;
+            this.chckBPortBPin2.Location = new System.Drawing.Point(231, 45);
+            this.chckBPortBPin2.Name = "chckBPortBPin2";
+            this.chckBPortBPin2.Size = new System.Drawing.Size(32, 17);
+            this.chckBPortBPin2.TabIndex = 36;
+            this.chckBPortBPin2.Text = "2";
+            this.chckBPortBPin2.UseVisualStyleBackColor = true;
+            this.chckBPortBPin2.CheckedChanged += new System.EventHandler(this.PortBPin2);
+            // 
+            // chckBPortBTris3
+            // 
+            this.chckBPortBTris3.AutoSize = true;
+            this.chckBPortBTris3.Enabled = false;
+            this.chckBPortBTris3.Location = new System.Drawing.Point(193, 23);
+            this.chckBPortBTris3.Name = "chckBPortBTris3";
+            this.chckBPortBTris3.Size = new System.Drawing.Size(32, 17);
+            this.chckBPortBTris3.TabIndex = 19;
+            this.chckBPortBTris3.Text = "3";
+            this.chckBPortBTris3.UseVisualStyleBackColor = true;
+            // 
+            // chckBPortBPin1
+            // 
+            this.chckBPortBPin1.AutoSize = true;
+            this.chckBPortBPin1.Location = new System.Drawing.Point(269, 45);
+            this.chckBPortBPin1.Name = "chckBPortBPin1";
+            this.chckBPortBPin1.Size = new System.Drawing.Size(32, 17);
+            this.chckBPortBPin1.TabIndex = 37;
+            this.chckBPortBPin1.Text = "1";
+            this.chckBPortBPin1.UseVisualStyleBackColor = true;
+            this.chckBPortBPin1.CheckedChanged += new System.EventHandler(this.PortBPin1);
+            // 
+            // chckBPortBTris2
+            // 
+            this.chckBPortBTris2.AutoSize = true;
+            this.chckBPortBTris2.Enabled = false;
+            this.chckBPortBTris2.Location = new System.Drawing.Point(231, 23);
+            this.chckBPortBTris2.Name = "chckBPortBTris2";
+            this.chckBPortBTris2.Size = new System.Drawing.Size(32, 17);
+            this.chckBPortBTris2.TabIndex = 20;
+            this.chckBPortBTris2.Text = "2";
+            this.chckBPortBTris2.UseVisualStyleBackColor = true;
+            // 
+            // chckBPortBPin0
+            // 
+            this.chckBPortBPin0.AutoSize = true;
+            this.chckBPortBPin0.Location = new System.Drawing.Point(307, 45);
+            this.chckBPortBPin0.Name = "chckBPortBPin0";
+            this.chckBPortBPin0.Size = new System.Drawing.Size(32, 17);
+            this.chckBPortBPin0.TabIndex = 30;
+            this.chckBPortBPin0.Text = "0";
+            this.chckBPortBPin0.UseVisualStyleBackColor = true;
+            this.chckBPortBPin0.CheckedChanged += new System.EventHandler(this.PortBPin0);
+            // 
+            // chckBPortBTris1
+            // 
+            this.chckBPortBTris1.AutoSize = true;
+            this.chckBPortBTris1.Enabled = false;
+            this.chckBPortBTris1.Location = new System.Drawing.Point(269, 23);
+            this.chckBPortBTris1.Name = "chckBPortBTris1";
+            this.chckBPortBTris1.Size = new System.Drawing.Size(32, 17);
+            this.chckBPortBTris1.TabIndex = 21;
+            this.chckBPortBTris1.Text = "1";
+            this.chckBPortBTris1.UseVisualStyleBackColor = true;
+            // 
+            // chckBPortBTris0
+            // 
+            this.chckBPortBTris0.AutoSize = true;
+            this.chckBPortBTris0.Enabled = false;
+            this.chckBPortBTris0.Location = new System.Drawing.Point(307, 23);
+            this.chckBPortBTris0.Name = "chckBPortBTris0";
+            this.chckBPortBTris0.Size = new System.Drawing.Size(32, 17);
+            this.chckBPortBTris0.TabIndex = 2;
+            this.chckBPortBTris0.Text = "0";
+            this.chckBPortBTris0.UseVisualStyleBackColor = true;
+            // 
+            // lblPinB
+            // 
+            this.lblPinB.AutoSize = true;
+            this.lblPinB.Location = new System.Drawing.Point(6, 46);
+            this.lblPinB.Name = "lblPinB";
+            this.lblPinB.Size = new System.Drawing.Size(22, 13);
+            this.lblPinB.TabIndex = 1;
+            this.lblPinB.Text = "Pin";
+            // 
+            // lblTrisB
+            // 
+            this.lblTrisB.AutoSize = true;
+            this.lblTrisB.Location = new System.Drawing.Point(6, 24);
+            this.lblTrisB.Name = "lblTrisB";
+            this.lblTrisB.Size = new System.Drawing.Size(24, 13);
+            this.lblTrisB.TabIndex = 0;
+            this.lblTrisB.Text = "Tris";
+            // 
             // GUI_Simu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1024, 616);
+            this.Controls.Add(this.grpBPortB);
+            this.Controls.Add(this.grpBPortA);
             this.Controls.Add(this.grpBTiming);
             this.Controls.Add(this.grpBMemory);
             this.Controls.Add(this.grBSFRBit);
@@ -1119,6 +1525,10 @@
             this.grpBMemory.ResumeLayout(false);
             this.grpBTiming.ResumeLayout(false);
             this.grpBTiming.PerformLayout();
+            this.grpBPortA.ResumeLayout(false);
+            this.grpBPortA.PerformLayout();
+            this.grpBPortB.ResumeLayout(false);
+            this.grpBPortB.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1221,6 +1631,38 @@
         private System.Windows.Forms.Label lblQuarz;
         private System.Windows.Forms.ComboBox cmbBQuarz;
         private System.Windows.Forms.Timer tWorkingInterval;
+        private System.Windows.Forms.GroupBox grpBPortA;
+        private System.Windows.Forms.Label lblPinA;
+        private System.Windows.Forms.Label lblTrisA;
+        private System.Windows.Forms.GroupBox grpBPortB;
+        private System.Windows.Forms.CheckBox chckBPortBTris0;
+        private System.Windows.Forms.Label lblPinB;
+        private System.Windows.Forms.Label lblTrisB;
+        private System.Windows.Forms.CheckBox chckBPortAPin4;
+        private System.Windows.Forms.CheckBox chckBPortAPin3;
+        private System.Windows.Forms.CheckBox chckBPortAPin2;
+        private System.Windows.Forms.CheckBox chckBPortAPin1;
+        private System.Windows.Forms.CheckBox chckBPortATris4;
+        private System.Windows.Forms.CheckBox chckBPortAPin0;
+        private System.Windows.Forms.CheckBox chckBPortATris0;
+        private System.Windows.Forms.CheckBox chckBPortATris3;
+        private System.Windows.Forms.CheckBox chckBPortATris1;
+        private System.Windows.Forms.CheckBox chckBPortATris2;
+        private System.Windows.Forms.CheckBox chckBPortBPin7;
+        private System.Windows.Forms.CheckBox chckBPortBPin6;
+        private System.Windows.Forms.CheckBox chckBPortBTris7;
+        private System.Windows.Forms.CheckBox chckBPortBPin5;
+        private System.Windows.Forms.CheckBox chckBPortBTris6;
+        private System.Windows.Forms.CheckBox chckBPortBPin4;
+        private System.Windows.Forms.CheckBox chckBPortBTris5;
+        private System.Windows.Forms.CheckBox chckBPortBPin3;
+        private System.Windows.Forms.CheckBox chckBPortBTris4;
+        private System.Windows.Forms.CheckBox chckBPortBPin2;
+        private System.Windows.Forms.CheckBox chckBPortBTris3;
+        private System.Windows.Forms.CheckBox chckBPortBPin1;
+        private System.Windows.Forms.CheckBox chckBPortBTris2;
+        private System.Windows.Forms.CheckBox chckBPortBPin0;
+        private System.Windows.Forms.CheckBox chckBPortBTris1;
     }
 }
 

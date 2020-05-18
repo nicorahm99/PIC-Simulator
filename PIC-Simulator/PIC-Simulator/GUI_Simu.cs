@@ -15,7 +15,7 @@ namespace PIC_Simulator
     public partial class GUI_Simu : Form
     {
         #region defines & dicts
-        //If there is the need to use meaningful names
+        //possibility to use meaningful names
         //Dictionary<string, int> status = new Dictionary<string, int>() //bits in status reg
         //{
         //    {  "lblIRPVal", 0},
@@ -52,28 +52,28 @@ namespace PIC_Simulator
         //    {  "lblRIFVal", 7},
         //};
 
-        Dictionary<int, string> prescalerTMR0 = new Dictionary<int, string>() //prescaler with TMR0 Rate
+        Dictionary<int, int> prescalerTMR0 = new Dictionary<int, int>() //prescaler with TMR0 Rate
         {
-            {  0, "1 : 2"},
-            {  1, "1 : 4"},
-            {  2, "1 : 8"},
-            {  3, "1 : 16"},
-            {  4, "1 : 32"},
-            {  5, "1 : 64"},
-            {  6, "1 : 128"},
-            {  7, "1 : 256"},
+            {  0, 2},
+            {  1, 4},
+            {  2, 8},
+            {  3, 16},
+            {  4, 32},
+            {  5, 64},
+            {  6, 128},
+            {  7, 256},
         };
 
-        Dictionary<int, string> prescalerWDT = new Dictionary<int, string>() //prescaler with WDT Rate
+        Dictionary<int, int> prescalerWDT = new Dictionary<int, int>() //prescaler with WDT Rate
         {
-            {  0, "1 : 1"},
-            {  1, "1 : 2"},
-            {  2, "1 : 4"},
-            {  3, "1 : 8"},
-            {  4, "1 : 16"},
-            {  5, "1 : 32"},
-            {  6, "1 : 64"},
-            {  7, "1 : 128"},
+            {  0, 1},
+            {  1, 2},
+            {  2, 4},
+            {  3, 8},
+            {  4, 16},
+            {  5, 32},
+            {  6, 64},
+            {  7, 128},
         };
         #endregion
 
@@ -118,14 +118,80 @@ namespace PIC_Simulator
         public void reset()
         {
             memory.setFullPC(0);
-            controller.reset_taktCount();
             //reset memory
             refreshMemory();
             refreshSFR_b();
-            reset_Timing();
+            resetTiming();
         }
 
         //------------------------------------------------GUI------------------------------------------------------------------------
+        #region I/O Ports
+        private void PortAPin0(object sender, EventArgs e)
+        {
+            // if checkbox is checked corresponding tris bit is set
+            if (chckBPortAPin0.Checked == true && memory.getBit(85, 0) == 1) { /*memory set bit */}
+        }
+
+        private void PortAPin1(object sender, EventArgs e)
+        {
+            if ( chckBPortAPin1.Checked == true && memory.getBit(85, 1) == 1) { /*memory set bit */}
+        }
+
+        private void PortAPin2(object sender, EventArgs e)
+        {
+            if ( chckBPortAPin2.Checked == true && memory.getBit(85, 2) == 1) { /*memory set bit */}
+        }
+
+        private void PortAPin3(object sender, EventArgs e)
+        {
+            if ( chckBPortAPin3.Checked == true && memory.getBit(85, 3) == 1) { /*memory set bit */}
+        }
+
+        private void PortAPin4(object sender, EventArgs e)
+        {
+            if (chckBPortAPin4.Checked == true && memory.getBit(85, 4) == 1) { /*memory set bit */}
+        }
+
+        private void PortBPin0(object sender, EventArgs e)
+        {
+            if ( chckBPortBPin0.Checked == true && memory.getBit(86, 0) == 1) { /*memory set bit */}
+        }
+
+        private void PortBPin1(object sender, EventArgs e)
+        {
+            if ( chckBPortBPin1.Checked == true && memory.getBit(86, 1) == 1) { /*memory set bit */}
+        }
+
+        private void PortBPin2(object sender, EventArgs e)
+        {
+            if ( chckBPortBPin2.Checked == true && memory.getBit(86, 2) == 1) { /*memory set bit */}
+        }
+
+        private void PortBPin3(object sender, EventArgs e)
+        {
+            if (chckBPortBPin3.Checked == true && memory.getBit(86, 3) == 1) { /*memory set bit */}
+        }
+
+        private void PortBPin4(object sender, EventArgs e)
+        {
+            if (chckBPortBPin4.Checked == true && memory.getBit(86, 4) == 1) { /*memory set bit */}
+        }
+
+        private void PortBPin5(object sender, EventArgs e)
+        {
+            if (chckBPortBPin5.Checked == true && memory.getBit(86, 5) == 1) { /*memory set bit */}
+        }
+
+        private void PortBPin6(object sender, EventArgs e)
+        {
+            if (chckBPortBPin6.Checked == true && memory.getBit(86, 6) == 1) { /*memory set bit */}
+        }
+
+        private void PortBPin7(object sender, EventArgs e)
+        {
+            if (chckBPortBPin7.Checked == true && memory.getBit(86, 7) == 1) { /*memory set bit */}
+        }
+        #endregion
 
         #region SFR(Bit)
         private void refreshSFR_b()
@@ -160,11 +226,11 @@ namespace PIC_Simulator
         #endregion
 
         #region SFR+W
-        public string getPrescaler()
+        public int getPrescaler()
         {
             int optionFile = memory.getFile(0x81);
-            optionFile = optionFile & 3;
-            string presaler = prescalerWDT[optionFile];
+            int prescalerBits = optionFile & 7;
+            int presaler = prescalerTMR0[prescalerBits];
             return presaler;
         }
         
@@ -178,7 +244,7 @@ namespace PIC_Simulator
             lblFSRVal.Text = memory.getFile(0x04).ToString();
 
             lblOptionVal.Text = memory.getFile(0x81).ToString();
-            lblVorteilerVal.Text = getPrescaler();
+            lblVorteilerVal.Text = "1 : " + getPrescaler().ToString();
             //lblTimer0Val.Text = ;
         }
         #endregion
@@ -219,7 +285,7 @@ namespace PIC_Simulator
         #endregion
 
         #region Timing
-        public void reset_Timing()
+        public void resetTiming()
         {
             lblLaufztVal.Text = "0";
             //Watchdog
@@ -251,7 +317,7 @@ namespace PIC_Simulator
 
         private void btnStep_Click(object sender, EventArgs e)
         {
-            
+            controller.step();
         }
         #endregion
 
@@ -297,10 +363,13 @@ namespace PIC_Simulator
         private void tWorkingInterval_Tick(object sender, EventArgs e)
         {
             controller.step();
-            setLaufzeit(controller.get_taktCount());
+            setLaufzeit(controller.get_timer0());
             refreshMemory();
             refreshSFR_b();
+            refreshSFRW();
         }
         #endregion
+
+        
     }
 }
