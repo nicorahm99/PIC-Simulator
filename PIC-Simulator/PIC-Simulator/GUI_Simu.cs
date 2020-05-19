@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -95,6 +96,13 @@ namespace PIC_Simulator
         {
             initMemory();
             refreshSFR_b();
+
+            // to test portA and PortB chackboxes
+            memory.setMemoryBankTo(1);
+            memory.setFile(0x05, 31); //0x85 = TrisA --> 1 1111
+            memory.setFile(0x06, 255); //0x86 = TrisB --> 1111 1111
+            memory.setMemoryBankTo(0);
+            refreshMemory();
         }
         #endregion
 
@@ -125,127 +133,257 @@ namespace PIC_Simulator
         }
 
         //------------------------------------------------GUI------------------------------------------------------------------------
+        #region memory adress resolution functions
+
+        public int memAdrRes_setFile(int fileAddress, int value)
+        {
+            if (fileAddress >= 0 && fileAddress <= 0x4F)
+            {
+                int tmp =  memory.setFile(fileAddress, value);
+            }
+            else if (fileAddress >= 0x80 && fileAddress <= 0xCF)
+            {
+                memory.setMemoryBankTo(1);
+                fileAddress -= 0x80;
+                int tmp =  memory.setFile(fileAddress, value);
+                memory.setMemoryBankTo(0);
+            }
+            return 0;
+        }
+
+        public int memAdrRes_getFile(int fileAddress)
+        {
+            int file = 0;
+            if (fileAddress >= 0 && fileAddress <= 0x4F)
+            {
+                file = memory.getFile(fileAddress);
+            }
+            else if (fileAddress >= 0x80 && fileAddress <= 0xCF)
+            {
+                memory.setMemoryBankTo(1);
+                fileAddress -= 0x80;
+                file = memory.getFile(fileAddress);
+                memory.setMemoryBankTo(0);
+            }
+            return file;
+        }
+
+        public int memAdrRes_getBit(int fileAddress, int bitAddress)
+        {
+            int bit = 0;
+            if (fileAddress >= 0 && fileAddress <= 0x4F)
+            {
+                bit = memory.getBit(fileAddress, fileAddress);
+            }
+            else if (fileAddress >= 0x80 && fileAddress <= 0xCF)
+            {
+                memory.setMemoryBankTo(1);
+                fileAddress -= 0x80;
+                bit = memory.getBit(fileAddress, fileAddress);
+                memory.setMemoryBankTo(0);
+            }
+            return bit;
+        }
+
+        public void memAdrRes_setBit(int fileAddress, int bit)
+        {
+            if (fileAddress >= 0 && fileAddress <= 0x4F)
+            {
+                memory.setBit(fileAddress, bit);
+            }
+            else if (fileAddress >= 0x80 && fileAddress <= 0xCF)
+            {
+                memory.setMemoryBankTo(1);
+                fileAddress -= 0x80;
+                memory.setBit(fileAddress, bit);
+                memory.setMemoryBankTo(0);
+            }
+        }
+
+        public void memAdrRes_clearBit(int fileAddress, int bit)
+        {
+            if (fileAddress >= 0 && fileAddress <= 0x4F)
+            {
+                memory.clearBit(fileAddress, bit);
+            }
+            else if (fileAddress >= 0x80 && fileAddress <= 0xCF)
+            {
+                memory.setMemoryBankTo(1);
+                fileAddress -= 0x80;
+                memory.clearBit(fileAddress, bit);
+                memory.setMemoryBankTo(0);
+            }
+        }
+
+        public bool memAdrRes_requestAccess(int fileAddress, int bit)
+        {
+            bool access = false;
+            if (fileAddress >= 0 && fileAddress <= 0x4F)
+            {
+                access = memory.requestAccess(fileAddress, bit);
+            }
+            else if (fileAddress >= 0x80 && fileAddress <= 0xCF)
+            {
+                memory.setMemoryBankTo(1);
+                fileAddress -= 0x80;
+                access = memory.requestAccess(fileAddress, bit);
+                memory.setMemoryBankTo(0);
+            }
+            return access;
+        }
+
+        #endregion
+
         #region I/O Ports
         private void PortAPin0(object sender, EventArgs e)
         {
             // if checkbox is checked corresponding tris bit is set
-            if (chckBPortAPin0.Checked == true && memory.getBit(85, 0) == 1) { /*memory set bit */}
+            if ( chckBPortAPin0.Checked == true && memAdrRes_requestAccess(0x85, 0)) { memory.setBit(0x05, 0); }
+            else if( chckBPortAPin0.Checked == false && memAdrRes_requestAccess(0x85, 0)) { memory.clearBit(0x05, 0); }
+            refreshMemory();
         }
 
         private void PortAPin1(object sender, EventArgs e)
         {
-            if ( chckBPortAPin1.Checked == true && memory.getBit(85, 1) == 1) { /*memory set bit */}
+            if ( chckBPortAPin1.Checked == true && memAdrRes_requestAccess(0x85, 1)) { memory.setBit(0x05, 1); }
+            else if ( chckBPortAPin1.Checked == false && memAdrRes_requestAccess(0x85, 1)) { memory.clearBit(0x05, 1); }
+            refreshMemory();
         }
 
         private void PortAPin2(object sender, EventArgs e)
         {
-            if ( chckBPortAPin2.Checked == true && memory.getBit(85, 2) == 1) { /*memory set bit */}
+            if ( chckBPortAPin2.Checked == true && memAdrRes_requestAccess(0x85, 2)) { memory.setBit(0x05, 2); }
+            else if ( chckBPortAPin2.Checked == false && memAdrRes_requestAccess(0x85, 2)) { memory.clearBit(0x05, 2); }
+            refreshMemory();
         }
 
         private void PortAPin3(object sender, EventArgs e)
         {
-            if ( chckBPortAPin3.Checked == true && memory.getBit(85, 3) == 1) { /*memory set bit */}
+            if ( chckBPortAPin3.Checked == true && memAdrRes_requestAccess(0x85, 3)) { memory.setBit(0x05, 3); }
+            else if ( chckBPortAPin3.Checked == false && memAdrRes_requestAccess(0x85, 3)) { memory.clearBit(0x05, 3); }
+            refreshMemory();
         }
 
         private void PortAPin4(object sender, EventArgs e)
         {
-            if (chckBPortAPin4.Checked == true && memory.getBit(85, 4) == 1) { /*memory set bit */}
+            if ( chckBPortAPin4.Checked == true && memAdrRes_requestAccess(0x85, 4)) { memory.setBit(0x05, 4); }
+            else if ( chckBPortAPin4.Checked == false && memAdrRes_requestAccess(0x85, 4)) { memory.clearBit(0x05, 4); }
+            refreshMemory();
         }
 
         private void PortBPin0(object sender, EventArgs e)
         {
-            if ( chckBPortBPin0.Checked == true && memory.getBit(86, 0) == 1) { /*memory set bit */}
+            if ( chckBPortBPin0.Checked == true && memAdrRes_requestAccess(0x86, 0)) { memory.setBit(0x06, 0); }
+            else if ( chckBPortBPin0.Checked == false && memAdrRes_requestAccess(0x86, 0)) { memory.clearBit(0x06, 0); }
+            refreshMemory();
         }
 
         private void PortBPin1(object sender, EventArgs e)
         {
-            if ( chckBPortBPin1.Checked == true && memory.getBit(86, 1) == 1) { /*memory set bit */}
+            if ( chckBPortBPin1.Checked == true && memAdrRes_requestAccess(0x86, 1)) { memory.setBit(0x06, 1); }
+            else if ( chckBPortBPin1.Checked == false && memAdrRes_requestAccess(0x86, 1)) { memory.clearBit(0x06, 1); }
+            refreshMemory();
         }
 
         private void PortBPin2(object sender, EventArgs e)
         {
-            if ( chckBPortBPin2.Checked == true && memory.getBit(86, 2) == 1) { /*memory set bit */}
+            if ( chckBPortBPin2.Checked == true && memAdrRes_requestAccess(0x86, 2)) { memory.setBit(0x06, 2); }
+            else if ( chckBPortBPin2.Checked == false && memAdrRes_requestAccess(0x86, 2)) { memory.clearBit(0x06, 2); }
+            refreshMemory();
         }
 
         private void PortBPin3(object sender, EventArgs e)
         {
-            if (chckBPortBPin3.Checked == true && memory.getBit(86, 3) == 1) { /*memory set bit */}
+            if ( chckBPortBPin3.Checked == true && memAdrRes_requestAccess(0x86, 3)) { memory.setBit(0x06, 3); }
+            else if ( chckBPortBPin3.Checked == false && memAdrRes_requestAccess(0x86, 3)) { memory.clearBit(0x06, 3); }
+            refreshMemory();
         }
 
         private void PortBPin4(object sender, EventArgs e)
         {
-            if (chckBPortBPin4.Checked == true && memory.getBit(86, 4) == 1) { /*memory set bit */}
+            if ( chckBPortBPin4.Checked == true && memAdrRes_requestAccess(0x86, 4)) { memory.setBit(0x06, 4); }
+            else if ( chckBPortBPin4.Checked == false && memAdrRes_requestAccess(0x86, 4)) { memory.clearBit(0x06, 4); }
+            refreshMemory();
         }
 
         private void PortBPin5(object sender, EventArgs e)
         {
-            if (chckBPortBPin5.Checked == true && memory.getBit(86, 5) == 1) { /*memory set bit */}
+            if ( chckBPortBPin5.Checked == true && memAdrRes_requestAccess(0x86, 5)) { memory.setBit(0x06, 5); }
+            else if ( chckBPortBPin5.Checked == false && memAdrRes_requestAccess(0x86, 5)) { memory.clearBit(0x06, 5); }
+            refreshMemory();
         }
 
         private void PortBPin6(object sender, EventArgs e)
         {
-            if (chckBPortBPin6.Checked == true && memory.getBit(86, 6) == 1) { /*memory set bit */}
+            if ( chckBPortBPin6.Checked == true && memAdrRes_requestAccess(0x86, 6)) { memory.setBit(0x06, 6); }
+            else if ( chckBPortBPin6.Checked == false && memAdrRes_requestAccess(0x86, 6)) { memory.clearBit(0x06, 6); }
+            refreshMemory();
         }
 
         private void PortBPin7(object sender, EventArgs e)
         {
-            if (chckBPortBPin7.Checked == true && memory.getBit(86, 7) == 1) { /*memory set bit */}
+            if ( chckBPortBPin7.Checked == true && memAdrRes_requestAccess(0x86, 7)) { memory.setBit(0x06, 7); }
+            else if ( chckBPortBPin7.Checked == false && memAdrRes_requestAccess(0x86, 7)) { memory.clearBit(0x06, 7); }
+            refreshMemory();
         }
         #endregion
 
         #region SFR(Bit)
         private void refreshSFR_b()
         {
-            lblIRPVal.Text = memory.getBit(0x3, 7).ToString();
-            lblRP1Val.Text = memory.getBit(0x3, 6).ToString();
-            lblRP0Val.Text = memory.getBit(0x3, 5).ToString();
-            lblTOVal.Text = memory.getBit(0x3, 4).ToString();
-            lblPDVal.Text = memory.getBit(0x3, 3).ToString();
-            lblZVal.Text = memory.getBit(0x3, 2).ToString();
-            lblDCVal.Text = memory.getBit(0x3, 1).ToString();
-            lblCVal.Text = memory.getBit(0x3, 0).ToString();
+            lblIRPVal.Text = memAdrRes_getBit(0x3, 7).ToString();
+            lblRP1Val.Text = memAdrRes_getBit(0x3, 6).ToString();
+            lblRP0Val.Text = memAdrRes_getBit(0x3, 5).ToString();
+            lblTOVal.Text = memAdrRes_getBit(0x3, 4).ToString();
+            lblPDVal.Text = memAdrRes_getBit(0x3, 3).ToString();
+            lblZVal.Text = memAdrRes_getBit(0x3, 2).ToString();
+            lblDCVal.Text = memAdrRes_getBit(0x3, 1).ToString();
+            lblCVal.Text = memAdrRes_getBit(0x3, 0).ToString();
 
-            lblRPuVal.Text = memory.getBit(0x81, 7).ToString();
-            lblIEgVal.Text = memory.getBit(0x81, 6).ToString();
-            lblTCsVal.Text = memory.getBit(0x81, 5).ToString();
-            lblTSeVal.Text = memory.getBit(0x81, 4).ToString();
-            lblPSAVal.Text = memory.getBit(0x81, 3).ToString();
-            lblPS2Val.Text = memory.getBit(0x81, 2).ToString();
-            lblPS1Val.Text = memory.getBit(0x81, 1).ToString();
-            lblPS0Val.Text = memory.getBit(0x81, 0).ToString();
+            lblRPuVal.Text = memAdrRes_getBit(0x81, 7).ToString();
+            lblIEgVal.Text = memAdrRes_getBit(0x81, 6).ToString();
+            lblTCsVal.Text = memAdrRes_getBit(0x81, 5).ToString();
+            lblTSeVal.Text = memAdrRes_getBit(0x81, 4).ToString();
+            lblPSAVal.Text = memAdrRes_getBit(0x81, 3).ToString();
+            lblPS2Val.Text = memAdrRes_getBit(0x81, 2).ToString();
+            lblPS1Val.Text = memAdrRes_getBit(0x81, 1).ToString();
+            lblPS0Val.Text = memAdrRes_getBit(0x81, 0).ToString();
 
-            lblGIEVal.Text = memory.getBit(0xB, 7).ToString();
-            lblEIEVal.Text = memory.getBit(0xB, 6).ToString();
-            lblTIEVal.Text = memory.getBit(0xB, 5).ToString();
-            lblIEVal.Text = memory.getBit(0xB, 4).ToString();
-            lblRIEVal.Text = memory.getBit(0xB, 3).ToString();
-            lblTIFVal.Text = memory.getBit(0xB, 2).ToString();
-            lblIFVal.Text = memory.getBit(0xB, 1).ToString();
-            lblRIFVal.Text = memory.getBit(0xB, 0).ToString();
+            lblGIEVal.Text = memAdrRes_getBit(0xB, 7).ToString();
+            lblEIEVal.Text = memAdrRes_getBit(0xB, 6).ToString();
+            lblTIEVal.Text = memAdrRes_getBit(0xB, 5).ToString();
+            lblIEVal.Text = memAdrRes_getBit(0xB, 4).ToString();
+            lblRIEVal.Text = memAdrRes_getBit(0xB, 3).ToString();
+            lblTIFVal.Text = memAdrRes_getBit(0xB, 2).ToString();
+            lblIFVal.Text = memAdrRes_getBit(0xB, 1).ToString();
+            lblRIFVal.Text = memAdrRes_getBit(0xB, 0).ToString();
         }
         #endregion
 
         #region SFR+W
         public int getPrescaler()
         {
-            int optionFile = memory.getFile(0x81);
-            int prescalerBits = optionFile & 7;
-            int presaler = prescalerTMR0[prescalerBits];
-            return presaler;
+            int optionFile = memAdrRes_getFile(0x81); // get the option file
+            int prescalerBits = optionFile & 7; // get bits 2-0 which define the prescaler
+            // define value of the prescaler due to the "prascaler assignment bit"
+            int prescaler;
+            if (memAdrRes_getBit(81, 3) == 1) { prescaler = prescalerWDT[prescalerBits]; }
+            else { prescaler = prescalerTMR0[prescalerBits]; }
+            return prescaler;
         }
         
         public void refreshSFRW()
         {
             lblWRegVal.Text = memory.getWReg().ToString();
-            lblPCLVal.Text = memory.getFile(0x02).ToString();
-            lblPCLATHVal.Text = memory.getFile(0x0A).ToString();
-            lblPCLinternVal.Text = memory.getFile(0x02).ToString();
-            lblStatusVal.Text = memory.getFile(0x03).ToString();
-            lblFSRVal.Text = memory.getFile(0x04).ToString();
+            lblPCLVal.Text = memAdrRes_getFile(0x02).ToString();
+            lblPCLATHVal.Text = memAdrRes_getFile(0x0A).ToString();
+            lblPCLinternVal.Text = memAdrRes_getFile(0x02).ToString();
+            lblStatusVal.Text = memAdrRes_getFile(0x03).ToString();
+            lblFSRVal.Text = memAdrRes_getFile(0x04).ToString();
 
-            lblOptionVal.Text = memory.getFile(0x81).ToString();
+            lblOptionVal.Text = memAdrRes_getFile(0x81).ToString();
             lblVorteilerVal.Text = "1 : " + getPrescaler().ToString();
-            //lblTimer0Val.Text = ;
+            lblTimer0Val.Text = controller.get_timer0().ToString();
         }
         #endregion
 
@@ -262,7 +400,7 @@ namespace PIC_Simulator
                 string newrow = adr + "   |";
                 for (int j = 0; j < 8; j++)
                 {
-                    newrow += "  " + memory.getFile((i * 8) + j).ToString() + "  |";
+                    newrow += "  " + memAdrRes_getFile((i * 8) + j).ToString() + "  |";
                 }
                 lVMemory.Items.Add(newrow);
             }
@@ -277,7 +415,7 @@ namespace PIC_Simulator
                 string newrow = adr + "   |";
                 for (int j = 0; j < 8; j++)
                 {
-                    newrow += "  " + memory.getFile((i * 8) + j).ToString() + "  |";
+                    newrow += "  " + memAdrRes_getFile((i * 8) + j).ToString() + "  |";
                 }
                 lVMemory.Items[i + 1].Text = newrow;
             }
@@ -317,7 +455,7 @@ namespace PIC_Simulator
 
         private void btnStep_Click(object sender, EventArgs e)
         {
-            controller.step();
+            controllerStep();
         }
         #endregion
 
@@ -362,6 +500,13 @@ namespace PIC_Simulator
         #region timer
         private void tWorkingInterval_Tick(object sender, EventArgs e)
         {
+            controllerStep();
+        }
+        #endregion
+
+        #region controller
+        public void controllerStep()
+        {
             controller.step();
             setLaufzeit(controller.get_timer0());
             refreshMemory();
@@ -370,6 +515,6 @@ namespace PIC_Simulator
         }
         #endregion
 
-        
+
     }
 }

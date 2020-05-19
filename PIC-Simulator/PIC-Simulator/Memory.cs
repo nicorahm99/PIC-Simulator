@@ -22,6 +22,7 @@ namespace PIC_Simulator
         private int EECON2;
         #endregion
 
+        #region file access
         public int setFile(int fileAddress, int value)
         {
             if (fileAddress <= 0x4f && (getStatusRP0() == 0)) // Bank 0
@@ -83,9 +84,9 @@ namespace PIC_Simulator
             }
             return 0;
         }
+        #endregion
 
-        #region help functions
-
+        #region bit access
         public int getBit(int fileadress, int bitadress) // Bitaddress like : 0-7
         {
             int reg = getFile(fileadress);
@@ -94,12 +95,37 @@ namespace PIC_Simulator
             else { return 1; }
         }
 
+        public void setBit(int reg, int bit)
+        {
+            if (getBit(reg, bit) == 0)
+            {
+                int file = getFile(reg);
+                int newfile = file + Convert.ToInt16(Math.Pow(2, bit));
+                setFile(reg, newfile);
+            }
+        }
+
+        public void clearBit(int reg, int bit)
+        {
+            if (getBit(reg, bit) == 1)
+            {
+                int file = getFile(reg);
+                int newfile = file - Convert.ToInt16(Math.Pow(2, bit));
+                setFile(reg, newfile);
+            } 
+        }
+        #endregion
+
+
+        #region help functions
         public int setWReg(int value) { return wReg = value; }
         public int getWReg() { return wReg; }
 
         public int getStatusRP0()
         {
-            return memory[0x3] & 0x20;
+            int val = memory[0x3] & 0x20;
+            if ((memory[0x3] & 0x20) > 0) { return 1; }
+            else { return 0; }
         }
 
         public int readStack()
@@ -191,6 +217,19 @@ namespace PIC_Simulator
             EECON2 = value;
         }
 
+        public bool requestAccess(int reg, int bit)
+        {
+            bool access;
+            if (reg == 0x05 || reg == 0x06) // TrisA TrisB Request
+            {
+                if (getBit(reg, bit) == 1) { access = true; }
+                else { access = false; }
+            }
+
+            else { access = false; }
+
+            return access;
+        }
         #endregion
     }
 }
