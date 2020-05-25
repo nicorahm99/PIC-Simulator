@@ -141,6 +141,10 @@ namespace PIC_Simulator
             {
                 int tmp =  memory.setFile(fileAddress, value);
             }
+            else if (fileAddress == 0x83)
+            {
+                memory.setFile(0x3, value);
+            }
             else if (fileAddress >= 0x80 && fileAddress <= 0xCF)
             {
                 memory.setMemoryBankTo(1);
@@ -157,6 +161,10 @@ namespace PIC_Simulator
             if (fileAddress >= 0 && fileAddress <= 0x4F)
             {
                 file = memory.getFile(fileAddress);
+            }
+            else if (fileAddress == 0x83)
+            {
+                file = memory.getFile(0x3);
             }
             else if (fileAddress >= 0x80 && fileAddress <= 0xCF)
             {
@@ -175,6 +183,10 @@ namespace PIC_Simulator
             {
                 bit = memory.getBit(fileAddress, bitAddress);
             }
+            else if (fileAddress == 0x83)
+            {
+                bit = memory.getBit(0x3, bitAddress);
+            }
             else if (fileAddress >= 0x80 && fileAddress <= 0xCF)
             {
                 memory.setMemoryBankTo(1);
@@ -185,17 +197,21 @@ namespace PIC_Simulator
             return bit;
         }
 
-        public void memAdrRes_setBit(int fileAddress, int bit)
+        public void memAdrRes_setBit(int fileAddress, int bitAddress)
         {
             if (fileAddress >= 0 && fileAddress <= 0x4F)
             {
-                memory.setBit(fileAddress, bit);
+                memory.setBit(fileAddress, bitAddress);
+            }
+            else if (fileAddress == 0x83)
+            {
+                memory.setBit(0x3, bitAddress);
             }
             else if (fileAddress >= 0x80 && fileAddress <= 0xCF)
             {
                 memory.setMemoryBankTo(1);
                 fileAddress -= 0x80;
-                memory.setBit(fileAddress, bit);
+                memory.setBit(fileAddress, bitAddress);
                 memory.setMemoryBankTo(0);
             }
         }
@@ -242,7 +258,7 @@ namespace PIC_Simulator
         #region Port A
         private void PortAPin0(object sender, EventArgs e)
         {
-            // if checkbox is checked corresponding tris bit is set
+            // if checkbox is checked corresponding tris bitAddress is set
             if ( chckBPortAPin0.Checked == true && memAdrRes_requestAccess(0x85, 0)) { memory.setBit(0x05, 0); }
             else if( chckBPortAPin0.Checked == false && memAdrRes_requestAccess(0x85, 0)) { memory.clearBit(0x05, 0); }
             refreshMemory();
@@ -381,7 +397,7 @@ namespace PIC_Simulator
         {
             int optionFile = memAdrRes_getFile(0x81); // get the option file
             int prescalerBits = optionFile & 7; // get bits 2-0 which define the prescaler
-            // define value of the prescaler due to the "prascaler assignment bit"
+            // define value of the prescaler due to the "prascaler assignment bitAddress"
             int prescaler;
             if (memAdrRes_getBit(81, 3) == 1) { prescaler = prescalerWDT[prescalerBits]; }
             else { prescaler = prescalerTMR0[prescalerBits]; }
