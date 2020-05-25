@@ -173,13 +173,13 @@ namespace PIC_Simulator
             int bit = 0;
             if (fileAddress >= 0 && fileAddress <= 0x4F)
             {
-                bit = memory.getBit(fileAddress, fileAddress);
+                bit = memory.getBit(fileAddress, bitAddress);
             }
             else if (fileAddress >= 0x80 && fileAddress <= 0xCF)
             {
                 memory.setMemoryBankTo(1);
                 fileAddress -= 0x80;
-                bit = memory.getBit(fileAddress, fileAddress);
+                bit = memory.getBit(fileAddress, bitAddress);
                 memory.setMemoryBankTo(0);
             }
             return bit;
