@@ -190,7 +190,7 @@
             this.grpBSFRW.Controls.Add(this.lblStatus);
             this.grpBSFRW.Location = new System.Drawing.Point(12, 28);
             this.grpBSFRW.Name = "grpBSFRW";
-            this.grpBSFRW.Size = new System.Drawing.Size(228, 144);
+            this.grpBSFRW.Size = new System.Drawing.Size(243, 144);
             this.grpBSFRW.TabIndex = 0;
             this.grpBSFRW.TabStop = false;
             this.grpBSFRW.Text = "SFR + W";
@@ -360,7 +360,7 @@
             // grpBProgramm
             // 
             this.grpBProgramm.Controls.Add(this.tBProgramm);
-            this.grpBProgramm.Location = new System.Drawing.Point(12, 178);
+            this.grpBProgramm.Location = new System.Drawing.Point(12, 260);
             this.grpBProgramm.Name = "grpBProgramm";
             this.grpBProgramm.Size = new System.Drawing.Size(500, 260);
             this.grpBProgramm.TabIndex = 1;
@@ -388,7 +388,7 @@
             this.tSBtnHilfe});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1024, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(989, 25);
             this.toolStrip1.TabIndex = 2;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -407,14 +407,14 @@
             // dateiÖffnenToolStripMenuItem
             // 
             this.dateiÖffnenToolStripMenuItem.Name = "dateiÖffnenToolStripMenuItem";
-            this.dateiÖffnenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.dateiÖffnenToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.dateiÖffnenToolStripMenuItem.Text = "Datei öffnen";
             this.dateiÖffnenToolStripMenuItem.Click += new System.EventHandler(this.dateiÖffnenToolStripMenuItem_Click);
             // 
             // verlassenToolStripMenuItem
             // 
             this.verlassenToolStripMenuItem.Name = "verlassenToolStripMenuItem";
-            this.verlassenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.verlassenToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.verlassenToolStripMenuItem.Text = "verlassen";
             this.verlassenToolStripMenuItem.Click += new System.EventHandler(this.verlassenToolStripMenuItem_Click);
             // 
@@ -439,6 +439,7 @@
             // 
             // btnStart
             // 
+            this.btnStart.Enabled = false;
             this.btnStart.Location = new System.Drawing.Point(6, 25);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(75, 23);
@@ -449,6 +450,7 @@
             // 
             // btnStop
             // 
+            this.btnStop.Enabled = false;
             this.btnStop.Location = new System.Drawing.Point(6, 54);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(75, 23);
@@ -459,6 +461,7 @@
             // 
             // btnReset
             // 
+            this.btnReset.Enabled = false;
             this.btnReset.Location = new System.Drawing.Point(6, 83);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(75, 23);
@@ -469,6 +472,7 @@
             // 
             // btnStep
             // 
+            this.btnStep.Enabled = false;
             this.btnStep.Location = new System.Drawing.Point(6, 112);
             this.btnStep.Name = "btnStep";
             this.btnStep.Size = new System.Drawing.Size(75, 23);
@@ -483,7 +487,7 @@
             this.grpBControls.Controls.Add(this.btnStart);
             this.grpBControls.Controls.Add(this.btnStep);
             this.grpBControls.Controls.Add(this.btnStop);
-            this.grpBControls.Location = new System.Drawing.Point(756, 28);
+            this.grpBControls.Location = new System.Drawing.Point(791, 28);
             this.grpBControls.Name = "grpBControls";
             this.grpBControls.Size = new System.Drawing.Size(88, 144);
             this.grpBControls.TabIndex = 8;
@@ -543,7 +547,7 @@
             this.grBSFRBit.Controls.Add(this.lblIRPVal);
             this.grBSFRBit.Controls.Add(this.lblDC);
             this.grBSFRBit.Controls.Add(this.lblC);
-            this.grBSFRBit.Location = new System.Drawing.Point(246, 28);
+            this.grBSFRBit.Location = new System.Drawing.Point(261, 28);
             this.grBSFRBit.Name = "grBSFRBit";
             this.grBSFRBit.Size = new System.Drawing.Size(372, 144);
             this.grBSFRBit.TabIndex = 9;
@@ -1027,7 +1031,7 @@
             // grpBMemory
             // 
             this.grpBMemory.Controls.Add(this.lVMemory);
-            this.grpBMemory.Location = new System.Drawing.Point(518, 178);
+            this.grpBMemory.Location = new System.Drawing.Point(518, 260);
             this.grpBMemory.Name = "grpBMemory";
             this.grpBMemory.Size = new System.Drawing.Size(420, 260);
             this.grpBMemory.TabIndex = 11;
@@ -1043,9 +1047,9 @@
             this.grpBTiming.Controls.Add(this.chckBWatchdog);
             this.grpBTiming.Controls.Add(this.lblLaufztVal);
             this.grpBTiming.Controls.Add(this.lblLaufzt);
-            this.grpBTiming.Location = new System.Drawing.Point(624, 28);
+            this.grpBTiming.Location = new System.Drawing.Point(639, 28);
             this.grpBTiming.Name = "grpBTiming";
-            this.grpBTiming.Size = new System.Drawing.Size(126, 144);
+            this.grpBTiming.Size = new System.Drawing.Size(146, 144);
             this.grpBTiming.TabIndex = 12;
             this.grpBTiming.TabStop = false;
             this.grpBTiming.Text = "Timing";
@@ -1068,7 +1072,7 @@
             "16",
             "32",
             "64"});
-            this.cmbBQuarz.Location = new System.Drawing.Point(75, 43);
+            this.cmbBQuarz.Location = new System.Drawing.Point(84, 43);
             this.cmbBQuarz.Name = "cmbBQuarz";
             this.cmbBQuarz.Size = new System.Drawing.Size(45, 21);
             this.cmbBQuarz.TabIndex = 13;
@@ -1077,7 +1081,7 @@
             // lblWdogVal
             // 
             this.lblWdogVal.AutoSize = true;
-            this.lblWdogVal.Location = new System.Drawing.Point(72, 110);
+            this.lblWdogVal.Location = new System.Drawing.Point(81, 110);
             this.lblWdogVal.Name = "lblWdogVal";
             this.lblWdogVal.Size = new System.Drawing.Size(13, 13);
             this.lblWdogVal.TabIndex = 13;
@@ -1105,7 +1109,7 @@
             // lblLaufztVal
             // 
             this.lblLaufztVal.AutoSize = true;
-            this.lblLaufztVal.Location = new System.Drawing.Point(72, 25);
+            this.lblLaufztVal.Location = new System.Drawing.Point(81, 23);
             this.lblLaufztVal.Name = "lblLaufztVal";
             this.lblLaufztVal.Size = new System.Drawing.Size(13, 13);
             this.lblLaufztVal.TabIndex = 1;
@@ -1139,7 +1143,7 @@
             this.grpBPortA.Controls.Add(this.chckBPortATris3);
             this.grpBPortA.Controls.Add(this.chckBPortATris1);
             this.grpBPortA.Controls.Add(this.chckBPortATris2);
-            this.grpBPortA.Location = new System.Drawing.Point(12, 444);
+            this.grpBPortA.Location = new System.Drawing.Point(12, 178);
             this.grpBPortA.Name = "grpBPortA";
             this.grpBPortA.Size = new System.Drawing.Size(345, 76);
             this.grpBPortA.TabIndex = 13;
@@ -1294,7 +1298,7 @@
             this.grpBPortB.Controls.Add(this.chckBPortBTris0);
             this.grpBPortB.Controls.Add(this.lblPinB);
             this.grpBPortB.Controls.Add(this.lblTrisB);
-            this.grpBPortB.Location = new System.Drawing.Point(12, 526);
+            this.grpBPortB.Location = new System.Drawing.Point(363, 179);
             this.grpBPortB.Name = "grpBPortB";
             this.grpBPortB.Size = new System.Drawing.Size(345, 75);
             this.grpBPortB.TabIndex = 14;
@@ -1499,7 +1503,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1024, 616);
+            this.ClientSize = new System.Drawing.Size(989, 550);
             this.Controls.Add(this.grpBPortB);
             this.Controls.Add(this.grpBPortA);
             this.Controls.Add(this.grpBTiming);

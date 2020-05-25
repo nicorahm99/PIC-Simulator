@@ -423,16 +423,16 @@ namespace PIC_Simulator
         public void initMemory()
         {
             //build listView
-            string firstrow = "Adr. | +00 | +01 | +02 | +03 | +04 | +05 | +06 | +07 |";
+            string firstrow = "Adr. || +00 | +01 | +02 | +03 | +04 | +05 | +06 | +07 |";
             lVMemory.Items.Add(firstrow);
             for (int i = 0; i < 32; i++)
             {
                 string adr = (i * 8).ToString("X"); //convert adress integer to hex string
                 if (adr.Length < 2) { adr = "0" + adr; }
-                string newrow = adr + "   |";
+                string newrow = adr + "   ||";
                 for (int j = 0; j < 8; j++)
                 {
-                    newrow += "  " + memAdrRes_getFile((i * 8) + j).ToString() + "  |";
+                    newrow += "   " + memAdrRes_getFile((i * 8) + j).ToString() + " |";
                 }
                 lVMemory.Items.Add(newrow);
             }
@@ -444,12 +444,16 @@ namespace PIC_Simulator
             {
                 string adr = (i * 8).ToString("X"); //convert adress integer to hex string
                 if (adr.Length < 2) { adr = "0" + adr; }
-                string newrow = adr + "   |";
+                string newrow = adr + "   ||";
                 for (int j = 0; j < 8; j++)
                 {
-                    newrow += "  " + memAdrRes_getFile((i * 8) + j).ToString() + "  |";
+                    string val = memAdrRes_getFile((i * 8) + j).ToString();
+                    if (val.Length == 1) { newrow += "   " + val + " |"; }
+                    else if (val.Length == 2) { newrow += "  " + val + " |"; }
+                    else if (val.Length == 3) { newrow += " " + val + " |"; }
+
                 }
-                lVMemory.Items[i + 1].Text = newrow;
+                lVMemory.Items[i + 1].Text = newrow; // replace old orw by new row (first row should not be touched)
             }
         }
         #endregion
@@ -469,6 +473,23 @@ namespace PIC_Simulator
         #endregion
 
         #region Control-Buttons
+
+        public void enableButtons()
+        {
+            btnReset.Enabled = true;
+            btnStart.Enabled = true;
+            btnStep.Enabled = true;
+            btnStop.Enabled = true;
+        }
+
+        public void disableButtons()
+        {
+            btnReset.Enabled = false;
+            btnStart.Enabled = false;
+            btnStep.Enabled = false;
+            btnStop.Enabled = false;
+        }
+
         private void btnStart_Click(object sender, EventArgs e)
         {
             tWorkingInterval.Enabled = true;
@@ -507,6 +528,7 @@ namespace PIC_Simulator
                 {
                     parser.setFilePath(FD.FileName);
                 }
+                enableButtons();
             }
             catch (Exception ex)
             {
