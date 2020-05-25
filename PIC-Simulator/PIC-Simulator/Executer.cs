@@ -125,13 +125,10 @@
             int result = wContent + fileContent;
             int fourBitResult = (wContent & 0xf) + (fileContent & 0xf);
             setCarryFlagIfNeeded(result);
+            setDigitCarryFlagIfNeeded(fourBitResult);
             if (result < 255)
             {
                 result -= 256;
-            }
-            if (fourBitResult < 15)
-            {
-                setDigitCarryFlag();
             }
             setZeroFlagIfNeeded(result);
             writeResultToRightDestination(result, isResultWrittenToW, fileAddress);
@@ -287,14 +284,10 @@
             int fileContent = getFile(fileAddress);
             int result = fileContent - wContent;
             int fourBitResult = (fileContent & 0xf) - (wContent & 0xf);
-            setCarryFlagForSub(result);
+            setCarryFlagsForSub(result, fourBitResult);
             if (result > 0)
             {
                 result += 256;
-            }
-            if (fourBitResult < 15)
-            {
-                setDigitCarryFlag();
             }
             setZeroFlagIfNeeded(result);
             writeResultToRightDestination(result, isResultWrittenToW, fileAddress);
@@ -361,13 +354,10 @@
             int result = wContent + literal;
             int fourBitResult = (wContent & 0xf) + (literal & 0xf);
             setCarryFlagIfNeeded(result);
+            setDigitCarryFlagIfNeeded(fourBitResult);
             if (isGreaterThan(result,255))
             {
                 result -= 256;
-            }
-            if (isGreaterThan(fourBitResult,15))
-            {
-                setDigitCarryFlag();
             }
             setZeroFlagIfNeeded(result);
             writeResultToRightDestination(result, true, 0);
@@ -469,14 +459,10 @@
             int wContent = getWReg();
             int result = literal - wContent;
             int fourBitResult = (literal & 0xf) - (wContent & 0xf);
-            setCarryFlagForSub(result);
+            setCarryFlagsForSub(result, fourBitResult);
             if (isLessThan(result, 0))
             {
                 result += 256;
-            }
-            if (isGreaterThan(15, fourBitResult))
-            {
-                setDigitCarryFlag();
             }
             setZeroFlagIfNeeded(result);
             writeResultToRightDestination(result, true, 0);
@@ -540,8 +526,19 @@
                 setCarryFlagTo(0);
             }
         }
+        private void setDigitCarryFlagIfNeeded(int result)
+        {
+            if (result > 15)
+            {
+                setDigitCarryFlagTo(1);
+            }
+            else
+            {
+                setDigitCarryFlagTo(0);
+            }
+        }
 
-        private void setCarryFlagForSub(int result)
+        private void setCarryFlagsForSub(int result, int fourBitResult)
         {
             if (result <= 255 && result >= 0)
             {
@@ -550,6 +547,15 @@
             else
             {
                 setCarryFlagTo(0);
+            }
+
+            if (fourBitResult <= 255 && fourBitResult >= 0)
+            {
+                setDigitCarryFlagTo(1);
+            }
+            else
+            {
+                setDigitCarryFlagTo(0);
             }
         }
 
@@ -562,11 +568,11 @@
         {
             if (value == 0)
             {
-                bcF(0x03, 0);
+                bcF(0x03, 1);
             }
             else
             {
-                bsF(0x03, 0);
+                bsF(0x03, 1);
             }
         }
 
