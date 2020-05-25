@@ -1,8 +1,4 @@
-﻿using System.Deployment.Application;
-using System.Dynamic;
-using System.IO;
-
-namespace PIC_Simulator
+﻿namespace PIC_Simulator
 {
     public class Executer
     {
@@ -365,11 +361,11 @@ namespace PIC_Simulator
             int result = wContent + literal;
             int fourBitResult = (wContent & 0xf) + (literal & 0xf);
             setCarryFlagIfNeeded(result);
-            if (result < 255)
+            if (isGreaterThan(result,255))
             {
                 result -= 256;
             }
-            if (fourBitResult < 15)
+            if (isGreaterThan(fourBitResult,15))
             {
                 setDigitCarryFlag();
             }
@@ -474,11 +470,11 @@ namespace PIC_Simulator
             int result = literal - wContent;
             int fourBitResult = (literal & 0xf) - (wContent & 0xf);
             setCarryFlagForSub(result);
-            if (result > 0)
+            if (isLessThan(result, 0))
             {
                 result += 256;
             }
-            if (fourBitResult < 15)
+            if (isGreaterThan(15, fourBitResult))
             {
                 setDigitCarryFlag();
             }
@@ -606,6 +602,18 @@ namespace PIC_Simulator
         private void popStackToPc()
         {
             GUI_Simu.memory.setFullPC(GUI_Simu.memory.popStack());
+        }
+
+        private bool isGreaterThan(int lower, int higher)
+        {
+            if (lower > higher) return true;
+            return false;
+        }
+
+        private bool isLessThan(int higher, int lower)
+        {
+            if (higher < lower) return true;
+            return false;
         }
         #endregion
     }
