@@ -235,6 +235,11 @@ namespace PIC_Simulator
         #endregion
 
         #region I/O Ports
+        public void refreshIO()
+        {
+
+        }
+        #region Port A
         private void PortAPin0(object sender, EventArgs e)
         {
             // if checkbox is checked corresponding tris bit is set
@@ -270,7 +275,9 @@ namespace PIC_Simulator
             else if ( chckBPortAPin4.Checked == false && memAdrRes_requestAccess(0x85, 4)) { memory.clearBit(0x05, 4); }
             refreshMemory();
         }
+        #endregion
 
+        #region Port B
         private void PortBPin0(object sender, EventArgs e)
         {
             if ( chckBPortBPin0.Checked == true && memAdrRes_requestAccess(0x86, 0)) { memory.setBit(0x06, 0); }
@@ -326,6 +333,15 @@ namespace PIC_Simulator
             else if ( chckBPortBPin7.Checked == false && memAdrRes_requestAccess(0x86, 7)) { memory.clearBit(0x06, 7); }
             refreshMemory();
         }
+        #endregion
+
+        #region Tris A
+
+        #endregion
+
+        #region Tris B
+        #endregion
+
         #endregion
 
         #region SFR(Bit)
