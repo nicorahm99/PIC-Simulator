@@ -8,7 +8,10 @@ namespace PIC_Simulator
 {
     public class ROM
     {
-        private int[] rom = new int[1024];
+        private int[] rom;
+
+        public ROM() { init(); }
+        public void init() { rom = new int[1024]; }
 
         public void setRom(List<int> rom)
         {

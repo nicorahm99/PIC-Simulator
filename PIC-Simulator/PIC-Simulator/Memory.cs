@@ -8,19 +8,30 @@ namespace PIC_Simulator
 {
     public class Memory
     {
+        public Memory() { init(); }
         private int[] memory = new int[81]; // addresses from 0x0c to 0x4f /-/ 0x8c to 0xcf
 
         private int wReg = 0;
 
         private Stack<int> stack = new Stack<int>();
 
-        #region special function Register on BANK 2
+        #region overloaded special function Register on BANK 1
         private int OPTION;
         private int TRISA;
         private int TRISB;
         private int EECON1;
         private int EECON2;
         #endregion
+
+        public void init()
+        {
+            setFile(0x3, 0x18);
+            setMemoryBankTo(1);
+            setFile(0x1, 0xff);
+            setFile(0x5, 0x1f);
+            setFile(0x6, 0xff);
+            setMemoryBankTo(0);
+        }
 
         #region file access
         public int setFile(int fileAddress, int value)
@@ -125,7 +136,7 @@ namespace PIC_Simulator
         {
             int val = memory[0x3] & 0x20;
             if ((memory[0x3] & 0x20) > 0) { return 1; }
-            else { return 0; }
+            return 0;
         }
 
         public int readStack()
