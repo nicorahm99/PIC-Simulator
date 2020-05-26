@@ -10,17 +10,23 @@ namespace PIC_Simulator
 {
     public class Controller
     {
-        public int timer0 = 0;
-        public int watchdog = 0;
+        private int timer0;
+        private int watchdog;
+
+        public Controller()
+        {
+            init();
+        }
 
         public void step()
         {
-            incTimer0();
-            int index = GUI_Simu.memory.getFullPC();
-            Command command = GUI_Simu.decoder.decodeCommand(GUI_Simu.rom.fetchCommand(GUI_Simu.memory.getFullPC()));
-            GUI_Simu.memory.incPC();
+            int pc = GUI_Simu.memory.getFullPC();
+            int commandCode = GUI_Simu.rom.fetchCommand(pc);
+            Command command = GUI_Simu.decoder.decodeCommand(commandCode);
             GUI_Simu.executer.executeCommand(command);
-            //reset watchdog
+            GUI_Simu.memory.incPC();
+            incTimer0();
+//reset watchdog
         }
 
         //public void sequence()
@@ -31,10 +37,11 @@ namespace PIC_Simulator
         //    }
         //}
 
-        public void reset()
+        public void init()
         {
             timer0 = 0;
             watchdog = 0;
+            GUI_Simu.memory.setFullPC(0);
         }
 
         public int get_timer0()

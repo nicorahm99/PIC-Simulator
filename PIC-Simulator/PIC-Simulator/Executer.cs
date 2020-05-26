@@ -1,4 +1,6 @@
-﻿namespace PIC_Simulator
+﻿using System;
+
+namespace PIC_Simulator
 {
     public class Executer
     {
@@ -112,8 +114,7 @@
                     xOrLW(command.getLiteral());
                     break;
                 default:
-                    // ERROR
-                    break;
+                    throw new Exception("Command not found");
             }
         }
 
@@ -387,8 +388,14 @@
 
         private int _goto(int address)
         {
-            //TODO check if adress - 1 is needed.
-            GUI_Simu.memory.setFullPC(address);
+            if (address == 0)
+            {
+                GUI_Simu.memory.setFullPC(1023);
+            }
+            else
+            { 
+                GUI_Simu.memory.setFullPC(address-1);
+            }
             return address;
         }
 
@@ -418,7 +425,6 @@
         {
             bsF(0xb, 7);
             popStackToPc();
-            // check if PC - 1 is needed
             return 0;
         }
 
@@ -426,14 +432,12 @@
         {
             writeResultToRightDestination(literal, true, 0);
             popStackToPc();
-            // check if PC - 1 is needed
             return literal;
         }
 
         private int _return()
         {
             popStackToPc();
-            // check if PC - 1 is needed
             return 0;
         }
 

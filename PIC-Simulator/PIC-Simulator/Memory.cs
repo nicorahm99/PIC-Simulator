@@ -172,7 +172,7 @@ namespace PIC_Simulator
         {
             int pcLatch = getFile(0x0a);
             pcLatch++;
-            if (pcLatch > 31)
+            if (pcLatch > 3)
             {
                 pcLatch = 0;
             }
@@ -181,13 +181,13 @@ namespace PIC_Simulator
 
         public int getFullPC()
         {
-            return ((getFile(0x0a) & 0x7) << 8) | getFile(0x2);
+            return ((getFile(0x0a) & 0x3) << 8) | getFile(0x2);
         }
 
         public void setFullPC(int value)
         {
             setFile(0x02, (value & 0xff));
-            int pcLatch = ((value & 0x700) >> 8);
+            int pcLatch = ((value & 0x300) >> 8);
             setFile(0x0a, pcLatch);
         }
 

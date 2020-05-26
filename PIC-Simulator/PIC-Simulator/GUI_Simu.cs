@@ -125,7 +125,8 @@ namespace PIC_Simulator
 
         public void reset()
         {
-            memory.setFullPC(0);
+            memory.init();
+            controller.init();
             //reset memory
             refreshMemory();
             refreshSFR_b();
