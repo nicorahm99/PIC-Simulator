@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,16 +17,31 @@ namespace PIC_Simulator
         }
         public void setRB0Pin(int address)
         {
-            
+            throw new NotImplementedException();
         }
 
         public void setInterruptFlag(InterruptFlags flag)
-        {
+        {            
             int bitAdress = decodeInterruptFlag(flag);
+            if (isInterruptEnabled(bitAdress))
+            {
+                int intCon = GUI_Simu.memory.getFile(0xb);
+                intCon |= (1 << bitAdress);
+                GUI_Simu.memory.setFile(0xb, intCon);
+            }
+        }
+
+        private bool isInterruptEnabled(int bitAdress)
+        {
+            bitAdress += 3; //bitadress of Enabled flag
             int intCon = GUI_Simu.memory.getFile(0xb);
-            intCon |= (1 << bitAdress);
-            // TODO call interrupt routine ?
-            GUI_Simu.memory.setFile(0xb, intCon);
+            
+            if ((intCon & (1 << bitAdress)) != 0)
+            {
+                return true;
+            }
+
+            return false;
         }
 
         private int decodeInterruptFlag(InterruptFlags flag)
@@ -39,6 +55,15 @@ namespace PIC_Simulator
                 case InterruptFlags.RBIF: return 0;
 
                 default: return 0;
+            }
+        }
+
+        public void checkInterrupts()
+        {
+            int intCon = GUI_Simu.memory.getFile(0xb);
+            if ((intCon & 0x7) != 0)
+            {
+                GUI_Simu.executer.interruptOccured();
             }
         }
     }

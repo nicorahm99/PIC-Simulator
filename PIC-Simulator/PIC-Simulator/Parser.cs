@@ -18,7 +18,7 @@ namespace PIC_Simulator
 
         public void setFilePath(string newPath)
         {
-            this.filePath = newPath;
+            filePath = newPath;
         }
 
         public void parse()

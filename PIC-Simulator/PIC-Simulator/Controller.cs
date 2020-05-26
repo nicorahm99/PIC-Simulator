@@ -20,6 +20,7 @@ namespace PIC_Simulator
 
         public void step()
         {
+            GUI_Simu.interruptController.checkInterrupts();
             int pc = GUI_Simu.memory.getFullPC();
             int commandCode = GUI_Simu.rom.fetchCommand(pc);
             Command command = GUI_Simu.decoder.decodeCommand(commandCode);
@@ -55,7 +56,7 @@ namespace PIC_Simulator
             else
             {
                 timer0 = 0;
-                //GUI_Simu.memory.set T0IF (Intcon -> 2 --> 0x0B, 2)
+                GUI_Simu.interruptController.setInterruptFlag(InterruptController.InterruptFlags.T0IF);
             }
         }
 

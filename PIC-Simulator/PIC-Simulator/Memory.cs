@@ -9,9 +9,9 @@ namespace PIC_Simulator
     public class Memory
     {
         public Memory() { init(); }
-        private int[] memory = new int[81]; // addresses from 0x0c to 0x4f /-/ 0x8c to 0xcf
+        private int[] memory; // addresses from 0x0c to 0x4f /-/ 0x8c to 0xcf
 
-        private int wReg = 0;
+        private int wReg;
 
         private Stack<int> stack = new Stack<int>();
 
@@ -25,6 +25,13 @@ namespace PIC_Simulator
 
         public void init()
         {
+            memory = new int[81];
+            wReg = 0;
+            OPTION = 0;
+            TRISA = 0;
+            TRISB = 0;
+            EECON1 = 0;
+            EECON2 = 0;
             setFile(0x3, 0x18);
             setMemoryBankTo(1);
             setFile(0x1, 0xff);

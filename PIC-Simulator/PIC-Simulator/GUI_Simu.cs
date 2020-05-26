@@ -128,6 +128,7 @@ namespace PIC_Simulator
             memory.init();
             controller.init();
             //reset memory
+            refreshSFRW();
             refreshMemory();
             refreshSFR_b();
             resetTiming();
@@ -521,6 +522,8 @@ namespace PIC_Simulator
         
         private void dateiÖffnenToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            tWorkingInterval.Enabled = false;
+            reset();
             try
             {
                 var FD = new System.Windows.Forms.OpenFileDialog();
@@ -530,6 +533,7 @@ namespace PIC_Simulator
                     parser.setFilePath(FD.FileName);
                 }
                 enableButtons();
+                FD.Dispose();
             }
             catch (Exception ex)
             {
@@ -537,6 +541,8 @@ namespace PIC_Simulator
             }
 
             rom.setRom(parser.getRom());
+
+            tBProgramm.Clear();
 
             List<string> file = parser.getFile();
             for (int i = 0; i < file.Count; i++)

@@ -127,7 +127,7 @@ namespace PIC_Simulator
             int fourBitResult = (wContent & 0xf) + (fileContent & 0xf);
             setCarryFlagIfNeeded(result);
             setDigitCarryFlagIfNeeded(fourBitResult);
-            if (result < 255)
+            if (result > 255)
             {
                 result -= 256;
             }
@@ -160,7 +160,7 @@ namespace PIC_Simulator
 
         private int comF(bool isResultWrittenToW, int fileAddress)
         {
-            int result = ~(getFile(fileAddress));
+            int result = ~(getFile(fileAddress)) & 0xff;
             setZeroFlagIfNeeded(result);
             writeResultToRightDestination(result, isResultWrittenToW, fileAddress);
             return fileAddress;
@@ -169,7 +169,7 @@ namespace PIC_Simulator
         private int decF(bool isResultWrittenToW, int fileAddress)
         {
             int result = getFile(fileAddress) - 1;
-            if (result > 0)
+            if (result < 0)
             {
                 result += 256;
             }
@@ -286,7 +286,7 @@ namespace PIC_Simulator
             int result = fileContent - wContent;
             int fourBitResult = (fileContent & 0xf) - (wContent & 0xf);
             setCarryFlagsForSub(result, fourBitResult);
-            if (result > 0)
+            if (result < 0)
             {
                 result += 256;
             }
@@ -330,10 +330,10 @@ namespace PIC_Simulator
         private int btFsc(int fileAddress, int bitAddress)
         {
             int registerContent = GUI_Simu.memory.getFile(fileAddress);
-            registerContent |= 1 << bitAddress;
+            registerContent &= 1 << bitAddress;
             if (registerContent == 0)
             {
-                //skip next command in ROM -- PC + 2
+                GUI_Simu.memory.incPC();
             }
             return fileAddress;
         }
@@ -341,10 +341,10 @@ namespace PIC_Simulator
         private int btFss(int fileAddress, int bitAddress)
         {
             int registerContent = GUI_Simu.memory.getFile(fileAddress);
-            registerContent |= 1 << bitAddress;
+            registerContent &= 1 << bitAddress;
             if (registerContent != 0)
             {
-                //skip next command in ROM -- PC + 2
+                GUI_Simu.memory.incPC();
             }
             return fileAddress;
         }
@@ -624,6 +624,13 @@ namespace PIC_Simulator
         {
             if (higher < lower) return true;
             return false;
+        }
+
+        public void interruptOccured()
+        {
+            pushPcToStack();
+            bcF(0xb, 7);
+            GUI_Simu.memory.setFullPC(4);
         }
         #endregion
     }
