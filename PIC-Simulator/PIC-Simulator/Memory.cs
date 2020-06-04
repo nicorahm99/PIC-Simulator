@@ -43,12 +43,16 @@ namespace PIC_Simulator
         #region file access
         public int setFile(int fileAddress, int value)
         {
+            if (fileAddress == 0)
+            {
+                memory[memory[4]] = value;
+            }
             if (fileAddress <= 0x4f && (getStatusRP0() == 0)) // Bank 0
             {
                 memory[fileAddress] = value;
                 return value;
             }
-            else if (fileAddress <= 0x4f && (getStatusRP0() == 1)) // Bank 1
+            if (fileAddress <= 0x4f && (getStatusRP0() == 1)) // Bank 1
             {
                 switch (fileAddress)
                 {
@@ -78,6 +82,10 @@ namespace PIC_Simulator
 
         public int getFile(int fileAddress)
         {
+            if (fileAddress == 0)
+            {
+                return memory[memory[4]];
+            }
             if (fileAddress <= 0x4f && (getStatusRP0() == 0)) // Bank 0
             {
                 return memory[fileAddress];

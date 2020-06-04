@@ -51,7 +51,7 @@ namespace PIC_Simulator
                     rlF(command.getDestinationSelect(), command.getFileAddress());
                     break;
                 case CommandNames.RRF:
-                        rrF(command.getDestinationSelect(), command.getFileAddress());
+                    rrF(command.getDestinationSelect(), command.getFileAddress());
                     break;
                 case CommandNames.SUBWF:
                     subWF(command.getDestinationSelect(), command.getFileAddress());
@@ -119,6 +119,7 @@ namespace PIC_Simulator
         }
 
         #region command functions
+
         private int addWF(bool isResultWrittenToW, int fileAddress)
         {
             int wContent = getWReg();
@@ -131,6 +132,7 @@ namespace PIC_Simulator
             {
                 result -= 256;
             }
+
             setZeroFlagIfNeeded(result);
             writeResultToRightDestination(result, isResultWrittenToW, fileAddress);
             return fileAddress;
@@ -173,6 +175,7 @@ namespace PIC_Simulator
             {
                 result += 256;
             }
+
             setZeroFlagIfNeeded(result);
             writeResultToRightDestination(result, isResultWrittenToW, fileAddress);
             return fileAddress;
@@ -181,11 +184,14 @@ namespace PIC_Simulator
         private int decFsZ(bool isResultWrittenToW, int fileAddress)
         {
             int fileContent = getFile(fileAddress);
-            if (fileContent > 0)
+
+            int result = fileContent - 1;
+            writeResultToRightDestination(result, isResultWrittenToW, fileAddress);
+            if (result == 0)
             {
-                int result = fileContent - 1;
-                writeResultToRightDestination(result, isResultWrittenToW, fileAddress);
+                GUI_Simu.memory.incPC();
             }
+
             return fileAddress;
         }
 
@@ -196,6 +202,7 @@ namespace PIC_Simulator
             {
                 result -= 256;
             }
+
             setZeroFlagIfNeeded(result);
             writeResultToRightDestination(result, isResultWrittenToW, fileAddress);
             return fileAddress;
@@ -204,15 +211,15 @@ namespace PIC_Simulator
         private int incFsZ(bool isResultWrittenToW, int fileAddress)
         {
             int fileContent = getFile(fileAddress);
-            if (fileContent != 0)
+            int result = fileContent + 1;
+            if (result > 255)
             {
-                int result = fileContent + 1;
-                if (result > 255)
-                {
-                    result -= 256;
-                }
-                writeResultToRightDestination(result, isResultWrittenToW, fileAddress);
+                result -= 256;
+                GUI_Simu.memory.incPC();
             }
+
+            writeResultToRightDestination(result, isResultWrittenToW, fileAddress);
+
             return fileAddress;
         }
 
@@ -228,6 +235,7 @@ namespace PIC_Simulator
             {
                 setZeroFlagTo(1);
             }
+
             writeResultToRightDestination(result, isResultWrittenToW, fileAddress);
             return fileAddress;
         }
@@ -261,6 +269,7 @@ namespace PIC_Simulator
             {
                 carryFlag = 0;
             }
+
             int result = workingBits & 0xff;
             setCarryFlagTo(carryFlag);
             writeResultToRightDestination(result, isResultWrittenToW, fileAddress);
@@ -290,6 +299,7 @@ namespace PIC_Simulator
             {
                 result += 256;
             }
+
             setZeroFlagIfNeeded(result);
             writeResultToRightDestination(result, isResultWrittenToW, fileAddress);
             return fileAddress;
@@ -312,14 +322,14 @@ namespace PIC_Simulator
             writeResultToRightDestination(result, isResultWrittenToW, fileAddress);
             return fileAddress;
         }
-        
+
         private int bcF(int fileAddress, int bitAddress)
         {
             int registerContent = GUI_Simu.memory.getFile(fileAddress);
             registerContent &= ~(1 << bitAddress);
             return GUI_Simu.memory.setFile(fileAddress, registerContent);
         }
-        
+
         private int bsF(int fileAddress, int bitAddress)
         {
             int registerContent = GUI_Simu.memory.getFile(fileAddress);
@@ -335,6 +345,7 @@ namespace PIC_Simulator
             {
                 GUI_Simu.memory.incPC();
             }
+
             return fileAddress;
         }
 
@@ -346,6 +357,7 @@ namespace PIC_Simulator
             {
                 GUI_Simu.memory.incPC();
             }
+
             return fileAddress;
         }
 
@@ -356,10 +368,11 @@ namespace PIC_Simulator
             int fourBitResult = (wContent & 0xf) + (literal & 0xf);
             setCarryFlagIfNeeded(result);
             setDigitCarryFlagIfNeeded(fourBitResult);
-            if (isGreaterThan(result,255))
+            if (isGreaterThan(result, 255))
             {
                 result -= 256;
             }
+
             setZeroFlagIfNeeded(result);
             writeResultToRightDestination(result, true, 0);
             return literal;
@@ -393,13 +406,14 @@ namespace PIC_Simulator
                 GUI_Simu.memory.setFullPC(1023);
             }
             else
-            { 
-                GUI_Simu.memory.setFullPC(address-1);
+            {
+                GUI_Simu.memory.setFullPC(address - 1);
             }
+
             return address;
         }
 
-        private int iOrLW(int literal) 
+        private int iOrLW(int literal)
         {
             int result = getWReg() | literal;
             if (result == 0) // inverted ZeroFlag --> see Datenblatt
@@ -410,6 +424,7 @@ namespace PIC_Simulator
             {
                 setZeroFlagTo(1);
             }
+
             writeResultToRightDestination(result, true, 0);
             return literal;
         }
@@ -468,21 +483,24 @@ namespace PIC_Simulator
             {
                 result += 256;
             }
+
             setZeroFlagIfNeeded(result);
             writeResultToRightDestination(result, true, 0);
             return literal;
         }
 
-        private int xOrLW(int literal) 
+        private int xOrLW(int literal)
         {
             int result = literal ^ getWReg();
             setZeroFlagIfNeeded(result);
             writeResultToRightDestination(result, true, 0);
             return literal;
         }
+
         #endregion
 
         #region shortcut/help functions
+
         private void setZeroFlagTo(int value)
         {
             if (value == 0)
@@ -530,6 +548,7 @@ namespace PIC_Simulator
                 setCarryFlagTo(0);
             }
         }
+
         private void setDigitCarryFlagIfNeeded(int result)
         {
             if (result > 15)
@@ -591,6 +610,7 @@ namespace PIC_Simulator
             {
                 return GUI_Simu.memory.setWReg(result);
             }
+
             return GUI_Simu.memory.setFile(fileAddress, result);
         }
 
@@ -632,6 +652,7 @@ namespace PIC_Simulator
             bcF(0xb, 7);
             GUI_Simu.memory.setFullPC(4);
         }
+
         #endregion
     }
 }
