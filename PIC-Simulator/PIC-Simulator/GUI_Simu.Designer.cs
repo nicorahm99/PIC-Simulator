@@ -50,7 +50,6 @@
             this.lblStatusVal = new System.Windows.Forms.Label();
             this.lblStatus = new System.Windows.Forms.Label();
             this.grpBProgramm = new System.Windows.Forms.GroupBox();
-            this.tBProgramm = new System.Windows.Forms.TextBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tSDropDownDatei = new System.Windows.Forms.ToolStripDropDownButton();
             this.dateiÖffnenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -157,6 +156,7 @@
             this.chckBPortBTris0 = new System.Windows.Forms.CheckBox();
             this.lblPinB = new System.Windows.Forms.Label();
             this.lblTrisB = new System.Windows.Forms.Label();
+            this.lVProgram = new System.Windows.Forms.ListView();
             this.grpBSFRW.SuspendLayout();
             this.grpBProgramm.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -359,26 +359,13 @@
             // 
             // grpBProgramm
             // 
-            this.grpBProgramm.Controls.Add(this.tBProgramm);
-            this.grpBProgramm.Location = new System.Drawing.Point(12, 260);
+            this.grpBProgramm.Controls.Add(this.lVProgram);
+            this.grpBProgramm.Location = new System.Drawing.Point(438, 260);
             this.grpBProgramm.Name = "grpBProgramm";
             this.grpBProgramm.Size = new System.Drawing.Size(500, 260);
             this.grpBProgramm.TabIndex = 1;
             this.grpBProgramm.TabStop = false;
             this.grpBProgramm.Text = "Programm";
-            // 
-            // tBProgramm
-            // 
-            this.tBProgramm.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tBProgramm.Location = new System.Drawing.Point(0, 19);
-            this.tBProgramm.Multiline = true;
-            this.tBProgramm.Name = "tBProgramm";
-            this.tBProgramm.ReadOnly = true;
-            this.tBProgramm.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.tBProgramm.Size = new System.Drawing.Size(500, 241);
-            this.tBProgramm.TabIndex = 3;
             // 
             // toolStrip1
             // 
@@ -1019,11 +1006,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lVMemory.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lVMemory.GridLines = true;
             this.lVMemory.HideSelection = false;
             this.lVMemory.Location = new System.Drawing.Point(0, 19);
             this.lVMemory.Name = "lVMemory";
-            this.lVMemory.Size = new System.Drawing.Size(420, 241);
+            this.lVMemory.Size = new System.Drawing.Size(414, 241);
             this.lVMemory.TabIndex = 10;
             this.lVMemory.UseCompatibleStateImageBehavior = false;
             this.lVMemory.View = System.Windows.Forms.View.SmallIcon;
@@ -1031,7 +1017,7 @@
             // grpBMemory
             // 
             this.grpBMemory.Controls.Add(this.lVMemory);
-            this.grpBMemory.Location = new System.Drawing.Point(518, 260);
+            this.grpBMemory.Location = new System.Drawing.Point(12, 260);
             this.grpBMemory.Name = "grpBMemory";
             this.grpBMemory.Size = new System.Drawing.Size(420, 260);
             this.grpBMemory.TabIndex = 11;
@@ -1298,7 +1284,7 @@
             this.grpBPortB.Controls.Add(this.chckBPortBTris0);
             this.grpBPortB.Controls.Add(this.lblPinB);
             this.grpBPortB.Controls.Add(this.lblTrisB);
-            this.grpBPortB.Location = new System.Drawing.Point(363, 179);
+            this.grpBPortB.Location = new System.Drawing.Point(438, 179);
             this.grpBPortB.Name = "grpBPortB";
             this.grpBPortB.Size = new System.Drawing.Size(345, 75);
             this.grpBPortB.TabIndex = 14;
@@ -1499,6 +1485,20 @@
             this.lblTrisB.TabIndex = 0;
             this.lblTrisB.Text = "Tris";
             // 
+            // lVProgram
+            // 
+            this.lVProgram.Alignment = System.Windows.Forms.ListViewAlignment.Left;
+            this.lVProgram.Font = new System.Drawing.Font("Courier New", 9F);
+            this.lVProgram.FullRowSelect = true;
+            this.lVProgram.HideSelection = false;
+            this.lVProgram.Location = new System.Drawing.Point(0, 19);
+            this.lVProgram.MultiSelect = false;
+            this.lVProgram.Name = "lVProgram";
+            this.lVProgram.Size = new System.Drawing.Size(500, 241);
+            this.lVProgram.TabIndex = 0;
+            this.lVProgram.UseCompatibleStateImageBehavior = false;
+            this.lVProgram.View = System.Windows.Forms.View.List;
+            // 
             // GUI_Simu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1520,7 +1520,6 @@
             this.grpBSFRW.ResumeLayout(false);
             this.grpBSFRW.PerformLayout();
             this.grpBProgramm.ResumeLayout(false);
-            this.grpBProgramm.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.grpBControls.ResumeLayout(false);
@@ -1542,7 +1541,6 @@
 
         private System.Windows.Forms.GroupBox grpBSFRW;
         private System.Windows.Forms.GroupBox grpBProgramm;
-        private System.Windows.Forms.TextBox tBProgramm;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Button btnStop;
@@ -1667,6 +1665,7 @@
         private System.Windows.Forms.CheckBox chckBPortBTris2;
         private System.Windows.Forms.CheckBox chckBPortBPin0;
         private System.Windows.Forms.CheckBox chckBPortBTris1;
+        private System.Windows.Forms.ListView lVProgram;
     }
 }
 

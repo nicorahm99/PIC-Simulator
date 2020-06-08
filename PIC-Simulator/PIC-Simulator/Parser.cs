@@ -23,6 +23,7 @@ namespace PIC_Simulator
 
         public void parse()
         {
+            Dictionary<int, int> newDict = new Dictionary<int, int>(); ;
             try
             {
                 file = File.ReadAllLines(filePath).ToList();
@@ -34,14 +35,15 @@ namespace PIC_Simulator
                     string commandCode = match.Groups[3].ToString();
                     if (commandCode != "")
                     {
-                        int adress = int.Parse(match.Groups[2].ToString(), NumberStyles.HexNumber) + 1;
+                        int adress = int.Parse(match.Groups[2].ToString(), NumberStyles.HexNumber);
                         int lineNumber = int.Parse(match.Groups[4].ToString(), NumberStyles.Integer);
-                        GUI_Simu.assignPCToLine(adress, lineNumber);
+                        newDict.Add(adress, lineNumber);
                         //MessageBox.Show(commandCode);
                         rom.Add(int.Parse(commandCode, System.Globalization.NumberStyles.HexNumber));
                     }
                 }
                 GUI_Simu.rom.setRom(rom);
+                GUI_Simu.getDitPcToLine(newDict);
             }
             catch (Exception ex) //invalid filepath
             {

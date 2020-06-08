@@ -27,7 +27,7 @@ namespace PIC_Simulator
             GUI_Simu.executer.executeCommand(command);
             GUI_Simu.memory.incPC();
             incTimerWithPrescaler();
-//reset watchdog
+            //reset watchdog
         }
 
         //public void sequence()

@@ -511,26 +511,31 @@ namespace PIC_Simulator
         #region Program
         public void showFile(List<string> file)
         {
+            lVProgram.Clear();
+            //ColumnHeader header = new ColumnHeader();
+            //header.Text = "";
+            //header.Name = "col1";
+            //lVProgram.Columns.Add(header);
             for (int i = 0; i < file.Count; i++)
             {
-                tBProgramm.AppendText(file[i] + Environment.NewLine);
+                lVProgram.Items.Add(file[i]);
             }
-        }
-
-        public void clearFile()
-        {
-            tBProgramm.Clear();
         }
 
         public void selectLine()
         {
+            for (int i = 0; i<lVProgram.SelectedItems.Count; i++)
+            {
+                lVProgram.SelectedItems[i].Selected = false;
+            }
             int pc = memory.getFullPC(); // Program Counter
             int line = pcToLine[pc];
+            lVProgram.Items[line].Selected = true;
         }
 
-        public static void assignPCToLine(int pc, int line)
+        public static void getDitPcToLine(Dictionary<int, int> newdict)
         {
-            pcToLine.Add(pc, line);
+            pcToLine = newdict;
         }
         #endregion
 
@@ -562,8 +567,8 @@ namespace PIC_Simulator
             //set rom
             rom.setRom(parser.getRom());
             //view file in textbox
-            clearFile();
             showFile(parser.getFile());
+            selectLine();
         }
 
         private void tSBtnHilfe_Click(object sender, EventArgs e)
@@ -583,6 +588,7 @@ namespace PIC_Simulator
         public void controllerStep()
         {
             controller.step();
+            selectLine();
             setLaufzeit(memory.getTMR0());
             refreshMemory();
             refreshSFR_b();
