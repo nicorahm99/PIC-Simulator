@@ -228,15 +228,7 @@ namespace PIC_Simulator
         private int iOrWF(bool isResultWrittenToW, int fileAddress)
         {
             int result = getWReg() | getFile(fileAddress);
-            // Inverted Zeroflag Setting
-            if (result == 0)
-            {
-                setZeroFlagTo(0);
-            }
-            else
-            {
-                setZeroFlagTo(1);
-            }
+            setZeroFlagIfNeeded(result);
 
             writeResultToRightDestination(result, isResultWrittenToW, fileAddress);
             return fileAddress;
@@ -420,14 +412,7 @@ namespace PIC_Simulator
         private int iOrLW(int literal)
         {
             int result = getWReg() | literal;
-            if (result == 0) // inverted ZeroFlag --> see Datenblatt
-            {
-                setZeroFlagTo(0);
-            }
-            else
-            {
-                setZeroFlagTo(1);
-            }
+            setZeroFlagIfNeeded(result);
 
             writeResultToRightDestination(result, true, 0);
             return literal;

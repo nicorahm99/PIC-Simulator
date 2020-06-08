@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -26,7 +27,6 @@ namespace PIC_Simulator
             {
                 file = File.ReadAllLines(filePath).ToList();
 
-                int countCycle = 0;
                 foreach (string line in file)
                 {
                     Regex regex = new Regex(@"(^([\d|\w]{4})\s([\d|\w]{4})\s+(\d+).*$)");
@@ -34,8 +34,9 @@ namespace PIC_Simulator
                     string commandCode = match.Groups[3].ToString();
                     if (commandCode != "")
                     {
-                        int adress = int.Parse(match.Groups[2].ToString(), System.Globalization.NumberStyles.HexNumber);
-                        GUI_Simu.assignPCToLine(adress, countCycle);
+                        int adress = int.Parse(match.Groups[2].ToString(), NumberStyles.HexNumber) + 1;
+                        int lineNumber = int.Parse(match.Groups[4].ToString(), NumberStyles.Integer);
+                        GUI_Simu.assignPCToLine(adress, lineNumber);
                         //MessageBox.Show(commandCode);
                         rom.Add(int.Parse(commandCode, System.Globalization.NumberStyles.HexNumber));
                     }
