@@ -190,6 +190,7 @@ namespace PIC_Simulator
             if (result == 0)
             {
                 GUI_Simu.memory.incPC();
+                GUI_Simu.controller.incTimerWithPrescaler();
             }
 
             return fileAddress;
@@ -215,7 +216,8 @@ namespace PIC_Simulator
             if (result > 255)
             {
                 result -= 256;
-                GUI_Simu.memory.incPC();
+                GUI_Simu.memory.incPC(); 
+                GUI_Simu.controller.incTimerWithPrescaler();
             }
 
             writeResultToRightDestination(result, isResultWrittenToW, fileAddress);
@@ -344,6 +346,7 @@ namespace PIC_Simulator
             if (registerContent == 0)
             {
                 GUI_Simu.memory.incPC();
+                GUI_Simu.controller.incTimerWithPrescaler();
             }
 
             return fileAddress;
@@ -356,6 +359,7 @@ namespace PIC_Simulator
             if (registerContent != 0)
             {
                 GUI_Simu.memory.incPC();
+                GUI_Simu.controller.incTimerWithPrescaler();
             }
 
             return fileAddress;

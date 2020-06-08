@@ -57,9 +57,9 @@ namespace PIC_Simulator
             GUI_Simu.memory.setTMR0(timer0);
         }
 
-        private void incTimerWithPrescaler()
+        public void incTimerWithPrescaler()
         {
-            if (prescaler < GUI_Simu.prescaler.getTMR0Prescaler())
+            if (prescaler < GUI_Simu.prescaler.getTMR0Prescaler() - 1)
             {
                 prescaler++;
             }

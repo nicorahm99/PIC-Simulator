@@ -431,6 +431,8 @@ namespace PIC_Simulator
         }
         public void refreshMemory()
         {
+            int currentMemoryBank = memory.getCurrentMemoryBank();
+            memory.setMemoryBankTo(0);
             //rebuild listView
             for (int i = 0; i < 32; i++)
             {
@@ -447,6 +449,7 @@ namespace PIC_Simulator
                 }
                 lVMemory.Items[i + 1].Text = newrow; // replace old orw by new row (first row should not be touched)
             }
+            memory.setMemoryBankTo(currentMemoryBank);
         }
         #endregion
 
