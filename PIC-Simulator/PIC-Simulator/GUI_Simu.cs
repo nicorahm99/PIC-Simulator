@@ -254,6 +254,7 @@ namespace PIC_Simulator
         {
 
         }
+
         #region Port A
         private void PortAPin0(object sender, EventArgs e)
         {
@@ -395,16 +396,16 @@ namespace PIC_Simulator
 
         public void refreshSFRW()
         {
-            lblWRegVal.Text = memory.getWReg().ToString();
-            lblPCLVal.Text = memAdrRes_getFile(0x02).ToString();
-            lblPCLATHVal.Text = memAdrRes_getFile(0x0A).ToString();
-            lblPCLinternVal.Text = memAdrRes_getFile(0x02).ToString();
-            lblStatusVal.Text = memAdrRes_getFile(0x03).ToString();
-            lblFSRVal.Text = memAdrRes_getFile(0x04).ToString();
+            lblWRegVal.Text = memory.getWReg().ToString("X");
+            lblPCLVal.Text = memAdrRes_getFile(0x02).ToString("X");
+            lblPCLATHVal.Text = memAdrRes_getFile(0x0A).ToString("X");
+            lblPCLinternVal.Text = memAdrRes_getFile(0x02).ToString("X");
+            lblStatusVal.Text = memAdrRes_getFile(0x03).ToString("X");
+            lblFSRVal.Text = memAdrRes_getFile(0x04).ToString("X");
 
-            lblOptionVal.Text = memAdrRes_getFile(0x81).ToString();
-            lblVorteilerVal.Text = "1 : " + prescaler.getPrescaler().ToString();
-            lblTimer0Val.Text = memory.getTMR0().ToString();
+            lblOptionVal.Text = memAdrRes_getFile(0x81).ToString("X");
+            lblVorteilerVal.Text = "1 : " + prescaler.getPrescaler().ToString("X");
+            lblTimer0Val.Text = memory.getTMR0().ToString("X");
         }
         #endregion
 
@@ -421,7 +422,7 @@ namespace PIC_Simulator
                 string newrow = adr + "   ||";
                 for (int j = 0; j < 8; j++)
                 {
-                    string val = memAdrRes_getFile((i * 8) + j).ToString();
+                    string val = memAdrRes_getFile((i * 8) + j).ToString("X");
                     if (val.Length == 1) { newrow += "   " + val + " |"; }
                     else if (val.Length == 2) { newrow += "  " + val + " |"; }
                     else if (val.Length == 3) { newrow += " " + val + " |"; }
@@ -441,7 +442,7 @@ namespace PIC_Simulator
                 string newrow = adr + "   ||";
                 for (int j = 0; j < 8; j++)
                 {
-                    string val = memAdrRes_getFile((i * 8) + j).ToString();
+                    string val = memAdrRes_getFile((i * 8) + j).ToString("X");
                     if (val.Length == 1) { newrow += "   " + val + " |"; }
                     else if (val.Length == 2) { newrow += "  " + val + " |"; }
                     else if (val.Length == 3) { newrow += " " + val + " |"; }
