@@ -11,7 +11,6 @@ namespace PIC_Simulator
 {
     public class Parser
     {
-
         private string filePath = "C:/tmp/testfile.txt";
         private List<int> rom = new List<int>();
         private List<string> file = new List<string>();
@@ -45,6 +44,12 @@ namespace PIC_Simulator
                 MessageBox.Show(ex.ToString());
             }
             
+        }
+
+        public void init()
+        {
+            rom = new List<int>();
+            file = new List<string>();
         }
 
         public List<string> getFile()

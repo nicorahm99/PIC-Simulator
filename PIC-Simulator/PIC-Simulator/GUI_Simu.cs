@@ -66,6 +66,7 @@ namespace PIC_Simulator
         public static readonly Controller controller = new Controller();
         public static readonly InterruptController interruptController = new InterruptController();
         public static readonly Prescaler prescaler = new Prescaler();
+        public Dictionary<int, int> pcToLine = new Dictionary<int, int>();
 
 
         string helpMsg = "DS PIC16F84/CR84 - Simulator" + Environment.NewLine + "Dominik Lange & Nico Rahm" + Environment.NewLine + "25.04.2020" + Environment.NewLine + "Version 1.0";
@@ -74,14 +75,7 @@ namespace PIC_Simulator
         {
             initMemory();
             refreshSFR_b();
-
-            // to test portA and PortB checkboxes
-            int currentMemoryBank = GUI_Simu.memory.getCurrentMemoryBank();
-            memory.setMemoryBankTo(1);
-            memory.setFile(0x05, 31); //0x85 = TrisA --> 1 1111
-            memory.setFile(0x06, 255); //0x86 = TrisB --> 1111 1111
-            memory.setMemoryBankTo(currentMemoryBank);
-            refreshMemory();
+            refreshSFRW();
         }
         #endregion
 
@@ -106,11 +100,29 @@ namespace PIC_Simulator
         {
             memory.init();
             controller.init();
-            //reset memory
             refreshSFRW();
             refreshMemory();
             refreshSFR_b();
             resetTiming();
+        }
+
+        public void init()
+        {
+            memory.init();
+            controller.init();
+            rom.init();
+            parser.init();
+            refreshSFRW();
+            refreshMemory();
+            refreshSFR_b();
+            resetTiming();
+        }
+
+        public void refresh()
+        {
+            refreshMemory();
+            refreshSFRW();
+            refreshSFR_b();
         }
 
         //------------------------------------------------GUI------------------------------------------------------------------------
@@ -409,7 +421,10 @@ namespace PIC_Simulator
                 string newrow = adr + "   ||";
                 for (int j = 0; j < 8; j++)
                 {
-                    newrow += "   " + memAdrRes_getFile((i * 8) + j).ToString() + " |";
+                    string val = memAdrRes_getFile((i * 8) + j).ToString();
+                    if (val.Length == 1) { newrow += "   " + val + " |"; }
+                    else if (val.Length == 2) { newrow += "  " + val + " |"; }
+                    else if (val.Length == 3) { newrow += " " + val + " |"; }
                 }
                 lVMemory.Items.Add(newrow);
             }
@@ -489,6 +504,32 @@ namespace PIC_Simulator
         }
         #endregion
 
+        #region Program
+        public void showFile(List<string> file)
+        {
+            for (int i = 0; i < file.Count; i++)
+            {
+                tBProgramm.AppendText(file[i] + Environment.NewLine);
+            }
+        }
+
+        public void clearFile()
+        {
+            tBProgramm.Clear();
+        }
+
+        public void selectLine()
+        {
+            int pc = memory.getFullPC(); // Program Counter
+            int line = pcToLine[pc];
+        }
+
+        public void assignPCToLine(int pc, int line)
+        {
+            pcToLine.Add(pc, line);
+        }
+        #endregion
+
         #region Toolbar
         private void verlassenToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -498,7 +539,7 @@ namespace PIC_Simulator
         private void dateiÖffnenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             tWorkingInterval.Enabled = false;
-            reset();
+            init();
             try
             {
                 var FD = new System.Windows.Forms.OpenFileDialog();
@@ -514,17 +555,11 @@ namespace PIC_Simulator
             {
                 MessageBox.Show(ex.ToString());
             }
-
+            //set rom
             rom.setRom(parser.getRom());
-
-            tBProgramm.Clear();
-
-            List<string> file = parser.getFile();
-            for (int i = 0; i < file.Count; i++)
-            {
-                tBProgramm.AppendText(file[i] + Environment.NewLine);
-            }
-            refreshSFR_b();
+            //view file in textbox
+            clearFile();
+            showFile(parser.getFile());
         }
 
         private void tSBtnHilfe_Click(object sender, EventArgs e)
