@@ -66,7 +66,7 @@ namespace PIC_Simulator
         public static readonly Controller controller = new Controller();
         public static readonly InterruptController interruptController = new InterruptController();
         public static readonly Prescaler prescaler = new Prescaler();
-        public Dictionary<int, int> pcToLine = new Dictionary<int, int>();
+        public static Dictionary<int, int> pcToLine = new Dictionary<int, int>();
 
 
         string helpMsg = "DS PIC16F84/CR84 - Simulator" + Environment.NewLine + "Dominik Lange & Nico Rahm" + Environment.NewLine + "25.04.2020" + Environment.NewLine + "Version 1.0";
@@ -527,7 +527,7 @@ namespace PIC_Simulator
             int line = pcToLine[pc];
         }
 
-        public void assignPCToLine(int pc, int line)
+        public static void assignPCToLine(int pc, int line)
         {
             pcToLine.Add(pc, line);
         }
