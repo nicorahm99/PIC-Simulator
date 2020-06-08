@@ -90,7 +90,7 @@ namespace PIC_Simulator
             {
                 return memory[fileAddress];
             }
-            else if (fileAddress <= 0x4f && (getStatusRP0() == 1)) // Bank 1
+            if (fileAddress <= 0x4f && (getStatusRP0() == 1)) // Bank 1
             {
                 switch (fileAddress)
                 {
@@ -206,6 +206,20 @@ namespace PIC_Simulator
             setFile(0x0a, pcLatch);
         }
 
+        public int getOptionRegister()
+        {
+            return OPTION;
+        }
+
+        public int getCurrentMemoryBank()
+        {
+            if ((getFile(0x3) & 1 << 5) == 0)
+            {
+                return 0;
+            }
+            return 1;
+        }
+
         public void setMemoryBankTo(int value)
         {
             int statusRegister = 0x03;
@@ -255,7 +269,18 @@ namespace PIC_Simulator
             else { access = false; }
 
             return access;
+        } 
+        
+        public void setTMR0(int timer0)
+        {
+           memory[1] = timer0;
         }
         #endregion
+
+
+        public int getTMR0()
+        {
+            return memory[1];
+        }
     }
 }

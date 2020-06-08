@@ -53,29 +53,6 @@ namespace PIC_Simulator
         //    {  "lblRIFVal", 7},
         //};
 
-        Dictionary<int, int> prescalerTMR0 = new Dictionary<int, int>() //prescaler with TMR0 Rate
-        {
-            {  0, 2},
-            {  1, 4},
-            {  2, 8},
-            {  3, 16},
-            {  4, 32},
-            {  5, 64},
-            {  6, 128},
-            {  7, 256},
-        };
-
-        Dictionary<int, int> prescalerWDT = new Dictionary<int, int>() //prescaler with WDT Rate
-        {
-            {  0, 1},
-            {  1, 2},
-            {  2, 4},
-            {  3, 8},
-            {  4, 16},
-            {  5, 32},
-            {  6, 64},
-            {  7, 128},
-        };
         #endregion
 
         #region init
@@ -88,6 +65,7 @@ namespace PIC_Simulator
         public static readonly EEPROM eeprom = new EEPROM();
         public static readonly Controller controller = new Controller();
         public static readonly InterruptController interruptController = new InterruptController();
+        public static readonly Prescaler prescaler = new Prescaler();
 
 
         string helpMsg = "DS PIC16F84/CR84 - Simulator" + Environment.NewLine + "Dominik Lange & Nico Rahm" + Environment.NewLine + "25.04.2020" + Environment.NewLine + "Version 1.0";
@@ -97,11 +75,12 @@ namespace PIC_Simulator
             initMemory();
             refreshSFR_b();
 
-            // to test portA and PortB chackboxes
+            // to test portA and PortB checkboxes
+            int currentMemoryBank = GUI_Simu.memory.getCurrentMemoryBank();
             memory.setMemoryBankTo(1);
             memory.setFile(0x05, 31); //0x85 = TrisA --> 1 1111
             memory.setFile(0x06, 255); //0x86 = TrisB --> 1111 1111
-            memory.setMemoryBankTo(0);
+            memory.setMemoryBankTo(currentMemoryBank);
             refreshMemory();
         }
         #endregion
@@ -149,10 +128,11 @@ namespace PIC_Simulator
             }
             else if (fileAddress >= 0x80 && fileAddress <= 0xCF)
             {
+                int currentMemoryBank = GUI_Simu.memory.getCurrentMemoryBank();
                 memory.setMemoryBankTo(1);
                 fileAddress -= 0x80;
                 int tmp =  memory.setFile(fileAddress, value);
-                memory.setMemoryBankTo(0);
+                memory.setMemoryBankTo(currentMemoryBank);
             }
             return 0;
         }
@@ -170,10 +150,11 @@ namespace PIC_Simulator
             }
             else if (fileAddress >= 0x80 && fileAddress <= 0xCF)
             {
+                int currentMemoryBank = GUI_Simu.memory.getCurrentMemoryBank();
                 memory.setMemoryBankTo(1);
                 fileAddress -= 0x80;
                 file = memory.getFile(fileAddress);
-                memory.setMemoryBankTo(0);
+                memory.setMemoryBankTo(currentMemoryBank);
             }
             return file;
         }
@@ -191,10 +172,11 @@ namespace PIC_Simulator
             }
             else if (fileAddress >= 0x80 && fileAddress <= 0xCF)
             {
+                int currentMemoryBank = GUI_Simu.memory.getCurrentMemoryBank();
                 memory.setMemoryBankTo(1);
                 fileAddress -= 0x80;
                 bit = memory.getBit(fileAddress, bitAddress);
-                memory.setMemoryBankTo(0);
+                memory.setMemoryBankTo(currentMemoryBank);
             }
             return bit;
         }
@@ -211,10 +193,11 @@ namespace PIC_Simulator
             }
             else if (fileAddress >= 0x80 && fileAddress <= 0xCF)
             {
+                int currentMemoryBank = GUI_Simu.memory.getCurrentMemoryBank();
                 memory.setMemoryBankTo(1);
                 fileAddress -= 0x80;
                 memory.setBit(fileAddress, bitAddress);
-                memory.setMemoryBankTo(0);
+                memory.setMemoryBankTo(currentMemoryBank);
             }
         }
 
@@ -226,10 +209,11 @@ namespace PIC_Simulator
             }
             else if (fileAddress >= 0x80 && fileAddress <= 0xCF)
             {
+                int currentMemoryBank = GUI_Simu.memory.getCurrentMemoryBank();
                 memory.setMemoryBankTo(1);
                 fileAddress -= 0x80;
                 memory.clearBit(fileAddress, bit);
-                memory.setMemoryBankTo(0);
+                memory.setMemoryBankTo(currentMemoryBank);
             }
         }
 
@@ -242,10 +226,11 @@ namespace PIC_Simulator
             }
             else if (fileAddress >= 0x80 && fileAddress <= 0xCF)
             {
+                int currentMemoryBank = GUI_Simu.memory.getCurrentMemoryBank();
                 memory.setMemoryBankTo(1);
                 fileAddress -= 0x80;
                 access = memory.requestAccess(fileAddress, bit);
-                memory.setMemoryBankTo(0);
+                memory.setMemoryBankTo(currentMemoryBank);
             }
             return access;
         }
@@ -395,17 +380,7 @@ namespace PIC_Simulator
         #endregion
 
         #region SFR+W
-        public int getPrescaler()
-        {
-            int optionFile = memAdrRes_getFile(0x81); // get the option file
-            int prescalerBits = optionFile & 7; // get bits 2-0 which define the prescaler
-            // define value of the prescaler due to the "prascaler assignment bitAddress"
-            int prescaler;
-            if (memAdrRes_getBit(81, 3) == 1) { prescaler = prescalerWDT[prescalerBits]; }
-            else { prescaler = prescalerTMR0[prescalerBits]; }
-            return prescaler;
-        }
-        
+
         public void refreshSFRW()
         {
             lblWRegVal.Text = memory.getWReg().ToString();
@@ -416,8 +391,8 @@ namespace PIC_Simulator
             lblFSRVal.Text = memAdrRes_getFile(0x04).ToString();
 
             lblOptionVal.Text = memAdrRes_getFile(0x81).ToString();
-            lblVorteilerVal.Text = "1 : " + getPrescaler().ToString();
-            lblTimer0Val.Text = controller.get_timer0().ToString();
+            lblVorteilerVal.Text = "1 : " + prescaler.getPrescaler().ToString();
+            lblTimer0Val.Text = memory.getTMR0().ToString();
         }
         #endregion
 
@@ -569,7 +544,7 @@ namespace PIC_Simulator
         public void controllerStep()
         {
             controller.step();
-            setLaufzeit(controller.get_timer0());
+            setLaufzeit(memory.getTMR0());
             refreshMemory();
             refreshSFR_b();
             refreshSFRW();

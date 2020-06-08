@@ -43,12 +43,13 @@ namespace PIC_Simulator
 
         private void clearBit(int bitAddress)
         {
+            int currentMemoryBank = GUI_Simu.memory.getCurrentMemoryBank();
             GUI_Simu.memory.setMemoryBankTo(1);
             int eecon1 = GUI_Simu.memory.getFile(0x08);
             eecon1 &= ~(1 << bitAddress);
             eecon1 += 0x10;
             GUI_Simu.memory.setFile(0x08, eecon1);
-            GUI_Simu.memory.setMemoryBankTo(0);
+            GUI_Simu.memory.setMemoryBankTo(currentMemoryBank);
         }
 
         private void clearWriteBitSetInetrruptFlag()

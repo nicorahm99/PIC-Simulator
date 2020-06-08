@@ -460,11 +460,12 @@ namespace PIC_Simulator
         {
             //00h → WDT,
             //0 → WDT prescaler,
+            int currentMemoryBank = GUI_Simu.memory.getCurrentMemoryBank();
             GUI_Simu.memory.setMemoryBankTo(1);
             bcF(0x1, 0);
             bcF(0x1, 1);
             bcF(0x1, 2);
-            GUI_Simu.memory.setMemoryBankTo(0);
+            GUI_Simu.memory.setMemoryBankTo(currentMemoryBank);
             //1 → TO,
             bsF(0x3, 4);
             //0 → PD
