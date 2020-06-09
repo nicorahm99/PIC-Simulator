@@ -50,6 +50,7 @@
             this.lblStatusVal = new System.Windows.Forms.Label();
             this.lblStatus = new System.Windows.Forms.Label();
             this.grpBProgramm = new System.Windows.Forms.GroupBox();
+            this.lVProgram = new System.Windows.Forms.ListView();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tSDropDownDatei = new System.Windows.Forms.ToolStripDropDownButton();
             this.dateiÖffnenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -156,7 +157,6 @@
             this.chckBPortBTris0 = new System.Windows.Forms.CheckBox();
             this.lblPinB = new System.Windows.Forms.Label();
             this.lblTrisB = new System.Windows.Forms.Label();
-            this.lVProgram = new System.Windows.Forms.ListView();
             this.grpBSFRW.SuspendLayout();
             this.grpBProgramm.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -366,6 +366,21 @@
             this.grpBProgramm.TabIndex = 1;
             this.grpBProgramm.TabStop = false;
             this.grpBProgramm.Text = "Programm";
+            // 
+            // lVProgram
+            // 
+            this.lVProgram.CheckBoxes = true;
+            this.lVProgram.Font = new System.Drawing.Font("Courier New", 9F);
+            this.lVProgram.FullRowSelect = true;
+            this.lVProgram.HideSelection = false;
+            this.lVProgram.LabelEdit = true;
+            this.lVProgram.Location = new System.Drawing.Point(0, 19);
+            this.lVProgram.MultiSelect = false;
+            this.lVProgram.Name = "lVProgram";
+            this.lVProgram.Size = new System.Drawing.Size(500, 241);
+            this.lVProgram.TabIndex = 9;
+            this.lVProgram.UseCompatibleStateImageBehavior = false;
+            this.lVProgram.View = System.Windows.Forms.View.Details;
             // 
             // toolStrip1
             // 
@@ -1484,20 +1499,6 @@
             this.lblTrisB.Size = new System.Drawing.Size(24, 13);
             this.lblTrisB.TabIndex = 0;
             this.lblTrisB.Text = "Tris";
-            // 
-            // lVProgram
-            // 
-            this.lVProgram.Alignment = System.Windows.Forms.ListViewAlignment.Left;
-            this.lVProgram.Font = new System.Drawing.Font("Courier New", 9F);
-            this.lVProgram.FullRowSelect = true;
-            this.lVProgram.HideSelection = false;
-            this.lVProgram.Location = new System.Drawing.Point(0, 19);
-            this.lVProgram.MultiSelect = false;
-            this.lVProgram.Name = "lVProgram";
-            this.lVProgram.Size = new System.Drawing.Size(500, 241);
-            this.lVProgram.TabIndex = 0;
-            this.lVProgram.UseCompatibleStateImageBehavior = false;
-            this.lVProgram.View = System.Windows.Forms.View.List;
             // 
             // GUI_Simu
             // 

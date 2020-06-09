@@ -512,12 +512,14 @@ namespace PIC_Simulator
         public void showFile(List<string> file)
         {
             lVProgram.Clear();
-            //ColumnHeader header = new ColumnHeader();
-            //header.Text = "";
-            //header.Name = "col1";
-            //lVProgram.Columns.Add(header);
+            ColumnHeader header = new ColumnHeader();
+            header.Text = "B; Program";
+            header.Name = "header";
+            header.Width = 800;
+            lVProgram.Columns.Add(header);
             for (int i = 0; i < file.Count; i++)
             {
+                //MessageBox.Show(file[i]);
                 lVProgram.Items.Add(file[i]);
             }
         }
@@ -529,7 +531,7 @@ namespace PIC_Simulator
                 lVProgram.SelectedItems[i].Selected = false;
             }
             int pc = memory.getFullPC(); // Program Counter
-            int line = pcToLine[pc];
+            int line = pcToLine[pc] -1;
             lVProgram.Items[line].Selected = true;
         }
 
