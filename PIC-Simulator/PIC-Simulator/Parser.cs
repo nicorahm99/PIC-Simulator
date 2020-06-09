@@ -14,7 +14,7 @@ namespace PIC_Simulator
     {
         private string filePath = "C:/tmp/testfile.txt";
         private List<int> rom = new List<int>();
-        private List<string> file = new List<string>();
+        private List<string> totalFile = new List<string>();
 
         public void setFilePath(string newPath)
         {
@@ -23,12 +23,13 @@ namespace PIC_Simulator
 
         public void parse()
         {
-            Dictionary<int, int> newDict = new Dictionary<int, int>(); ;
+            Dictionary<int, int> pc_line = new Dictionary<int, int>();
+            Dictionary<int, int> line_pc = new Dictionary<int, int>();
             try
             {
-                file = File.ReadAllLines(filePath).ToList();
+                totalFile = File.ReadAllLines(filePath).ToList();
 
-                foreach (string line in file)
+                foreach (string line in totalFile)
                 {
                     Regex regex = new Regex(@"(^([\d|\w]{4})\s([\d|\w]{4})\s+(\d+).*$)");
                     Match match = regex.Match(line);
@@ -37,13 +38,15 @@ namespace PIC_Simulator
                     {
                         int adress = int.Parse(match.Groups[2].ToString(), NumberStyles.HexNumber);
                         int lineNumber = int.Parse(match.Groups[4].ToString(), NumberStyles.Integer);
-                        newDict.Add(adress, lineNumber);
+                        pc_line.Add(adress, lineNumber);
+                        line_pc.Add(lineNumber, adress);
                         //MessageBox.Show(commandCode);
                         rom.Add(int.Parse(commandCode, System.Globalization.NumberStyles.HexNumber));
                     }
                 }
                 GUI_Simu.rom.setRom(rom);
-                GUI_Simu.getDitPcToLine(newDict);
+                GUI_Simu.getDictPcToLine(pc_line);
+                GUI_Simu.getDictLineToPc(line_pc);
             }
             catch (Exception ex) //invalid filepath
             {
@@ -55,13 +58,13 @@ namespace PIC_Simulator
         public void init()
         {
             rom = new List<int>();
-            file = new List<string>();
+            totalFile = new List<string>();
         }
 
-        public List<string> getFile()
+        public List<string> getTotalFile()
         {
             parse();
-            return file;
+            return totalFile;
         }
 
         public List<int> getRom()

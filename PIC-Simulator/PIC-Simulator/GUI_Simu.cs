@@ -67,6 +67,7 @@ namespace PIC_Simulator
         public static readonly InterruptController interruptController = new InterruptController();
         public static readonly Prescaler prescaler = new Prescaler();
         public static Dictionary<int, int> pcToLine = new Dictionary<int, int>();
+        public static Dictionary<int, int> lineToPc = new Dictionary<int, int>();
 
 
         string helpMsg = "DS PIC16F84/CR84 - Simulator" + Environment.NewLine + "Dominik Lange & Nico Rahm" + Environment.NewLine + "25.04.2020" + Environment.NewLine + "Version 1.0";
@@ -488,17 +489,17 @@ namespace PIC_Simulator
 
         private void btnStart_Click(object sender, EventArgs e)
         {
-            tWorkingInterval.Enabled = true;
+            startTimer();
         }
 
         private void btnStop_Click(object sender, EventArgs e)
         {
-            tWorkingInterval.Enabled = false;
+            stopTimer();
         }
 
         private void btnReset_Click(object sender, EventArgs e)
         {
-            tWorkingInterval.Enabled = false;
+            stopTimer();
             reset();
         }
 
@@ -508,37 +509,77 @@ namespace PIC_Simulator
         }
         #endregion
 
-        #region Program
+        #region Program Listiew + Breakpoints
+        private void itemChecked(object sender, ItemCheckedEventArgs e)
+        {
+            setBreakPoint();
+        }
+
+        public static void getDictPcToLine(Dictionary<int, int> newdict)
+        {
+            // get dit from Parser class
+            pcToLine = newdict;
+        }
+
+        public static void getDictLineToPc(Dictionary<int, int> newdict)
+        {
+            // get dit from Parser class
+            lineToPc = newdict;
+        }
+
         public void showFile(List<string> file)
         {
+            //clear list
             lVProgram.Clear();
+            //define new Column header
             ColumnHeader header = new ColumnHeader();
             header.Text = "B; Program";
             header.Name = "header";
             header.Width = 800;
+            //add header to listview
             lVProgram.Columns.Add(header);
+            //add all lines from file to listview
             for (int i = 0; i < file.Count; i++)
             {
-                //MessageBox.Show(file[i]);
                 lVProgram.Items.Add(file[i]);
             }
         }
 
         public void selectLine()
         {
+            //unselect all items
             for (int i = 0; i<lVProgram.SelectedItems.Count; i++)
             {
                 lVProgram.SelectedItems[i].Selected = false;
             }
             int pc = memory.getFullPC(); // Program Counter
-            int line = pcToLine[pc] -1;
-            lVProgram.Items[line].Selected = true;
+            int line = pcToLine[pc] -1; // corresponding (to pc) line of file
+            lVProgram.Items[line].Selected = true; // select the current line
         }
 
-        public static void getDitPcToLine(Dictionary<int, int> newdict)
-        {
-            pcToLine = newdict;
-        }
+       public void setBreakPoint()
+       {
+            List<int> breakPoints = new List<int>(); // list contains pcs of all breakpoints
+            if (lVProgram.CheckedItems.Count > 0)
+            {
+                // items are checked
+                for (int i = 0; i < lVProgram.Items.Count; i++)
+                {
+                    // go through all listview items
+                    if (lVProgram.Items[i].Checked == true && lineToPc.ContainsKey(i+1))// (i+1) --> linenumbers are 1-based
+                    {
+                        // checked & part of the programm code
+                        breakPoints.Add(lineToPc[i+1]);// (i+1) --> linenumbers are 1-based
+                    }
+                    else if (lVProgram.Items[i].Checked == true && lineToPc.ContainsKey(i+1) == false)// (i+1) --> linenumbers are 1-based
+                    {
+                        // checked but not part of the programm code
+                        lVProgram.Items[i].Checked = false; // uncheck
+                    }
+                }
+            }
+            controller.setBreakPoints(breakPoints);
+       }
         #endregion
 
         #region Toolbar
@@ -569,7 +610,7 @@ namespace PIC_Simulator
             //set rom
             rom.setRom(parser.getRom());
             //view file in textbox
-            showFile(parser.getFile());
+            showFile(parser.getTotalFile());
             selectLine();
         }
 
@@ -584,20 +625,36 @@ namespace PIC_Simulator
         {
             controllerStep();
         }
+
+        public void stopTimer()
+        {
+            tWorkingInterval.Enabled = false;
+        }
+
+        public void startTimer()
+        {
+            tWorkingInterval.Enabled = true;
+        }
         #endregion
 
         #region controller
         public void controllerStep()
         {
-            controller.step();
-            selectLine();
-            setLaufzeit(memory.getTMR0());
-            refreshMemory();
-            refreshSFR_b();
-            refreshSFRW();
+            bool isBreakPoint = controller.step();
+            if (isBreakPoint == false)
+            {
+                selectLine();
+                setLaufzeit(memory.getTMR0());
+                refreshMemory();
+                refreshSFR_b();
+                refreshSFRW();
+            }
+            else
+            {
+                stopTimer();
+            }
         }
+
         #endregion
-
-
     }
 }

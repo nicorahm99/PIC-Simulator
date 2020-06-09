@@ -12,31 +12,34 @@ namespace PIC_Simulator
     {
         private int prescaler;
         private int watchdog;
+        List<int> breakPoints = new List<int>(); // list contains pcs of all breakpoints
 
         public Controller()
         {
             init();
         }
 
-        public void step()
+        public bool step()
         {
             GUI_Simu.interruptController.checkInterrupts();
             int pc = GUI_Simu.memory.getFullPC();
-            int commandCode = GUI_Simu.rom.fetchCommand(pc);
-            Command command = GUI_Simu.decoder.decodeCommand(commandCode);
-            GUI_Simu.executer.executeCommand(command);
-            GUI_Simu.memory.incPC();
-            incTimerWithPrescaler();
-            //reset watchdog
-        }
+            bool isInList = breakPoints.IndexOf(pc) != -1;
+            if (isInList)
+            {
+                return true;
+            }
+            else
+            {
+                int commandCode = GUI_Simu.rom.fetchCommand(pc);
+                Command command = GUI_Simu.decoder.decodeCommand(commandCode);
+                GUI_Simu.executer.executeCommand(command);
+                GUI_Simu.memory.incPC();
+                incTimerWithPrescaler();
+                //reset watchdog
+                return false;
+            }
 
-        //public void sequence()
-        //{
-        //    while (isActive && (GUI_Simu.memory.getFullPC() < 1024))
-        //    {
-        //        step();
-        //    }
-        //}
+        }
 
         public void init()
         {
@@ -68,6 +71,11 @@ namespace PIC_Simulator
                 prescaler = 0;
                 incTimer0();
             }
+        }
+
+        public void setBreakPoints(List<int> bPs)
+        {
+            breakPoints = bPs;
         }
 
         private void resetWatchdog()

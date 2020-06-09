@@ -11,6 +11,7 @@ namespace PIC_Simulator
         public Memory() { init(); }
         private int[] memory; // addresses from 0x0c to 0x4f /-/ 0x8c to 0xcf
 
+
         private int wReg;
 
         private Stack<int> stack = new Stack<int>();
@@ -169,6 +170,11 @@ namespace PIC_Simulator
             int item = stack.Peek();
             stack.Pop();
             return item;
+        }
+
+        public Stack<int> getstack()
+        {
+            return stack;
         }
 
         public void incPC()
