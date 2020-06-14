@@ -59,11 +59,6 @@ namespace PIC_Simulator
                     return value;
                 }
 
-                
-                if (fileAddress == 6)
-                {
-                    setPortB(value);
-                }
                 memory[fileAddress] = value;
                 return value;
             }
@@ -144,6 +139,15 @@ namespace PIC_Simulator
                 {
                     GUI_Simu.controller.incTimer0ByExternalInput(false);
                 }
+                if (reg == 6 && bit == 0)
+                {
+                    GUI_Simu.interruptController.onRB0Changed(false);
+                }
+
+                if (reg == 6 && (bit == 4 || bit == 5 || bit == 6 || bit == 7))
+                {
+                    GUI_Simu.interruptController.onRB4TO7Changed();
+                }
                 int file = getFile(reg);
                 int newFile = file + Convert.ToInt16(Math.Pow(2, bit));
                 setFile(reg, newFile);
@@ -158,6 +162,14 @@ namespace PIC_Simulator
                 {
                     GUI_Simu.controller.incTimer0ByExternalInput(true);
                 }
+                if (reg == 6 && bit == 0)
+                {
+                    GUI_Simu.interruptController.onRB0Changed(true);
+                }
+                if (reg == 6 && (bit == 4 || bit == 5 || bit == 6 || bit == 7))
+                {
+                    GUI_Simu.interruptController.onRB4TO7Changed();
+                }
                 int file = getFile(reg);
                 int newfile = file - Convert.ToInt16(Math.Pow(2, bit));
                 setFile(reg, newfile);
@@ -167,12 +179,6 @@ namespace PIC_Simulator
 
 
         #region help functions
-
-        private void setPortB(int value)
-        {
-            throw new NotImplementedException();
-        }
-
 
         public int setWReg(int value) { return wReg = value; }
         public int getWReg() { return wReg; }

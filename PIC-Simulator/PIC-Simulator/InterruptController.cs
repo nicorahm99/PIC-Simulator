@@ -15,13 +15,28 @@ namespace PIC_Simulator
             INTF,
             RBIF
         }
-        public void setRB0Pin(int address)
+
+        public void onRB0Changed(bool isFallingEdge)
         {
-            throw new NotImplementedException();
+            int optionRegister = GUI_Simu.memory.getOptionRegister();
+
+            if ((optionRegister & 2 ^ 6) == 0 && isFallingEdge)
+            {
+                setInterruptFlag(InterruptFlags.INTF);
+            }
+            else if ((optionRegister & 2 ^ 6) != 0 && !isFallingEdge)
+            {
+                setInterruptFlag(InterruptFlags.INTF);
+            }
+        }
+
+        public void onRB4TO7Changed()
+        {
+            setInterruptFlag(InterruptFlags.RBIF);
         }
 
         public void setInterruptFlag(InterruptFlags flag)
-        {            
+        {
             int bitAdress = decodeInterruptFlag(flag);
             if (isInterruptEnabled(bitAdress))
             {
@@ -35,7 +50,7 @@ namespace PIC_Simulator
         {
             bitAdress += 3; //bitadress of Enabled flag
             int intCon = GUI_Simu.memory.getFile(0xb);
-            
+
             if ((intCon & (1 << bitAdress)) != 0)
             {
                 return true;
