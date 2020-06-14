@@ -61,7 +61,7 @@ namespace PIC_Simulator
         public void checkInterrupts()
         {
             int intCon = GUI_Simu.memory.getFile(0xb);
-            if ((intCon & 0x7) != 0)
+            if ((intCon & 0x7) != 0 && (intCon & 1 << 7) != 0)
             {
                 GUI_Simu.executer.interruptOccured();
             }
