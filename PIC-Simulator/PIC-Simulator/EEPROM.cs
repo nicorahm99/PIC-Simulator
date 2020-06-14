@@ -16,24 +16,32 @@ namespace PIC_Simulator
         
         public void writeToEEPROM()
         {
+            int currentMemoryBank = GUI_Simu.memory.getCurrentMemoryBank();
+            GUI_Simu.memory.setMemoryBankTo(0);
             int address = GUI_Simu.memory.getFile(0x09);
             int value = GUI_Simu.memory.getFile(0x08);
-            if (address <= 64 && isStateMachineTriggered)
+            GUI_Simu.memory.setMemoryBankTo(currentMemoryBank);
+            if (address < 64 && isStateMachineTriggered)
             {
                 eeprom[address] = value;
                 isStateMachineTriggered = false;
-                clearWriteBitSetInetrruptFlag();
+
+                Task.Factory.StartNew(() => clearWriteBitSetInetrruptFlag());
             }
+
         }
 
         public void readFromEEPROM() 
         {
+            int currentMemoryBank = GUI_Simu.memory.getCurrentMemoryBank();
+            GUI_Simu.memory.setMemoryBankTo(0);
             int address = GUI_Simu.memory.getFile(0x09);
-            if (address <= 64)
+            if (address < 64)
             {
                 GUI_Simu.memory.setFile(0x08, eeprom[address]);
                 clearReadBitSetInetrruptFlag();
             }
+            GUI_Simu.memory.setMemoryBankTo(currentMemoryBank);
         }
 
         public void setStateMachineTriggered()
@@ -52,9 +60,15 @@ namespace PIC_Simulator
             GUI_Simu.memory.setMemoryBankTo(currentMemoryBank);
         }
 
-        private void clearWriteBitSetInetrruptFlag()
+        private async Task<int> clearWriteBitSetInetrruptFlag()
         {
+            Task.Delay(1000).Wait();
             clearBit(1);
+            int currentMemoryBank = GUI_Simu.memory.getCurrentMemoryBank();
+            GUI_Simu.memory.setMemoryBankTo(1);
+            GUI_Simu.memory.setBit(8,4);
+            GUI_Simu.memory.setMemoryBankTo(currentMemoryBank);
+            return 0;
         }
 
         private void clearReadBitSetInetrruptFlag()
