@@ -190,7 +190,7 @@ namespace PIC_Simulator
             if (result == 0)
             {
                 GUI_Simu.memory.incPC();
-                GUI_Simu.controller.incTimerWithPrescaler();
+                GUI_Simu.controller.incTimer0ByProgram();
             }
 
             return fileAddress;
@@ -217,7 +217,7 @@ namespace PIC_Simulator
             {
                 result -= 256;
                 GUI_Simu.memory.incPC(); 
-                GUI_Simu.controller.incTimerWithPrescaler();
+                GUI_Simu.controller.incTimer0ByProgram();
             }
 
             writeResultToRightDestination(result, isResultWrittenToW, fileAddress);
@@ -338,7 +338,7 @@ namespace PIC_Simulator
             if (registerContent == 0)
             {
                 GUI_Simu.memory.incPC();
-                GUI_Simu.controller.incTimerWithPrescaler();
+                GUI_Simu.controller.incTimer0ByProgram();
             }
 
             return fileAddress;
@@ -351,7 +351,7 @@ namespace PIC_Simulator
             if (registerContent != 0)
             {
                 GUI_Simu.memory.incPC();
-                GUI_Simu.controller.incTimerWithPrescaler();
+                GUI_Simu.controller.incTimer0ByProgram();
             }
 
             return fileAddress;
@@ -405,6 +405,7 @@ namespace PIC_Simulator
             {
                 GUI_Simu.memory.setFullPC(address - 1);
             }
+            GUI_Simu.controller.incTimer0ByProgram();
 
             return address;
         }
@@ -429,6 +430,7 @@ namespace PIC_Simulator
         {
             bsF(0xb, 7);
             popStackToPc();
+            GUI_Simu.controller.incTimer0ByProgram();
             return 0;
         }
 
@@ -436,12 +438,14 @@ namespace PIC_Simulator
         {
             writeResultToRightDestination(literal, true, 0);
             popStackToPc();
+            GUI_Simu.controller.incTimer0ByProgram();
             return literal;
         }
 
         private int _return()
         {
             popStackToPc();
+            GUI_Simu.controller.incTimer0ByProgram();
             return 0;
         }
 

@@ -44,16 +44,30 @@ namespace PIC_Simulator
         #region file access
         public int setFile(int fileAddress, int value)
         {
+            int memoryBank = getStatusRP0();
+
             if (fileAddress == 0)
             {
                 memory[memory[4]] = value;
+                return value;
             }
-            if (fileAddress <= 0x4f && (getStatusRP0() == 0)) // Bank 0
+            if (fileAddress <= 0x4f && (memoryBank == 0)) // Bank 0
             {
+                if (fileAddress == 1)
+                {
+                    setTMR0(value);
+                    return value;
+                }
+
+                
+                if (fileAddress == 6)
+                {
+                    setPortB(value);
+                }
                 memory[fileAddress] = value;
                 return value;
             }
-            if (fileAddress <= 0x4f && (getStatusRP0() == 1)) // Bank 1
+            if (fileAddress <= 0x4f && (memoryBank == 1)) // Bank 1
             {
                 switch (fileAddress)
                 {
@@ -126,9 +140,13 @@ namespace PIC_Simulator
         {
             if (getBit(reg, bit) == 0)
             {
+                if (reg == 5 && bit == 4)
+                {
+                    GUI_Simu.controller.incTimer0ByExternalInput(false);
+                }
                 int file = getFile(reg);
-                int newfile = file + Convert.ToInt16(Math.Pow(2, bit));
-                setFile(reg, newfile);
+                int newFile = file + Convert.ToInt16(Math.Pow(2, bit));
+                setFile(reg, newFile);
             }
         }
 
@@ -136,6 +154,10 @@ namespace PIC_Simulator
         {
             if (getBit(reg, bit) == 1)
             {
+                if (reg == 5 && bit == 4)
+                {
+                    GUI_Simu.controller.incTimer0ByExternalInput(true);
+                }
                 int file = getFile(reg);
                 int newfile = file - Convert.ToInt16(Math.Pow(2, bit));
                 setFile(reg, newfile);
@@ -145,6 +167,13 @@ namespace PIC_Simulator
 
 
         #region help functions
+
+        private void setPortB(int value)
+        {
+            throw new NotImplementedException();
+        }
+
+
         public int setWReg(int value) { return wReg = value; }
         public int getWReg() { return wReg; }
 
@@ -280,6 +309,7 @@ namespace PIC_Simulator
         public void setTMR0(int timer0)
         {
            memory[1] = timer0;
+           GUI_Simu.controller.resetPrescaleCounter();
         }
         #endregion
 

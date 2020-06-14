@@ -10,7 +10,7 @@ namespace PIC_Simulator
 {
     public class Controller
     {
-        private int prescaler;
+        private int prescaleCounter;
         private int watchdog;
         List<int> breakPoints = new List<int>(); // list contains pcs of all breakpoints
 
@@ -28,17 +28,14 @@ namespace PIC_Simulator
             {
                 return true;
             }
-            else
-            {
-                int commandCode = GUI_Simu.rom.fetchCommand(pc);
-                Command command = GUI_Simu.decoder.decodeCommand(commandCode);
-                GUI_Simu.executer.executeCommand(command);
-                GUI_Simu.memory.incPC();
-                incTimerWithPrescaler();
-                //reset watchdog
-                return false;
-            }
 
+            int commandCode = GUI_Simu.rom.fetchCommand(pc);
+            Command command = GUI_Simu.decoder.decodeCommand(commandCode);
+            GUI_Simu.executer.executeCommand(command);
+            GUI_Simu.memory.incPC();
+            incTimer0ByProgram();
+            //reset watchdog
+            return false;
         }
 
         public void init()
@@ -50,7 +47,10 @@ namespace PIC_Simulator
         private void incTimer0() // timer 0 overflow sets T0IF
         {
             int timer0 = GUI_Simu.memory.getTMR0();
-            if (timer0 < 0xFF) { timer0++; }
+            if (timer0 < 0xFF)
+            {
+                timer0++;
+            }
             else
             {
                 timer0 = 0;
@@ -60,16 +60,36 @@ namespace PIC_Simulator
             GUI_Simu.memory.setTMR0(timer0);
         }
 
-        public void incTimerWithPrescaler()
+        public void incTimer0ByExternalInput(bool isFallingEdge)
         {
-            if (prescaler < GUI_Simu.prescaler.getTMR0Prescaler() - 1)
+            int optionRegister = GUI_Simu.memory.getOptionRegister();
+            if ((optionRegister & 1 << 5) != 0)
             {
-                prescaler++;
+                if ((optionRegister & 1 << 4) != 0 && isFallingEdge || (optionRegister & 1 << 4) == 0 && !isFallingEdge)
+                {
+                    incTimer0RegardingPrescaler();
+                }
+            }
+        }
+
+        public void incTimer0RegardingPrescaler()
+        {
+            if (prescaleCounter < GUI_Simu.prescaler.getTMR0Prescaler() - 1)
+            {
+                prescaleCounter++;
             }
             else
             {
-                prescaler = 0;
+                prescaleCounter = 0;
                 incTimer0();
+            }
+        }
+
+        public void incTimer0ByProgram()
+        {
+            if ((GUI_Simu.memory.getOptionRegister() & 1 << 5) == 0)
+            {
+                incTimer0RegardingPrescaler();
             }
         }
 
@@ -81,6 +101,11 @@ namespace PIC_Simulator
         private void resetWatchdog()
         {
             watchdog = 0;
+        }
+
+        public void resetPrescaleCounter()
+        {
+            prescaleCounter = 0;
         }
     }
 }
