@@ -117,6 +117,7 @@ namespace PIC_Simulator
             refreshMemory();
             refreshSFR_b();
             resetTiming();
+            refreshIO();
         }
 
         public void refresh()
@@ -124,6 +125,7 @@ namespace PIC_Simulator
             refreshMemory();
             refreshSFRW();
             refreshSFR_b();
+            refreshIO();
         }
 
         //------------------------------------------------GUI------------------------------------------------------------------------
@@ -273,7 +275,38 @@ namespace PIC_Simulator
         #region I/O Ports
         public void refreshIO()
         {
+            if (memory.getBit(0x05, 0) == 1) { chckBPortAPin0.Checked = true; } else { chckBPortAPin0.Checked = false; }
+            if (memory.getBit(0x05, 1) == 1) { chckBPortAPin1.Checked = true; } else { chckBPortAPin1.Checked = false; }
+            if (memory.getBit(0x05, 2) == 1) { chckBPortAPin2.Checked = true; } else { chckBPortAPin2.Checked = false; }
+            if (memory.getBit(0x05, 3) == 1) { chckBPortAPin3.Checked = true; } else { chckBPortAPin3.Checked = false; }
+            if (memory.getBit(0x05, 4) == 1) { chckBPortAPin4.Checked = true; } else { chckBPortAPin4.Checked = false; }
 
+            if (memory.getBit(0x06, 0) == 1) { chckBPortBPin0.Checked = true; } else { chckBPortBPin0.Checked = false; }
+            if (memory.getBit(0x06, 1) == 1) { chckBPortBPin1.Checked = true; } else { chckBPortBPin1.Checked = false; }
+            if (memory.getBit(0x06, 2) == 1) { chckBPortBPin2.Checked = true; } else { chckBPortBPin2.Checked = false; }
+            if (memory.getBit(0x06, 3) == 1) { chckBPortBPin3.Checked = true; } else { chckBPortBPin3.Checked = false; }
+            if (memory.getBit(0x06, 4) == 1) { chckBPortBPin4.Checked = true; } else { chckBPortBPin4.Checked = false; }
+            if (memory.getBit(0x06, 5) == 1) { chckBPortBPin5.Checked = true; } else { chckBPortBPin5.Checked = false; }
+            if (memory.getBit(0x06, 6) == 1) { chckBPortBPin6.Checked = true; } else { chckBPortBPin6.Checked = false; }
+            if (memory.getBit(0x06, 7) == 1) { chckBPortBPin7.Checked = true; } else { chckBPortBPin7.Checked = false; }
+
+            int currentMemBank = memory.getCurrentMemoryBank();
+            memory.setMemoryBankTo(1);
+            if (memory.getBit(0x05, 0) == 1) { chckBPortATris0.Checked = true; } else { chckBPortATris0.Checked = false; }
+            if (memory.getBit(0x05, 1) == 1) { chckBPortATris1.Checked = true; } else { chckBPortATris1.Checked = false; }
+            if (memory.getBit(0x05, 2) == 1) { chckBPortATris2.Checked = true; } else { chckBPortATris2.Checked = false; }
+            if (memory.getBit(0x05, 3) == 1) { chckBPortATris3.Checked = true; } else { chckBPortATris3.Checked = false; }
+            if (memory.getBit(0x05, 4) == 1) { chckBPortATris4.Checked = true; } else { chckBPortATris4.Checked = false; }
+
+            if (memory.getBit(0x06, 0) == 1) { chckBPortBTris0.Checked = true; } else { chckBPortBTris0.Checked = false; }
+            if (memory.getBit(0x06, 1) == 1) { chckBPortBTris1.Checked = true; } else { chckBPortBTris1.Checked = false; }
+            if (memory.getBit(0x06, 2) == 1) { chckBPortBTris2.Checked = true; } else { chckBPortBTris2.Checked = false; }
+            if (memory.getBit(0x06, 3) == 1) { chckBPortBTris3.Checked = true; } else { chckBPortBTris3.Checked = false; }
+            if (memory.getBit(0x06, 4) == 1) { chckBPortBTris4.Checked = true; } else { chckBPortBTris4.Checked = false; }
+            if (memory.getBit(0x06, 5) == 1) { chckBPortBTris5.Checked = true; } else { chckBPortBTris5.Checked = false; }
+            if (memory.getBit(0x06, 6) == 1) { chckBPortBTris6.Checked = true; } else { chckBPortBTris6.Checked = false; }
+            if (memory.getBit(0x06, 7) == 1) { chckBPortBTris7.Checked = true; } else { chckBPortBTris7.Checked = false; }
+            memory.setMemoryBankTo(currentMemBank);
         }
 
         #region Port A
@@ -670,6 +703,7 @@ namespace PIC_Simulator
                 refreshSFR_b();
                 refreshSFRW();
                 refreshStack();
+                refreshIO();
             }
             else
             {
