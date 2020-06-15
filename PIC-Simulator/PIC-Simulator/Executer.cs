@@ -255,7 +255,7 @@ namespace PIC_Simulator
             int carryFlag = getFile(0x03) & 1;
             int workingBits = fileContent << 1;
             workingBits += carryFlag;
-            if ((workingBits & 0x100) == 1)
+            if ((workingBits & 0x100) != 0)
             {
                 carryFlag = 1;
             }
