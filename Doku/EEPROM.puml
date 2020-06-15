@@ -1,0 +1,12 @@
+@startuml
+class EEPROM {
+    - eeprom : int[]
+    - isStateMachineTriggered : bool = false
+    + writeToEEPROM() : void
+    + readFromEEPROM() : void
+    + setStateMachineTriggered() : void
+    - clearBit(bitAddress:int) : void
+    - <<async>> clearWriteBitSetInetrruptFlag() : Task<int>
+    - clearReadBitSetInetrruptFlag() : void
+}
+@enduml

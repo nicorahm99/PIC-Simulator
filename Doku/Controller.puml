@@ -1,0 +1,17 @@
+@startuml
+class Controller {
+    - prescaleCounter : int
+    - watchdog : int
+    breakPoints : List<int>
+    + Controller()
+    + step() : bool
+    + init() : void
+    - incTimer0() : void
+    + incTimer0ByExternalInput(isFallingEdge:bool) : void
+    + incTimer0RegardingPrescaler() : void
+    + incTimer0ByProgram() : void
+    + setBreakPoints(bPs:List<int>) : void
+    - resetWatchdog() : void
+    + resetPrescaleCounter() : void
+}
+@enduml

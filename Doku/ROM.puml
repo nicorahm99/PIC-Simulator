@@ -1,0 +1,9 @@
+@startuml
+class ROM {
+    - rom : int[]
+    + ROM()
+    + init() : void
+    + setRom(rom:List<int>) : void
+    + fetchCommand(address:int) : int
+}
+@enduml
