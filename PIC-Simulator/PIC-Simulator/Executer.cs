@@ -620,12 +620,12 @@ namespace PIC_Simulator
 
         private void pushPcToStack()
         {
-            GUI_Simu.memory.pushStack(GUI_Simu.memory.getFullPC());
+            GUI_Simu.stack.push(GUI_Simu.memory.getFullPC());
         }
 
         private void popStackToPc()
         {
-            GUI_Simu.memory.setFullPC(GUI_Simu.memory.popStack());
+            GUI_Simu.memory.setFullPC(GUI_Simu.stack.pop());
         }
 
         private bool isGreaterThan(int lower, int higher)

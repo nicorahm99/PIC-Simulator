@@ -64,6 +64,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Stack.cs" />
     <EmbeddedResource Include="GUI_Simu.resx">
       <DependentUpon>GUI_Simu.cs</DependentUpon>
     </EmbeddedResource>

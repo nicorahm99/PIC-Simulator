@@ -66,18 +66,13 @@ namespace PIC_Simulator
         public static readonly Controller controller = new Controller();
         public static readonly InterruptController interruptController = new InterruptController();
         public static readonly Prescaler prescaler = new Prescaler();
+        public static readonly Stack stack = new Stack();
         public static Dictionary<int, int> pcToLine = new Dictionary<int, int>();
         public static Dictionary<int, int> lineToPc = new Dictionary<int, int>();
 
 
-        string helpMsg = "DS PIC16F84/CR84 - Simulator" + Environment.NewLine + "Dominik Lange & Nico Rahm" + Environment.NewLine + "25.04.2020" + Environment.NewLine + "Version 1.0";
+        string helpMsg = "DS PIC16F84/CR84 - Simulator" + Environment.NewLine + "Dominik Lange & Nico Rahm" + Environment.NewLine + "15.06.2020" + Environment.NewLine + "Version 1.0";
 
-        private void initialisation()
-        {
-            initMemory();
-            refreshSFR_b();
-            refreshSFRW();
-        }
         #endregion
 
         #region windows
@@ -88,7 +83,10 @@ namespace PIC_Simulator
 
         private void GUI_Simu_load(object sender, EventArgs e)
         {
-            initialisation();
+            initMemory();
+            refreshSFR_b();
+            refreshSFRW();
+            refreshStack();
         }
 
         private void GUI_Simu_close(object sender, FormClosingEventArgs e)
@@ -101,6 +99,7 @@ namespace PIC_Simulator
         {
             memory.init();
             controller.init();
+            stack.init();
             refreshSFRW();
             refreshMemory();
             refreshSFR_b();
@@ -113,6 +112,7 @@ namespace PIC_Simulator
             controller.init();
             rom.init();
             parser.init();
+            stack.init();
             refreshSFRW();
             refreshMemory();
             refreshSFR_b();
@@ -248,6 +248,26 @@ namespace PIC_Simulator
             return access;
         }
 
+        #endregion
+
+        #region Stack
+        public void refreshStack()
+        {
+            int[] tmpStackArray = new int[8];
+            List<int> tmpStackList = stack.get();
+            for (int i = 0; i<tmpStackList.Count; i++)
+            {
+                tmpStackArray[i] = tmpStackList[i];
+            }
+            lblStck0.Text = tmpStackArray[0].ToString();
+            lblStck1.Text = tmpStackArray[1].ToString();
+            lblStck2.Text = tmpStackArray[2].ToString();
+            lblStck3.Text = tmpStackArray[3].ToString();
+            lblStck4.Text = tmpStackArray[4].ToString();
+            lblStck5.Text = tmpStackArray[5].ToString();
+            lblStck6.Text = tmpStackArray[6].ToString();
+            lblStck7.Text = tmpStackArray[7].ToString();
+        }
         #endregion
 
         #region I/O Ports
@@ -607,6 +627,7 @@ namespace PIC_Simulator
             {
                 MessageBox.Show(ex.ToString());
             }
+
             //set rom
             rom.setRom(parser.getRom());
             //view file in textbox
@@ -648,6 +669,7 @@ namespace PIC_Simulator
                 refreshMemory();
                 refreshSFR_b();
                 refreshSFRW();
+                refreshStack();
             }
             else
             {

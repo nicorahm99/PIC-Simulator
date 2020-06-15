@@ -190,27 +190,22 @@ namespace PIC_Simulator
             return 0;
         }
 
-        public int readStack()
-        {
-            return stack.Peek();
-        }
+        //public int readStack()
+        //{
+        //    return stack.Peek();
+        //}
 
-        public void pushStack(int item)
-        {
-            stack.Push(item);
-        }
+        //public void pushStack(int item)
+        //{
+        //    stack.Push(item);
+        //}
 
-        public int popStack()
-        {
-            int item = stack.Peek();
-            stack.Pop();
-            return item;
-        }
-
-        public Stack<int> getstack()
-        {
-            return stack;
-        }
+        //public int popStack()
+        //{
+        //    int item = stack.Peek();
+        //    stack.Pop();
+        //    return item;
+        //}
 
         public void incPC()
         {

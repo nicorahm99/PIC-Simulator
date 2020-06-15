@@ -158,6 +158,14 @@
             this.lblPinB = new System.Windows.Forms.Label();
             this.lblTrisB = new System.Windows.Forms.Label();
             this.grpBStack = new System.Windows.Forms.GroupBox();
+            this.lblStck1 = new System.Windows.Forms.Label();
+            this.lblStck2 = new System.Windows.Forms.Label();
+            this.lblStck3 = new System.Windows.Forms.Label();
+            this.lblStck4 = new System.Windows.Forms.Label();
+            this.lblStck5 = new System.Windows.Forms.Label();
+            this.lblStck6 = new System.Windows.Forms.Label();
+            this.lblStck7 = new System.Windows.Forms.Label();
+            this.lblStck0 = new System.Windows.Forms.Label();
             this.grpBSFRW.SuspendLayout();
             this.grpBProgramm.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -167,6 +175,7 @@
             this.grpBTiming.SuspendLayout();
             this.grpBPortA.SuspendLayout();
             this.grpBPortB.SuspendLayout();
+            this.grpBStack.SuspendLayout();
             this.SuspendLayout();
             // 
             // grpBSFRW
@@ -1504,12 +1513,92 @@
             // 
             // grpBStack
             // 
+            this.grpBStack.Controls.Add(this.lblStck1);
+            this.grpBStack.Controls.Add(this.lblStck2);
+            this.grpBStack.Controls.Add(this.lblStck3);
+            this.grpBStack.Controls.Add(this.lblStck4);
+            this.grpBStack.Controls.Add(this.lblStck5);
+            this.grpBStack.Controls.Add(this.lblStck6);
+            this.grpBStack.Controls.Add(this.lblStck7);
+            this.grpBStack.Controls.Add(this.lblStck0);
             this.grpBStack.Location = new System.Drawing.Point(747, 178);
             this.grpBStack.Name = "grpBStack";
             this.grpBStack.Size = new System.Drawing.Size(133, 144);
             this.grpBStack.TabIndex = 16;
             this.grpBStack.TabStop = false;
             this.grpBStack.Text = "Stack";
+            // 
+            // lblStck1
+            // 
+            this.lblStck1.AutoSize = true;
+            this.lblStck1.Location = new System.Drawing.Point(41, 103);
+            this.lblStck1.Name = "lblStck1";
+            this.lblStck1.Size = new System.Drawing.Size(13, 13);
+            this.lblStck1.TabIndex = 7;
+            this.lblStck1.Text = "0";
+            // 
+            // lblStck2
+            // 
+            this.lblStck2.AutoSize = true;
+            this.lblStck2.Location = new System.Drawing.Point(41, 90);
+            this.lblStck2.Name = "lblStck2";
+            this.lblStck2.Size = new System.Drawing.Size(13, 13);
+            this.lblStck2.TabIndex = 6;
+            this.lblStck2.Text = "0";
+            // 
+            // lblStck3
+            // 
+            this.lblStck3.AutoSize = true;
+            this.lblStck3.Location = new System.Drawing.Point(41, 77);
+            this.lblStck3.Name = "lblStck3";
+            this.lblStck3.Size = new System.Drawing.Size(13, 13);
+            this.lblStck3.TabIndex = 5;
+            this.lblStck3.Text = "0";
+            // 
+            // lblStck4
+            // 
+            this.lblStck4.AutoSize = true;
+            this.lblStck4.Location = new System.Drawing.Point(41, 64);
+            this.lblStck4.Name = "lblStck4";
+            this.lblStck4.Size = new System.Drawing.Size(13, 13);
+            this.lblStck4.TabIndex = 4;
+            this.lblStck4.Text = "0";
+            // 
+            // lblStck5
+            // 
+            this.lblStck5.AutoSize = true;
+            this.lblStck5.Location = new System.Drawing.Point(41, 51);
+            this.lblStck5.Name = "lblStck5";
+            this.lblStck5.Size = new System.Drawing.Size(13, 13);
+            this.lblStck5.TabIndex = 3;
+            this.lblStck5.Text = "0";
+            // 
+            // lblStck6
+            // 
+            this.lblStck6.AutoSize = true;
+            this.lblStck6.Location = new System.Drawing.Point(41, 38);
+            this.lblStck6.Name = "lblStck6";
+            this.lblStck6.Size = new System.Drawing.Size(13, 13);
+            this.lblStck6.TabIndex = 2;
+            this.lblStck6.Text = "0";
+            // 
+            // lblStck7
+            // 
+            this.lblStck7.AutoSize = true;
+            this.lblStck7.Location = new System.Drawing.Point(41, 25);
+            this.lblStck7.Name = "lblStck7";
+            this.lblStck7.Size = new System.Drawing.Size(13, 13);
+            this.lblStck7.TabIndex = 1;
+            this.lblStck7.Text = "0";
+            // 
+            // lblStck0
+            // 
+            this.lblStck0.AutoSize = true;
+            this.lblStck0.Location = new System.Drawing.Point(41, 116);
+            this.lblStck0.Name = "lblStck0";
+            this.lblStck0.Size = new System.Drawing.Size(13, 13);
+            this.lblStck0.TabIndex = 0;
+            this.lblStck0.Text = "0";
             // 
             // GUI_Simu
             // 
@@ -1545,6 +1634,8 @@
             this.grpBPortA.PerformLayout();
             this.grpBPortB.ResumeLayout(false);
             this.grpBPortB.PerformLayout();
+            this.grpBStack.ResumeLayout(false);
+            this.grpBStack.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1680,6 +1771,14 @@
         private System.Windows.Forms.CheckBox chckBPortBTris1;
         private System.Windows.Forms.ListView lVProgram;
         private System.Windows.Forms.GroupBox grpBStack;
+        private System.Windows.Forms.Label lblStck1;
+        private System.Windows.Forms.Label lblStck2;
+        private System.Windows.Forms.Label lblStck3;
+        private System.Windows.Forms.Label lblStck4;
+        private System.Windows.Forms.Label lblStck5;
+        private System.Windows.Forms.Label lblStck6;
+        private System.Windows.Forms.Label lblStck7;
+        private System.Windows.Forms.Label lblStck0;
     }
 }
 
