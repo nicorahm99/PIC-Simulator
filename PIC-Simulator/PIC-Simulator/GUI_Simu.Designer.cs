@@ -198,9 +198,9 @@
             this.grpBSFRW.Controls.Add(this.lblPCLinternVal);
             this.grpBSFRW.Controls.Add(this.lblStatusVal);
             this.grpBSFRW.Controls.Add(this.lblStatus);
-            this.grpBSFRW.Location = new System.Drawing.Point(842, 328);
+            this.grpBSFRW.Location = new System.Drawing.Point(782, 478);
             this.grpBSFRW.Name = "grpBSFRW";
-            this.grpBSFRW.Size = new System.Drawing.Size(132, 144);
+            this.grpBSFRW.Size = new System.Drawing.Size(151, 157);
             this.grpBSFRW.TabIndex = 0;
             this.grpBSFRW.TabStop = false;
             this.grpBSFRW.Text = "SFR + W";
@@ -208,7 +208,7 @@
             // lblTimer0Val
             // 
             this.lblTimer0Val.AutoSize = true;
-            this.lblTimer0Val.Location = new System.Drawing.Point(90, 127);
+            this.lblTimer0Val.Location = new System.Drawing.Point(97, 131);
             this.lblTimer0Val.Name = "lblTimer0Val";
             this.lblTimer0Val.Size = new System.Drawing.Size(19, 13);
             this.lblTimer0Val.TabIndex = 27;
@@ -217,7 +217,7 @@
             // lblWReg
             // 
             this.lblWReg.AutoSize = true;
-            this.lblWReg.Location = new System.Drawing.Point(6, 23);
+            this.lblWReg.Location = new System.Drawing.Point(22, 27);
             this.lblWReg.Name = "lblWReg";
             this.lblWReg.Size = new System.Drawing.Size(63, 13);
             this.lblWReg.TabIndex = 10;
@@ -226,7 +226,7 @@
             // lblTimer0
             // 
             this.lblTimer0.AutoSize = true;
-            this.lblTimer0.Location = new System.Drawing.Point(6, 127);
+            this.lblTimer0.Location = new System.Drawing.Point(22, 131);
             this.lblTimer0.Name = "lblTimer0";
             this.lblTimer0.Size = new System.Drawing.Size(42, 13);
             this.lblTimer0.TabIndex = 24;
@@ -235,7 +235,7 @@
             // lblVorteilerVal
             // 
             this.lblVorteilerVal.AutoSize = true;
-            this.lblVorteilerVal.Location = new System.Drawing.Point(90, 114);
+            this.lblVorteilerVal.Location = new System.Drawing.Point(97, 118);
             this.lblVorteilerVal.Name = "lblVorteilerVal";
             this.lblVorteilerVal.Size = new System.Drawing.Size(22, 13);
             this.lblVorteilerVal.TabIndex = 26;
@@ -244,7 +244,7 @@
             // lblWRegVal
             // 
             this.lblWRegVal.AutoSize = true;
-            this.lblWRegVal.Location = new System.Drawing.Point(91, 23);
+            this.lblWRegVal.Location = new System.Drawing.Point(98, 27);
             this.lblWRegVal.Name = "lblWRegVal";
             this.lblWRegVal.Size = new System.Drawing.Size(19, 13);
             this.lblWRegVal.TabIndex = 11;
@@ -253,7 +253,7 @@
             // lblOptionVal
             // 
             this.lblOptionVal.AutoSize = true;
-            this.lblOptionVal.Location = new System.Drawing.Point(90, 101);
+            this.lblOptionVal.Location = new System.Drawing.Point(97, 105);
             this.lblOptionVal.Name = "lblOptionVal";
             this.lblOptionVal.Size = new System.Drawing.Size(19, 13);
             this.lblOptionVal.TabIndex = 25;
@@ -262,7 +262,7 @@
             // lblVorteiler
             // 
             this.lblVorteiler.AutoSize = true;
-            this.lblVorteiler.Location = new System.Drawing.Point(6, 114);
+            this.lblVorteiler.Location = new System.Drawing.Point(22, 118);
             this.lblVorteiler.Name = "lblVorteiler";
             this.lblVorteiler.Size = new System.Drawing.Size(48, 13);
             this.lblVorteiler.TabIndex = 23;
@@ -271,7 +271,7 @@
             // lblPCL
             // 
             this.lblPCL.AutoSize = true;
-            this.lblPCL.Location = new System.Drawing.Point(6, 36);
+            this.lblPCL.Location = new System.Drawing.Point(22, 40);
             this.lblPCL.Name = "lblPCL";
             this.lblPCL.Size = new System.Drawing.Size(30, 13);
             this.lblPCL.TabIndex = 12;
@@ -280,7 +280,7 @@
             // lblPCLVal
             // 
             this.lblPCLVal.AutoSize = true;
-            this.lblPCLVal.Location = new System.Drawing.Point(91, 36);
+            this.lblPCLVal.Location = new System.Drawing.Point(98, 40);
             this.lblPCLVal.Name = "lblPCLVal";
             this.lblPCLVal.Size = new System.Drawing.Size(19, 13);
             this.lblPCLVal.TabIndex = 13;
@@ -289,7 +289,7 @@
             // lblPCLATH
             // 
             this.lblPCLATH.AutoSize = true;
-            this.lblPCLATH.Location = new System.Drawing.Point(6, 49);
+            this.lblPCLATH.Location = new System.Drawing.Point(22, 53);
             this.lblPCLATH.Name = "lblPCLATH";
             this.lblPCLATH.Size = new System.Drawing.Size(52, 13);
             this.lblPCLATH.TabIndex = 14;
@@ -298,7 +298,7 @@
             // lblOption
             // 
             this.lblOption.AutoSize = true;
-            this.lblOption.Location = new System.Drawing.Point(6, 101);
+            this.lblOption.Location = new System.Drawing.Point(22, 105);
             this.lblOption.Name = "lblOption";
             this.lblOption.Size = new System.Drawing.Size(41, 13);
             this.lblOption.TabIndex = 22;
@@ -307,7 +307,7 @@
             // lblPCLATHVal
             // 
             this.lblPCLATHVal.AutoSize = true;
-            this.lblPCLATHVal.Location = new System.Drawing.Point(91, 49);
+            this.lblPCLATHVal.Location = new System.Drawing.Point(98, 53);
             this.lblPCLATHVal.Name = "lblPCLATHVal";
             this.lblPCLATHVal.Size = new System.Drawing.Size(19, 13);
             this.lblPCLATHVal.TabIndex = 15;
@@ -316,7 +316,7 @@
             // lblFSRVal
             // 
             this.lblFSRVal.AutoSize = true;
-            this.lblFSRVal.Location = new System.Drawing.Point(91, 88);
+            this.lblFSRVal.Location = new System.Drawing.Point(98, 92);
             this.lblFSRVal.Name = "lblFSRVal";
             this.lblFSRVal.Size = new System.Drawing.Size(19, 13);
             this.lblFSRVal.TabIndex = 21;
@@ -325,7 +325,7 @@
             // lblPCLintern
             // 
             this.lblPCLintern.AutoSize = true;
-            this.lblPCLintern.Location = new System.Drawing.Point(6, 62);
+            this.lblPCLintern.Location = new System.Drawing.Point(22, 66);
             this.lblPCLintern.Name = "lblPCLintern";
             this.lblPCLintern.Size = new System.Drawing.Size(53, 13);
             this.lblPCLintern.TabIndex = 16;
@@ -334,7 +334,7 @@
             // lblFSR
             // 
             this.lblFSR.AutoSize = true;
-            this.lblFSR.Location = new System.Drawing.Point(6, 88);
+            this.lblFSR.Location = new System.Drawing.Point(22, 92);
             this.lblFSR.Name = "lblFSR";
             this.lblFSR.Size = new System.Drawing.Size(31, 13);
             this.lblFSR.TabIndex = 20;
@@ -343,7 +343,7 @@
             // lblPCLinternVal
             // 
             this.lblPCLinternVal.AutoSize = true;
-            this.lblPCLinternVal.Location = new System.Drawing.Point(91, 62);
+            this.lblPCLinternVal.Location = new System.Drawing.Point(98, 66);
             this.lblPCLinternVal.Name = "lblPCLinternVal";
             this.lblPCLinternVal.Size = new System.Drawing.Size(19, 13);
             this.lblPCLinternVal.TabIndex = 17;
@@ -352,7 +352,7 @@
             // lblStatusVal
             // 
             this.lblStatusVal.AutoSize = true;
-            this.lblStatusVal.Location = new System.Drawing.Point(91, 75);
+            this.lblStatusVal.Location = new System.Drawing.Point(98, 79);
             this.lblStatusVal.Name = "lblStatusVal";
             this.lblStatusVal.Size = new System.Drawing.Size(19, 13);
             this.lblStatusVal.TabIndex = 19;
@@ -361,7 +361,7 @@
             // lblStatus
             // 
             this.lblStatus.AutoSize = true;
-            this.lblStatus.Location = new System.Drawing.Point(6, 75);
+            this.lblStatus.Location = new System.Drawing.Point(22, 79);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(40, 13);
             this.lblStatus.TabIndex = 18;
@@ -372,7 +372,7 @@
             this.grpBProgramm.Controls.Add(this.lVProgram);
             this.grpBProgramm.Location = new System.Drawing.Point(5, 28);
             this.grpBProgramm.Name = "grpBProgramm";
-            this.grpBProgramm.Size = new System.Drawing.Size(736, 294);
+            this.grpBProgramm.Size = new System.Drawing.Size(796, 294);
             this.grpBProgramm.TabIndex = 1;
             this.grpBProgramm.TabStop = false;
             this.grpBProgramm.Text = "Programm";
@@ -387,7 +387,7 @@
             this.lVProgram.Location = new System.Drawing.Point(0, 19);
             this.lVProgram.MultiSelect = false;
             this.lVProgram.Name = "lVProgram";
-            this.lVProgram.Size = new System.Drawing.Size(736, 275);
+            this.lVProgram.Size = new System.Drawing.Size(796, 275);
             this.lVProgram.TabIndex = 9;
             this.lVProgram.UseCompatibleStateImageBehavior = false;
             this.lVProgram.View = System.Windows.Forms.View.Details;
@@ -401,7 +401,7 @@
             this.tSBtnHilfe});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(989, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(951, 25);
             this.toolStrip1.TabIndex = 2;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -453,7 +453,7 @@
             // btnStart
             // 
             this.btnStart.Enabled = false;
-            this.btnStart.Location = new System.Drawing.Point(6, 25);
+            this.btnStart.Location = new System.Drawing.Point(19, 18);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(75, 23);
             this.btnStart.TabIndex = 3;
@@ -464,7 +464,7 @@
             // btnStop
             // 
             this.btnStop.Enabled = false;
-            this.btnStop.Location = new System.Drawing.Point(6, 54);
+            this.btnStop.Location = new System.Drawing.Point(19, 47);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(75, 23);
             this.btnStop.TabIndex = 4;
@@ -475,7 +475,7 @@
             // btnReset
             // 
             this.btnReset.Enabled = false;
-            this.btnReset.Location = new System.Drawing.Point(6, 83);
+            this.btnReset.Location = new System.Drawing.Point(19, 105);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(75, 23);
             this.btnReset.TabIndex = 5;
@@ -486,7 +486,7 @@
             // btnStep
             // 
             this.btnStep.Enabled = false;
-            this.btnStep.Location = new System.Drawing.Point(6, 112);
+            this.btnStep.Location = new System.Drawing.Point(19, 76);
             this.btnStep.Name = "btnStep";
             this.btnStep.Size = new System.Drawing.Size(75, 23);
             this.btnStep.TabIndex = 6;
@@ -500,9 +500,9 @@
             this.grpBControls.Controls.Add(this.btnStart);
             this.grpBControls.Controls.Add(this.btnStep);
             this.grpBControls.Controls.Add(this.btnStop);
-            this.grpBControls.Location = new System.Drawing.Point(886, 28);
+            this.grpBControls.Location = new System.Drawing.Point(807, 178);
             this.grpBControls.Name = "grpBControls";
-            this.grpBControls.Size = new System.Drawing.Size(88, 144);
+            this.grpBControls.Size = new System.Drawing.Size(126, 144);
             this.grpBControls.TabIndex = 8;
             this.grpBControls.TabStop = false;
             this.grpBControls.Text = "Controls";
@@ -570,7 +570,7 @@
             // lblRIFVal
             // 
             this.lblRIFVal.AutoSize = true;
-            this.lblRIFVal.Location = new System.Drawing.Point(346, 114);
+            this.lblRIFVal.Location = new System.Drawing.Point(345, 114);
             this.lblRIFVal.Name = "lblRIFVal";
             this.lblRIFVal.Size = new System.Drawing.Size(13, 13);
             this.lblRIFVal.TabIndex = 59;
@@ -588,7 +588,7 @@
             // lblIFVal
             // 
             this.lblIFVal.AutoSize = true;
-            this.lblIFVal.Location = new System.Drawing.Point(305, 114);
+            this.lblIFVal.Location = new System.Drawing.Point(304, 114);
             this.lblIFVal.Name = "lblIFVal";
             this.lblIFVal.Size = new System.Drawing.Size(13, 13);
             this.lblIFVal.TabIndex = 57;
@@ -597,7 +597,7 @@
             // lblTIFVal
             // 
             this.lblTIFVal.AutoSize = true;
-            this.lblTIFVal.Location = new System.Drawing.Point(264, 114);
+            this.lblTIFVal.Location = new System.Drawing.Point(263, 114);
             this.lblTIFVal.Name = "lblTIFVal";
             this.lblTIFVal.Size = new System.Drawing.Size(13, 13);
             this.lblTIFVal.TabIndex = 58;
@@ -606,7 +606,7 @@
             // lblGIE
             // 
             this.lblGIE.AutoSize = true;
-            this.lblGIE.Location = new System.Drawing.Point(59, 101);
+            this.lblGIE.Location = new System.Drawing.Point(58, 101);
             this.lblGIE.Name = "lblGIE";
             this.lblGIE.Size = new System.Drawing.Size(25, 13);
             this.lblGIE.TabIndex = 44;
@@ -615,7 +615,7 @@
             // lblEIE
             // 
             this.lblEIE.AutoSize = true;
-            this.lblEIE.Location = new System.Drawing.Point(100, 101);
+            this.lblEIE.Location = new System.Drawing.Point(99, 101);
             this.lblEIE.Name = "lblEIE";
             this.lblEIE.Size = new System.Drawing.Size(24, 13);
             this.lblEIE.TabIndex = 45;
@@ -624,7 +624,7 @@
             // lblRIEVal
             // 
             this.lblRIEVal.AutoSize = true;
-            this.lblRIEVal.Location = new System.Drawing.Point(223, 114);
+            this.lblRIEVal.Location = new System.Drawing.Point(222, 114);
             this.lblRIEVal.Name = "lblRIEVal";
             this.lblRIEVal.Size = new System.Drawing.Size(13, 13);
             this.lblRIEVal.TabIndex = 56;
@@ -633,7 +633,7 @@
             // lblTIE
             // 
             this.lblTIE.AutoSize = true;
-            this.lblTIE.Location = new System.Drawing.Point(141, 101);
+            this.lblTIE.Location = new System.Drawing.Point(140, 101);
             this.lblTIE.Name = "lblTIE";
             this.lblTIE.Size = new System.Drawing.Size(24, 13);
             this.lblTIE.TabIndex = 46;
@@ -642,7 +642,7 @@
             // lblIEVal
             // 
             this.lblIEVal.AutoSize = true;
-            this.lblIEVal.Location = new System.Drawing.Point(182, 114);
+            this.lblIEVal.Location = new System.Drawing.Point(181, 114);
             this.lblIEVal.Name = "lblIEVal";
             this.lblIEVal.Size = new System.Drawing.Size(13, 13);
             this.lblIEVal.TabIndex = 55;
@@ -651,7 +651,7 @@
             // lblIE
             // 
             this.lblIE.AutoSize = true;
-            this.lblIE.Location = new System.Drawing.Point(182, 101);
+            this.lblIE.Location = new System.Drawing.Point(181, 101);
             this.lblIE.Name = "lblIE";
             this.lblIE.Size = new System.Drawing.Size(17, 13);
             this.lblIE.TabIndex = 47;
@@ -660,7 +660,7 @@
             // lblTIEVal
             // 
             this.lblTIEVal.AutoSize = true;
-            this.lblTIEVal.Location = new System.Drawing.Point(141, 114);
+            this.lblTIEVal.Location = new System.Drawing.Point(140, 114);
             this.lblTIEVal.Name = "lblTIEVal";
             this.lblTIEVal.Size = new System.Drawing.Size(13, 13);
             this.lblTIEVal.TabIndex = 54;
@@ -669,7 +669,7 @@
             // lblRIE
             // 
             this.lblRIE.AutoSize = true;
-            this.lblRIE.Location = new System.Drawing.Point(223, 101);
+            this.lblRIE.Location = new System.Drawing.Point(222, 101);
             this.lblRIE.Name = "lblRIE";
             this.lblRIE.Size = new System.Drawing.Size(25, 13);
             this.lblRIE.TabIndex = 48;
@@ -678,7 +678,7 @@
             // lblEIEVal
             // 
             this.lblEIEVal.AutoSize = true;
-            this.lblEIEVal.Location = new System.Drawing.Point(100, 114);
+            this.lblEIEVal.Location = new System.Drawing.Point(99, 114);
             this.lblEIEVal.Name = "lblEIEVal";
             this.lblEIEVal.Size = new System.Drawing.Size(13, 13);
             this.lblEIEVal.TabIndex = 53;
@@ -687,7 +687,7 @@
             // lblTIF
             // 
             this.lblTIF.AutoSize = true;
-            this.lblTIF.Location = new System.Drawing.Point(264, 101);
+            this.lblTIF.Location = new System.Drawing.Point(263, 101);
             this.lblTIF.Name = "lblTIF";
             this.lblTIF.Size = new System.Drawing.Size(23, 13);
             this.lblTIF.TabIndex = 49;
@@ -696,7 +696,7 @@
             // lblGIEVal
             // 
             this.lblGIEVal.AutoSize = true;
-            this.lblGIEVal.Location = new System.Drawing.Point(59, 114);
+            this.lblGIEVal.Location = new System.Drawing.Point(58, 114);
             this.lblGIEVal.Name = "lblGIEVal";
             this.lblGIEVal.Size = new System.Drawing.Size(13, 13);
             this.lblGIEVal.TabIndex = 52;
@@ -705,7 +705,7 @@
             // lblIF
             // 
             this.lblIF.AutoSize = true;
-            this.lblIF.Location = new System.Drawing.Point(305, 101);
+            this.lblIF.Location = new System.Drawing.Point(304, 101);
             this.lblIF.Name = "lblIF";
             this.lblIF.Size = new System.Drawing.Size(16, 13);
             this.lblIF.TabIndex = 50;
@@ -714,7 +714,7 @@
             // lblRIF
             // 
             this.lblRIF.AutoSize = true;
-            this.lblRIF.Location = new System.Drawing.Point(346, 101);
+            this.lblRIF.Location = new System.Drawing.Point(345, 101);
             this.lblRIF.Name = "lblRIF";
             this.lblRIF.Size = new System.Drawing.Size(24, 13);
             this.lblRIF.TabIndex = 51;
@@ -723,7 +723,7 @@
             // lblPS0Val
             // 
             this.lblPS0Val.AutoSize = true;
-            this.lblPS0Val.Location = new System.Drawing.Point(346, 75);
+            this.lblPS0Val.Location = new System.Drawing.Point(345, 75);
             this.lblPS0Val.Name = "lblPS0Val";
             this.lblPS0Val.Size = new System.Drawing.Size(13, 13);
             this.lblPS0Val.TabIndex = 42;
@@ -741,7 +741,7 @@
             // lblPS1Val
             // 
             this.lblPS1Val.AutoSize = true;
-            this.lblPS1Val.Location = new System.Drawing.Point(305, 75);
+            this.lblPS1Val.Location = new System.Drawing.Point(304, 75);
             this.lblPS1Val.Name = "lblPS1Val";
             this.lblPS1Val.Size = new System.Drawing.Size(13, 13);
             this.lblPS1Val.TabIndex = 40;
@@ -750,7 +750,7 @@
             // lblPS2Val
             // 
             this.lblPS2Val.AutoSize = true;
-            this.lblPS2Val.Location = new System.Drawing.Point(264, 75);
+            this.lblPS2Val.Location = new System.Drawing.Point(263, 75);
             this.lblPS2Val.Name = "lblPS2Val";
             this.lblPS2Val.Size = new System.Drawing.Size(13, 13);
             this.lblPS2Val.TabIndex = 41;
@@ -759,7 +759,7 @@
             // lblRPu
             // 
             this.lblRPu.AutoSize = true;
-            this.lblRPu.Location = new System.Drawing.Point(59, 62);
+            this.lblRPu.Location = new System.Drawing.Point(58, 62);
             this.lblRPu.Name = "lblRPu";
             this.lblRPu.Size = new System.Drawing.Size(28, 13);
             this.lblRPu.TabIndex = 27;
@@ -768,7 +768,7 @@
             // lblIEg
             // 
             this.lblIEg.AutoSize = true;
-            this.lblIEg.Location = new System.Drawing.Point(100, 62);
+            this.lblIEg.Location = new System.Drawing.Point(99, 62);
             this.lblIEg.Name = "lblIEg";
             this.lblIEg.Size = new System.Drawing.Size(23, 13);
             this.lblIEg.TabIndex = 28;
@@ -777,7 +777,7 @@
             // lblPSAVal
             // 
             this.lblPSAVal.AutoSize = true;
-            this.lblPSAVal.Location = new System.Drawing.Point(223, 75);
+            this.lblPSAVal.Location = new System.Drawing.Point(222, 75);
             this.lblPSAVal.Name = "lblPSAVal";
             this.lblPSAVal.Size = new System.Drawing.Size(13, 13);
             this.lblPSAVal.TabIndex = 39;
@@ -786,7 +786,7 @@
             // lblTCs
             // 
             this.lblTCs.AutoSize = true;
-            this.lblTCs.Location = new System.Drawing.Point(141, 62);
+            this.lblTCs.Location = new System.Drawing.Point(140, 62);
             this.lblTCs.Name = "lblTCs";
             this.lblTCs.Size = new System.Drawing.Size(26, 13);
             this.lblTCs.TabIndex = 29;
@@ -795,7 +795,7 @@
             // lblTSeVal
             // 
             this.lblTSeVal.AutoSize = true;
-            this.lblTSeVal.Location = new System.Drawing.Point(182, 75);
+            this.lblTSeVal.Location = new System.Drawing.Point(181, 75);
             this.lblTSeVal.Name = "lblTSeVal";
             this.lblTSeVal.Size = new System.Drawing.Size(13, 13);
             this.lblTSeVal.TabIndex = 38;
@@ -804,7 +804,7 @@
             // lblTSe
             // 
             this.lblTSe.AutoSize = true;
-            this.lblTSe.Location = new System.Drawing.Point(182, 62);
+            this.lblTSe.Location = new System.Drawing.Point(181, 62);
             this.lblTSe.Name = "lblTSe";
             this.lblTSe.Size = new System.Drawing.Size(27, 13);
             this.lblTSe.TabIndex = 30;
@@ -813,7 +813,7 @@
             // lblTCsVal
             // 
             this.lblTCsVal.AutoSize = true;
-            this.lblTCsVal.Location = new System.Drawing.Point(141, 75);
+            this.lblTCsVal.Location = new System.Drawing.Point(140, 75);
             this.lblTCsVal.Name = "lblTCsVal";
             this.lblTCsVal.Size = new System.Drawing.Size(13, 13);
             this.lblTCsVal.TabIndex = 37;
@@ -822,7 +822,7 @@
             // lblPSA
             // 
             this.lblPSA.AutoSize = true;
-            this.lblPSA.Location = new System.Drawing.Point(223, 62);
+            this.lblPSA.Location = new System.Drawing.Point(222, 62);
             this.lblPSA.Name = "lblPSA";
             this.lblPSA.Size = new System.Drawing.Size(28, 13);
             this.lblPSA.TabIndex = 31;
@@ -831,7 +831,7 @@
             // lblIEgVal
             // 
             this.lblIEgVal.AutoSize = true;
-            this.lblIEgVal.Location = new System.Drawing.Point(100, 75);
+            this.lblIEgVal.Location = new System.Drawing.Point(99, 75);
             this.lblIEgVal.Name = "lblIEgVal";
             this.lblIEgVal.Size = new System.Drawing.Size(13, 13);
             this.lblIEgVal.TabIndex = 36;
@@ -840,7 +840,7 @@
             // lblPS2
             // 
             this.lblPS2.AutoSize = true;
-            this.lblPS2.Location = new System.Drawing.Point(264, 62);
+            this.lblPS2.Location = new System.Drawing.Point(263, 62);
             this.lblPS2.Name = "lblPS2";
             this.lblPS2.Size = new System.Drawing.Size(27, 13);
             this.lblPS2.TabIndex = 32;
@@ -849,7 +849,7 @@
             // lblRPuVal
             // 
             this.lblRPuVal.AutoSize = true;
-            this.lblRPuVal.Location = new System.Drawing.Point(59, 75);
+            this.lblRPuVal.Location = new System.Drawing.Point(58, 75);
             this.lblRPuVal.Name = "lblRPuVal";
             this.lblRPuVal.Size = new System.Drawing.Size(13, 13);
             this.lblRPuVal.TabIndex = 35;
@@ -858,7 +858,7 @@
             // lblPS1
             // 
             this.lblPS1.AutoSize = true;
-            this.lblPS1.Location = new System.Drawing.Point(305, 62);
+            this.lblPS1.Location = new System.Drawing.Point(304, 62);
             this.lblPS1.Name = "lblPS1";
             this.lblPS1.Size = new System.Drawing.Size(27, 13);
             this.lblPS1.TabIndex = 33;
@@ -867,7 +867,7 @@
             // lblPS0
             // 
             this.lblPS0.AutoSize = true;
-            this.lblPS0.Location = new System.Drawing.Point(346, 62);
+            this.lblPS0.Location = new System.Drawing.Point(345, 62);
             this.lblPS0.Name = "lblPS0";
             this.lblPS0.Size = new System.Drawing.Size(27, 13);
             this.lblPS0.TabIndex = 34;
@@ -876,7 +876,7 @@
             // lblCVal
             // 
             this.lblCVal.AutoSize = true;
-            this.lblCVal.Location = new System.Drawing.Point(346, 36);
+            this.lblCVal.Location = new System.Drawing.Point(345, 36);
             this.lblCVal.Name = "lblCVal";
             this.lblCVal.Size = new System.Drawing.Size(13, 13);
             this.lblCVal.TabIndex = 25;
@@ -894,7 +894,7 @@
             // lblDCVal
             // 
             this.lblDCVal.AutoSize = true;
-            this.lblDCVal.Location = new System.Drawing.Point(305, 36);
+            this.lblDCVal.Location = new System.Drawing.Point(304, 36);
             this.lblDCVal.Name = "lblDCVal";
             this.lblDCVal.Size = new System.Drawing.Size(13, 13);
             this.lblDCVal.TabIndex = 23;
@@ -903,7 +903,7 @@
             // lblZVal
             // 
             this.lblZVal.AutoSize = true;
-            this.lblZVal.Location = new System.Drawing.Point(264, 36);
+            this.lblZVal.Location = new System.Drawing.Point(263, 36);
             this.lblZVal.Name = "lblZVal";
             this.lblZVal.Size = new System.Drawing.Size(13, 13);
             this.lblZVal.TabIndex = 24;
@@ -912,7 +912,7 @@
             // lblIRP
             // 
             this.lblIRP.AutoSize = true;
-            this.lblIRP.Location = new System.Drawing.Point(59, 23);
+            this.lblIRP.Location = new System.Drawing.Point(58, 23);
             this.lblIRP.Name = "lblIRP";
             this.lblIRP.Size = new System.Drawing.Size(25, 13);
             this.lblIRP.TabIndex = 10;
@@ -921,7 +921,7 @@
             // lblRP1
             // 
             this.lblRP1.AutoSize = true;
-            this.lblRP1.Location = new System.Drawing.Point(100, 23);
+            this.lblRP1.Location = new System.Drawing.Point(99, 23);
             this.lblRP1.Name = "lblRP1";
             this.lblRP1.Size = new System.Drawing.Size(28, 13);
             this.lblRP1.TabIndex = 11;
@@ -930,7 +930,7 @@
             // lblPDVal
             // 
             this.lblPDVal.AutoSize = true;
-            this.lblPDVal.Location = new System.Drawing.Point(223, 36);
+            this.lblPDVal.Location = new System.Drawing.Point(222, 36);
             this.lblPDVal.Name = "lblPDVal";
             this.lblPDVal.Size = new System.Drawing.Size(13, 13);
             this.lblPDVal.TabIndex = 22;
@@ -939,7 +939,7 @@
             // lblRP0
             // 
             this.lblRP0.AutoSize = true;
-            this.lblRP0.Location = new System.Drawing.Point(141, 23);
+            this.lblRP0.Location = new System.Drawing.Point(140, 23);
             this.lblRP0.Name = "lblRP0";
             this.lblRP0.Size = new System.Drawing.Size(28, 13);
             this.lblRP0.TabIndex = 12;
@@ -948,7 +948,7 @@
             // lblTOVal
             // 
             this.lblTOVal.AutoSize = true;
-            this.lblTOVal.Location = new System.Drawing.Point(182, 36);
+            this.lblTOVal.Location = new System.Drawing.Point(181, 36);
             this.lblTOVal.Name = "lblTOVal";
             this.lblTOVal.Size = new System.Drawing.Size(13, 13);
             this.lblTOVal.TabIndex = 21;
@@ -957,7 +957,7 @@
             // lblTO
             // 
             this.lblTO.AutoSize = true;
-            this.lblTO.Location = new System.Drawing.Point(182, 23);
+            this.lblTO.Location = new System.Drawing.Point(181, 23);
             this.lblTO.Name = "lblTO";
             this.lblTO.Size = new System.Drawing.Size(22, 13);
             this.lblTO.TabIndex = 13;
@@ -966,7 +966,7 @@
             // lblRP0Val
             // 
             this.lblRP0Val.AutoSize = true;
-            this.lblRP0Val.Location = new System.Drawing.Point(141, 36);
+            this.lblRP0Val.Location = new System.Drawing.Point(140, 36);
             this.lblRP0Val.Name = "lblRP0Val";
             this.lblRP0Val.Size = new System.Drawing.Size(13, 13);
             this.lblRP0Val.TabIndex = 20;
@@ -975,7 +975,7 @@
             // lblPD
             // 
             this.lblPD.AutoSize = true;
-            this.lblPD.Location = new System.Drawing.Point(223, 23);
+            this.lblPD.Location = new System.Drawing.Point(222, 23);
             this.lblPD.Name = "lblPD";
             this.lblPD.Size = new System.Drawing.Size(22, 13);
             this.lblPD.TabIndex = 14;
@@ -984,7 +984,7 @@
             // lblRP1Val
             // 
             this.lblRP1Val.AutoSize = true;
-            this.lblRP1Val.Location = new System.Drawing.Point(100, 36);
+            this.lblRP1Val.Location = new System.Drawing.Point(99, 36);
             this.lblRP1Val.Name = "lblRP1Val";
             this.lblRP1Val.Size = new System.Drawing.Size(13, 13);
             this.lblRP1Val.TabIndex = 19;
@@ -993,7 +993,7 @@
             // lblZ
             // 
             this.lblZ.AutoSize = true;
-            this.lblZ.Location = new System.Drawing.Point(264, 23);
+            this.lblZ.Location = new System.Drawing.Point(263, 23);
             this.lblZ.Name = "lblZ";
             this.lblZ.Size = new System.Drawing.Size(14, 13);
             this.lblZ.TabIndex = 15;
@@ -1002,7 +1002,7 @@
             // lblIRPVal
             // 
             this.lblIRPVal.AutoSize = true;
-            this.lblIRPVal.Location = new System.Drawing.Point(59, 36);
+            this.lblIRPVal.Location = new System.Drawing.Point(58, 36);
             this.lblIRPVal.Name = "lblIRPVal";
             this.lblIRPVal.Size = new System.Drawing.Size(13, 13);
             this.lblIRPVal.TabIndex = 18;
@@ -1011,7 +1011,7 @@
             // lblDC
             // 
             this.lblDC.AutoSize = true;
-            this.lblDC.Location = new System.Drawing.Point(305, 23);
+            this.lblDC.Location = new System.Drawing.Point(304, 23);
             this.lblDC.Name = "lblDC";
             this.lblDC.Size = new System.Drawing.Size(22, 13);
             this.lblDC.TabIndex = 16;
@@ -1020,7 +1020,7 @@
             // lblC
             // 
             this.lblC.AutoSize = true;
-            this.lblC.Location = new System.Drawing.Point(346, 23);
+            this.lblC.Location = new System.Drawing.Point(345, 23);
             this.lblC.Name = "lblC";
             this.lblC.Size = new System.Drawing.Size(14, 13);
             this.lblC.TabIndex = 17;
@@ -1059,9 +1059,9 @@
             this.grpBTiming.Controls.Add(this.chckBWatchdog);
             this.grpBTiming.Controls.Add(this.lblLaufztVal);
             this.grpBTiming.Controls.Add(this.lblLaufzt);
-            this.grpBTiming.Location = new System.Drawing.Point(747, 28);
+            this.grpBTiming.Location = new System.Drawing.Point(807, 28);
             this.grpBTiming.Name = "grpBTiming";
-            this.grpBTiming.Size = new System.Drawing.Size(133, 144);
+            this.grpBTiming.Size = new System.Drawing.Size(126, 144);
             this.grpBTiming.TabIndex = 12;
             this.grpBTiming.TabStop = false;
             this.grpBTiming.Text = "Timing";
@@ -1084,7 +1084,7 @@
             "16",
             "32",
             "64"});
-            this.cmbBQuarz.Location = new System.Drawing.Point(84, 43);
+            this.cmbBQuarz.Location = new System.Drawing.Point(84, 45);
             this.cmbBQuarz.Name = "cmbBQuarz";
             this.cmbBQuarz.Size = new System.Drawing.Size(39, 21);
             this.cmbBQuarz.TabIndex = 13;
@@ -1093,7 +1093,7 @@
             // lblWdogVal
             // 
             this.lblWdogVal.AutoSize = true;
-            this.lblWdogVal.Location = new System.Drawing.Point(81, 110);
+            this.lblWdogVal.Location = new System.Drawing.Point(81, 112);
             this.lblWdogVal.Name = "lblWdogVal";
             this.lblWdogVal.Size = new System.Drawing.Size(13, 13);
             this.lblWdogVal.TabIndex = 13;
@@ -1121,7 +1121,7 @@
             // lblLaufztVal
             // 
             this.lblLaufztVal.AutoSize = true;
-            this.lblLaufztVal.Location = new System.Drawing.Point(81, 23);
+            this.lblLaufztVal.Location = new System.Drawing.Point(81, 25);
             this.lblLaufztVal.Name = "lblLaufztVal";
             this.lblLaufztVal.Size = new System.Drawing.Size(13, 13);
             this.lblLaufztVal.TabIndex = 1;
@@ -1521,9 +1521,9 @@
             this.grpBStack.Controls.Add(this.lblStck6);
             this.grpBStack.Controls.Add(this.lblStck7);
             this.grpBStack.Controls.Add(this.lblStck0);
-            this.grpBStack.Location = new System.Drawing.Point(747, 178);
+            this.grpBStack.Location = new System.Drawing.Point(842, 328);
             this.grpBStack.Name = "grpBStack";
-            this.grpBStack.Size = new System.Drawing.Size(133, 144);
+            this.grpBStack.Size = new System.Drawing.Size(91, 144);
             this.grpBStack.TabIndex = 16;
             this.grpBStack.TabStop = false;
             this.grpBStack.Text = "Stack";
@@ -1604,7 +1604,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(989, 681);
+            this.ClientSize = new System.Drawing.Size(951, 651);
             this.Controls.Add(this.grpBStack);
             this.Controls.Add(this.grpBPortB);
             this.Controls.Add(this.grpBPortA);
