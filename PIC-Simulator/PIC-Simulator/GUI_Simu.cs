@@ -425,7 +425,7 @@ namespace PIC_Simulator
             lblFSRVal.Text = memAdrRes_getFile(0x04).ToString("X");
 
             lblOptionVal.Text = memAdrRes_getFile(0x81).ToString("X");
-            lblVorteilerVal.Text = "1 : " + prescaler.getPrescaler().ToString("X");
+            lblVorteilerVal.Text = "1 : " + prescaler.getPrescaler().ToString();
             lblTimer0Val.Text = memory.getTMR0().ToString("X");
         }
         #endregion
