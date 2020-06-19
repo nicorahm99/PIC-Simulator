@@ -310,7 +310,6 @@ namespace PIC_Simulator
             chckBPortAPin3.Checked = tmpPortA[3];
             chckBPortAPin4.Checked = tmpPortA[4];
 
-
             chckBPortBPin0.Checked = tmpPortB[0];
             chckBPortBPin1.Checked = tmpPortB[1];
             chckBPortBPin2.Checked = tmpPortB[2];
