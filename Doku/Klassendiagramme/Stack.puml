@@ -1,0 +1,12 @@
+@startuml
+class Stack {
+    - optionCounter : int = 0
+    - stack : List<int>
+    + init() : void
+    + push(pc:int) : void
+    + pop() : int
+    + peek() : int
+    + get() : List<int>
+    - CountertoIndex() : int
+}
+@enduml

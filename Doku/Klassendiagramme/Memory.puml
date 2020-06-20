@@ -1,0 +1,34 @@
+@startuml
+class Memory {
+    + Memory()
+    - memory : int[]
+    - wReg : int
+    - stack : Stack<int>
+    - OPTION : int
+    - TRISA : int
+    - TRISB : int
+    - EECON1 : int
+    - EECON2 : int
+    + init() : void
+    + setFile(fileAddress:int, value:int) : int
+    + getFile(fileAddress:int) : int
+    + getBit(fileadress:int, bitadress:int) : int
+    + setBit(reg:int, bit:int) : void
+    + clearBit(reg:int, bit:int) : void
+    + setWReg(value:int) : int
+    + getWReg() : int
+    + getStatusRP0() : int
+    + incPC() : void
+    - incPCLatch() : void
+    + getFullPC() : int
+    + setFullPC(value:int) : void
+    + getOptionRegister() : int
+    + getCurrentMemoryBank() : int
+    + setMemoryBankTo(value:int) : void
+    - setEECON1(value:int) : void
+    - setEECON2(value:int) : void
+    + requestAccess(reg:int, bit:int) : bool
+    + setTMR0(timer0:int) : void
+    + getTMR0() : int
+}
+@enduml

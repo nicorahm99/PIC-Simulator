@@ -1,0 +1,56 @@
+@startuml
+class Executer {
+    + executeCommand(command:Command) : void
+    - addWF(isResultWrittenToW:bool, fileAddress:int) : int
+    - andWF(isResultWrittenToW:bool, fileAddress:int) : int
+    - clrF(fileAddress:int) : int
+    - clrW() : int
+    - comF(isResultWrittenToW:bool, fileAddress:int) : int
+    - decF(isResultWrittenToW:bool, fileAddress:int) : int
+    - decFsZ(isResultWrittenToW:bool, fileAddress:int) : int
+    - incF(isResultWrittenToW:bool, fileAddress:int) : int
+    - incFsZ(isResultWrittenToW:bool, fileAddress:int) : int
+    - iOrWF(isResultWrittenToW:bool, fileAddress:int) : int
+    - movF(isResultWrittenToW:bool, fileAddress:int) : int
+    - movWF(fileAddress:int) : int
+    - rlF(isResultWrittenToW:bool, fileAddress:int) : int
+    - rrF(isResultWrittenToW:bool, fileAddress:int) : int
+    - subWF(isResultWrittenToW:bool, fileAddress:int) : int
+    - swapF(isResultWrittenToW:bool, fileAddress:int) : int
+    - xOrWF(isResultWrittenToW:bool, fileAddress:int) : int
+    - bcF(fileAddress:int, bitAddress:int) : int
+    - bsF(fileAddress:int, bitAddress:int) : int
+    - btFsc(fileAddress:int, bitAddress:int) : int
+    - btFss(fileAddress:int, bitAddress:int) : int
+    - addLW(literal:int) : int
+    - andLW(literal:int) : int
+    - call(address:int) : int
+    - clrWdT() : int
+    - _goto(address:int) : int
+    - iOrLW(literal:int) : int
+    - movLW(literal:int) : int
+    - retfIE() : int
+    - retLW(literal:int) : int
+    - _return() : int
+    - sleep() : int
+    - subLW(literal:int) : int
+    - xOrLW(literal:int) : int
+    - setZeroFlagTo(value:int) : void
+    - setZeroFlagIfNeeded(result:int) : void
+    - setCarryFlagTo(value:int) : void
+    - setCarryFlagIfNeeded(result:int) : void
+    - setDigitCarryFlagIfNeeded(result:int) : void
+    - setCarryFlagsForSub(result:int, fourBitResult:int) : void
+    - setCarryFlag() : void
+    - setDigitCarryFlagTo(value:int) : void
+    - setDigitCarryFlag() : void
+    - writeResultToRightDestination(result:int, isResultWrittenToW:bool, fileAddress:int) : int
+    - getWReg() : int
+    - getFile(fileAddress:int) : int
+    - pushPcToStack() : void
+    - popStackToPc() : void
+    - isGreaterThan(lower:int, higher:int) : bool
+    - isLessThan(higher:int, lower:int) : bool
+    + interruptOccured() : void
+}
+@enduml
