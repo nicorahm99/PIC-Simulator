@@ -23,7 +23,7 @@ namespace PIC_Simulator
         {
             GUI_Simu.interruptController.checkInterrupts();
             int pc = GUI_Simu.memory.getFullPC();
-            bool isInList = breakPoints.IndexOf(pc) != -1;
+            bool isInList = breakPoints.IndexOf(pc) != -1; //returns true if pc is in breakpoint-list
             if (isInList)
             {
                 return true;
