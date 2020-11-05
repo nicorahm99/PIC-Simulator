@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using PIC_Simulator;
 using System;
 using System.Collections.Generic;
@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace PIC_Simulator.Tests
 {
-    [TestClass()]
-    public class StackTests
+    [TestFixture()]
+    public class ROMTests
     {
-        [TestMethod()]
-        public void pushTest()
+        [Test()]
+        public void setRomTest()
         {
             Assert.Fail();
         }
