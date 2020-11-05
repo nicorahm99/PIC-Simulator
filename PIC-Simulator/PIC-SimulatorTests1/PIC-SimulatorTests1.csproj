@@ -65,6 +65,12 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PIC-Simulator\PIC-Simulator.csproj">
+      <Project>{E9BC3A3B-8002-424C-8994-7915B26CCE37}</Project>
+      <Name>PIC-Simulator</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
