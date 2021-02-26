@@ -125,11 +125,6 @@ namespace PIC_Simulator
                     addNameLiteralToResult(CommandNames.XORLW);
                     break;
             }
-
-            if (resultCommand.getCommandName() != CommandNames.ERROR)
-            {
-                return resultCommand;
-            }
             #endregion
 
             if (resultCommand.getCommandName() != CommandNames.ERROR) { return resultCommand; }
