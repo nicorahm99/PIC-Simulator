@@ -303,9 +303,5 @@ namespace PIC_Simulator
             return memory[1];
         }
 
-        static public int testReturnNum(int number)
-        {
-            return number;
-        }
     }
 }
