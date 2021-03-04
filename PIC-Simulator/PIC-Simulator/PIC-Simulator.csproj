@@ -46,6 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\CLRWDT.cs" />
+    <Compile Include="Commands\NOP.cs" />
     <Compile Include="Commands\XORLW.cs" />
     <Compile Include="Commands\SUBLW.cs" />
     <Compile Include="Commands\RETLW.cs" />

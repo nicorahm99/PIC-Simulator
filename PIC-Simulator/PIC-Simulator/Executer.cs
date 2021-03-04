@@ -4,6 +4,33 @@ namespace PIC_Simulator
 {
     public class Executer
     {
+        public Executer() { }
+
+        public void executeCommand(Command command)
+        {
+            command.execute();
+        }
+
+        private void pushPcToStack()
+        {
+            GUI_Simu.stack.push(GUI_Simu.memory.getFullPC());
+        }
+
+        public void interruptOccured()
+        {
+            pushPcToStack();
+            bcF(0xb, 7);
+            GUI_Simu.memory.setFullPC(4);
+        }
+
+        private int bcF(int fileAddress, int bitAddress)
+        {
+            int registerContent = GUI_Simu.memory.getFile(fileAddress);
+            registerContent &= ~(1 << bitAddress);
+            return GUI_Simu.memory.setFile(fileAddress, registerContent);
+        }
+
+        #region execute command old
         //public void executeCommand(Command command)
         //{
         //    switch (command.getCommandName())
@@ -117,6 +144,7 @@ namespace PIC_Simulator
         //            throw new Exception("Command not found");
         //    }
         //}
+        #endregion
 
         #region command functions
 
@@ -629,14 +657,6 @@ namespace PIC_Simulator
         //    if (higher < lower) return true;
         //    return false;
         //}
-
-        //public void interruptOccured()
-        //{
-        //    pushPcToStack();
-        //    bcF(0xb, 7);
-        //    GUI_Simu.memory.setFullPC(4);
-        //}
-
         #endregion
     }
 }

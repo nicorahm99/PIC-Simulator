@@ -13,7 +13,7 @@ namespace PIC_Simulator.Commands
             fileAddress = fAddress;
             bitAddress = bAddress;
         }
-        public void execute()
+        public override void execute()
         {
             int registerContent = GUI_Simu.memory.getFile(fileAddress);
             registerContent &= 1 << bitAddress;

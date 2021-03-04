@@ -12,7 +12,7 @@ namespace PIC_Simulator.Commands
         {
             fileAddress = fAddress;
         }
-        public void execute()
+        public override void execute()
         {
             int fileContent = getWReg();
             writeResultToRightDestination(fileContent, false, fileAddress);

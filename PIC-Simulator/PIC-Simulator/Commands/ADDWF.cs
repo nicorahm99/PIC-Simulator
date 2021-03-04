@@ -15,7 +15,7 @@ namespace PIC_Simulator.Commands
             fileAddress = fAddress;
             isResultWrittenToW = isResWritToW;
         }
-        public void execute()
+        public override void execute()
         {
             int wContent = GUI_Simu.memory.getWReg();
             int fileContent = GUI_Simu.memory.getFile(this.fileAddress);

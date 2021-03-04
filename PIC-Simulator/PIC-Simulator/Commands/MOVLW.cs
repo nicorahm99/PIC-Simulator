@@ -12,7 +12,7 @@ namespace PIC_Simulator.Commands
         {
             literal = k;
         }
-        public void execute()
+        public override void execute()
         {
             setZeroFlagIfNeeded(literal);
             writeResultToRightDestination(literal, true, 0);

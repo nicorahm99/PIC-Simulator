@@ -9,7 +9,7 @@ namespace PIC_Simulator.Commands
     class RETURN: Command
     {
         public RETURN() { return; }
-        public void execute()
+        public override void execute()
         {
             popStackToPc();
             GUI_Simu.controller.incTimer0ByProgram();

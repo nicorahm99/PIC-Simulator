@@ -15,7 +15,7 @@ namespace PIC_Simulator.Commands
             fileAddress = fAddress;
             isResultWrittenToW = isResWritToW;
         }
-        public void execute()
+        public override void execute()
         {
             int result = getFile(fileAddress) + 1;
             if (result > 255)

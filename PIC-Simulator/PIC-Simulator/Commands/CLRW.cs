@@ -9,7 +9,7 @@ namespace PIC_Simulator.Commands
     class CLRW: Command
     {
         public CLRW() { }
-        public void execute()
+        public override void execute()
         {
             writeResultToRightDestination(0, true, 0);
             setZeroFlagTo(1);

@@ -12,7 +12,7 @@ namespace PIC_Simulator.Commands
         {
             literal = k;
         }
-        public void execute()
+        public override void execute()
         {
             int wContent = getWReg();
             int result = literal - wContent;

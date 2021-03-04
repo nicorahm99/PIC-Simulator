@@ -9,7 +9,7 @@ namespace PIC_Simulator.Commands
     class RETFIE: Command
     {
         public RETFIE() { return; }
-        public void execute()
+        public override void execute()
         {
             setBit(0xb, 7);
             popStackToPc();

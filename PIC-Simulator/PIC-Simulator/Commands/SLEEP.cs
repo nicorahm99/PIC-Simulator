@@ -9,7 +9,7 @@ namespace PIC_Simulator.Commands
     class SLEEP: Command
     {
         public SLEEP() { return; }
-        public void execute()
+        public override void execute()
         {
             //00h → WDT,
             //0 → WDT prescaler,

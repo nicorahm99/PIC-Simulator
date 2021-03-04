@@ -13,7 +13,7 @@ namespace PIC_Simulator.Commands
         {
             targetAdress = adress;
         }
-        public void execute()
+        public override void execute()
         {
             GUI_Simu.stack.push(GUI_Simu.memory.getFullPC());
             _goto();

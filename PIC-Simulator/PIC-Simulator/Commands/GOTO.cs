@@ -13,7 +13,7 @@ namespace PIC_Simulator.Commands
         {
             targetAddress = address;
         }
-        public void execute()
+        public override void execute()
         {
             if (targetAddress == 0)
             {

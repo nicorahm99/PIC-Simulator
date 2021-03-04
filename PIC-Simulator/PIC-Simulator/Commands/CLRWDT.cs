@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace PIC_Simulator.Commands
 {
-    class CLRWD: Command
+    class CLRWDT: Command //todo
     {
-        public CLRWD() { }
-        public override void execute() {  } //todo
+        public CLRWDT() { }
+        
+        public override void execute() { }
     }
 }

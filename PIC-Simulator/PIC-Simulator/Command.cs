@@ -45,6 +45,8 @@ namespace PIC_Simulator
 
     public abstract class Command
     {
+        public abstract void execute();
+
         protected int fileAddress; // eaquals operand f
         public void setFileAddress(int value) { fileAddress = value; }
         public int getFileAddress() { return fileAddress; }

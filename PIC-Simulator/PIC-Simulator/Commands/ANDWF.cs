@@ -17,7 +17,7 @@ namespace PIC_Simulator.Commands
             isResultWrittenToW = isResWritToW;
         }
 
-        public void execute()
+        public override void execute()
         {
             int result = getWReg() & getFile(fileAddress);
             setZeroFlagIfNeeded(result);

@@ -1,5 +1,7 @@
-﻿using System;
+﻿using PIC_Simulator.Commands;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,237 +22,225 @@ namespace PIC_Simulator
         private const int returnCommand = 0x8;
         private const int sleepCommand = 0x63;
 
+        Command command;
+
         public Decoder(){}
 
         public Command decodeCommand(int commandCode)
         {
-            Command resultCommand = new Command();
-            resultCommand.setCommandName(CommandNames.ERROR);
+            if (isStaticCommand(commandCode)) { return command; }
 
-            if (isStaticCommand(commandCode) != CommandNames.ERROR)
-            {
-                resultCommand.setCommandName(isStaticCommand(commandCode));
-                return resultCommand;
-            }
+            if (is7BitMasked(commandCode)) { return command; }
 
-            #region 7 Bit masked Commands
+            if (is6BitMasked(commandCode)) { return command; }
 
-            switch (commandCode & sevenBitMask)
-            {
-                case 0x180:
-                    addNameFileToResult(CommandNames.CLRF);
-                    break;
+            if (is5BitMasked(commandCode)) { return command; }
 
-                case 0x100:
-                    resultCommand.setCommandName(CommandNames.CLRW);
-                    break;
+            if (is4BitMasked(commandCode)) { return command; }
 
-                case 0x80:
-                    addNameFileToResult(CommandNames.MOVWF);
-                    break;
-            }
-            #endregion
-
-            if (resultCommand.getCommandName() != CommandNames.ERROR) { return resultCommand; }
-
-            #region 6 Bit Masked Commands
-
-            switch (commandCode & sixBitMask)
-            {
-                case 0x700:
-                    addNameDestAddressToResult(CommandNames.ADDWF);
-                    break;
-
-                case 0x500:
-                    addNameDestAddressToResult(CommandNames.ANDWF);
-                    break;
-
-                case 0x900:
-                    addNameDestAddressToResult(CommandNames.COMF);
-                    break;
-
-                case 0x300:
-                    addNameDestAddressToResult(CommandNames.DECF);
-                    break;
-
-                case 0xb00:
-                    addNameDestAddressToResult(CommandNames.DECFSZ);
-                    break;
-
-                case 0xa00:
-                    addNameDestAddressToResult(CommandNames.INCF);
-                    break;
-
-                case 0xf00:
-                    addNameDestAddressToResult(CommandNames.INCFSZ);
-                    break;
-
-                case 0x400:
-                    addNameDestAddressToResult(CommandNames.IORWF);
-                    break;
-
-                case 0x800:
-                    addNameDestAddressToResult(CommandNames.MOVF);
-                    break;
-
-                case 0xd00:
-                    addNameDestAddressToResult(CommandNames.RLF);
-                    break;
-
-                case 0xc00:
-                    addNameDestAddressToResult(CommandNames.RRF);
-                    break;
-
-                case 0x200:
-                    addNameDestAddressToResult(CommandNames.SUBWF);
-                    break;
-
-                case 0xe00:
-                    addNameDestAddressToResult(CommandNames.SWAPF);
-                    break;
-
-                case 0x600:
-                    addNameDestAddressToResult(CommandNames.XORWF);
-                    break;
-
-                case 0x3900:
-                    addNameLiteralToResult(CommandNames.ANDLW);
-                    break;
-
-                case 0x3800:
-                    addNameLiteralToResult(CommandNames.IORLW);
-                    break;
-
-                case 0x3a00:
-                    addNameLiteralToResult(CommandNames.XORLW);
-                    break;
-            }
-            #endregion
-
-            if (resultCommand.getCommandName() != CommandNames.ERROR) { return resultCommand; }
-
-            #region 5 Bit Masked Commands
-
-            switch (commandCode & fiveBitMask) 
-            {
-                case 0x3e00:
-                    addNameLiteralToResult(CommandNames.ADDLW);
-                    break;
-
-                case 0x3c00:
-                    addNameLiteralToResult(CommandNames.SUBLW);
-                    break;
-            }
-            #endregion
-
-            if (resultCommand.getCommandName() != CommandNames.ERROR) { return resultCommand; }
-
-            #region 4 Bit Masked Commands
-            switch (commandCode & fourBitMask)
-            {
-                case 0x1000:
-                    addNameBitaddrFileaddrToResult(CommandNames.BCF);
-                    break;
-
-                case 0x1400:
-                    addNameBitaddrFileaddrToResult(CommandNames.BSF);
-                    break;
-
-                case 0x1800:
-                    addNameBitaddrFileaddrToResult(CommandNames.BTFSC);
-                    break;
-
-                case 0x1c00:
-                    addNameBitaddrFileaddrToResult(CommandNames.BTFSS);
-                    break;
-
-                case 0x3000:
-                    addNameLiteralToResult(CommandNames.MOVLW);
-                    break;
-
-                case 0x3400:
-                    addNameLiteralToResult(CommandNames.RETLW);
-                    break;
-            }
-            #endregion
-
-            if (resultCommand.getCommandName() != CommandNames.ERROR) { return resultCommand; }
-
-            #region 3 Bit Masked Commands
-            switch (commandCode & threeBitMask)
-            {
-                case 0x2000:
-                    resultCommand.setCommandName(CommandNames.CALL);
-                    resultCommand.setLiteral(extractJumpAddress(commandCode));
-                    break;
-
-                case 0x2800:
-                    resultCommand.setCommandName(CommandNames.GOTO);
-                    resultCommand.setLiteral(extractJumpAddress(commandCode));
-                    break;
-            }
-            #endregion
-
-            return resultCommand;
-
-            #region Help functions
-            void addNameDestAddressToResult(CommandNames commandName)
-            {
-                resultCommand.setCommandName(commandName);
-                resultCommand.setDestinationSelect(isResultWrittenToW(commandCode));
-                resultCommand.setFileAddress(extractFileAddress(commandCode));
-            }
-
-            void addNameBitaddrFileaddrToResult(CommandNames commandName)
-            {
-                resultCommand.setCommandName(commandName);
-                resultCommand.setBitAddress(extractBitAddress(commandCode));
-                resultCommand.setFileAddress(extractFileAddress(commandCode));
-            }
-
-            void addNameFileToResult(CommandNames commandName)
-            {
-                resultCommand.setCommandName(commandName);
-                resultCommand.setFileAddress(extractFileAddress(commandCode));
-            }
-
-            void addNameLiteralToResult(CommandNames commandName)
-            {
-                resultCommand.setCommandName(commandName);
-                resultCommand.setLiteral(extractLiteral(commandCode));
-            }
-            #endregion
+            if (is3BitMasked(commandCode)) { return command; }
+            
+            return command; //should never be reached --> command undefined
         }
 
-        private CommandNames isStaticCommand(int commandCode)
+
+        #region Generate Command Instance
+        private bool isStaticCommand(int commandCode)
         {
-            CommandNames commandName = CommandNames.ERROR;
             
             switch (commandCode)
             {
                 case clrwdtCommand:
-                    commandName = CommandNames.CLRWDT;
-                    break;
+                    command = new CLRWDT(); //todo
+                    return true;
                 case retfieCommand:
-                    commandName = CommandNames.RETFIE;
-                    break;
+                    command = new RETFIE();
+                    return true;
                 case returnCommand:
-                    commandName = CommandNames.RETURN;
-                    break;
+                    command = new RETURN();
+                    return true;
                 case sleepCommand:
-                    commandName = CommandNames.SLEEP;
-                    break;
+                    command = new SLEEP();
+                    return true;
                 case 96:
                 case 64:
                 case 32:
                 case 0:
-                    commandName = CommandNames.NOP;
-                    break;
+                    command = new NOP();
+                    return true;
             }
+            return false;
+        }
 
-            return commandName;
+        private bool is7BitMasked(int commandCode)
+        {
+            int fileAddress;
+            switch (commandCode & sevenBitMask)
+            {
+                case 0x180:
+                    fileAddress = extractFileAddress(commandCode);
+                    command = new CLRF(fileAddress);
+                    return true;
+
+                case 0x100:
+                    command = new CLRW();
+                    return true;
+
+                case 0x80:
+                    fileAddress = extractFileAddress(commandCode);
+                    command = new MOVWF(fileAddress);
+                    return true;
+            }
+            return false;
         }
         
+        private bool is6BitMasked(int commandCode)
+        {
+            bool isWrittenIntoW = isResultWrittenToW(commandCode);
+            int fileAddress = extractFileAddress(commandCode);
+            int literal = extractLiteral(commandCode);
+            switch (commandCode & sixBitMask)
+            {
+                case 0x700:
+                    command = new ADDWF(isWrittenIntoW, fileAddress);
+                    return true;
+
+                case 0x500:
+                    command = new ANDWF(isWrittenIntoW, fileAddress);
+                    return true; ;
+
+                case 0x900:
+                    command = new COMF(isWrittenIntoW, fileAddress);
+                    return true; ;
+
+                case 0x300:
+                    command = new DECF(isWrittenIntoW, fileAddress);
+                    return true; ;
+
+                case 0xb00:
+                    command = new DECFSZ(isWrittenIntoW, fileAddress);
+                    return true; ;
+
+                case 0xa00:
+                    command = new INCF(isWrittenIntoW, fileAddress);
+                    return true; ;
+
+                case 0xf00:
+                    command = new INCFSZ(isWrittenIntoW, fileAddress);
+                    return true; ;
+
+                case 0x400:
+                    command = new IORWF(isWrittenIntoW, fileAddress);
+                    return true; ;
+
+                case 0x800:
+                    command = new MOVF(isWrittenIntoW, fileAddress);
+                    return true; ;
+
+                case 0xd00:
+                    command = new RLF(isWrittenIntoW, fileAddress);
+                    return true; ;
+
+                case 0xc00:
+                    command = new RRF(isWrittenIntoW, fileAddress);
+                    return true; ;
+
+                case 0x200:
+                    command = new SUBWF(isWrittenIntoW, fileAddress);
+                    return true; ;
+
+                case 0xe00:
+                    command = new SWAPF(isWrittenIntoW, fileAddress);
+                    return true; ;
+
+                case 0x600:
+                    command = new XORWF(isWrittenIntoW, fileAddress);
+                    return true; ;
+
+                case 0x3900:
+                    command = new ANDLW(literal);
+                    return true; ;
+
+                case 0x3800:
+                    command = new IORLW(literal);
+                    return true; ;
+
+                case 0x3a00:
+                    command = new XORLW(literal);
+                    return true; ;
+            }
+            return false;
+        }
+
+        private bool is5BitMasked(int commandCode)
+        {
+            int literal = extractLiteral(commandCode);
+            switch (commandCode & fiveBitMask)
+            {
+                case 0x3e00:
+                    command = new ADDLW(literal);
+                    return true;
+
+                case 0x3c00:
+                    command = new SUBLW(literal);
+                    return true;
+            }
+            return false;
+        }
+
+        private bool is4BitMasked(int commandCode)
+        {
+            int bitAddress = extractBitAddress(commandCode);
+            int fileAddress = extractFileAddress(commandCode);
+            int literal = extractLiteral(commandCode);
+            switch (commandCode & fourBitMask)
+            {
+                case 0x1000:
+                    command = new BCF(fileAddress, bitAddress);
+                    return true;
+
+                case 0x1400:
+                    command = new BSF(fileAddress, bitAddress);
+                    return true;
+
+                case 0x1800:
+                    command = new BTFSC(fileAddress, bitAddress);
+                    return true;
+
+                case 0x1c00:
+                    command = new BTFSS(fileAddress, bitAddress);
+                    return true;
+
+                case 0x3000:
+                    command = new MOVLW(literal);
+                    return true;
+
+                case 0x3400:
+                    command = new RETLW(literal);
+                    return true;
+            }
+            return false;
+        }
+
+        private bool is3BitMasked(int commandCode)
+        {
+            int jumpAddress = extractJumpAddress(commandCode);
+            switch (commandCode & threeBitMask)
+            {
+                case 0x2000:
+                    command = new CALL(jumpAddress);
+                    return true;
+
+                case 0x2800:
+                    command = new GOTO(jumpAddress);
+                    return true;
+            }
+            return false;
+        }
+        #endregion
+
+
+        #region Help functions
         private int extractFileAddress(int commandCode)
         {
             return commandCode & 0x7f;
@@ -275,5 +265,6 @@ namespace PIC_Simulator
         {
             return commandCode & 0xff;
         }
+        #endregion
     }
 }
