@@ -14,8 +14,6 @@ namespace PIC_Simulator
 
         private int wReg;
 
-        private Stack<int> stack = new Stack<int>();
-
         #region overloaded special function Register on BANK 1
         private int OPTION;
         private int TRISA;
