@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Moq;
 
 namespace PIC_Simulator.Tests
 {
@@ -186,6 +187,7 @@ namespace PIC_Simulator.Tests
             //act 
             classUnderTest.reset();
 
+            Console.WriteLine(classUnderTest.getOptionRegister());
             //assert
             Assert.That(classUnderTest.getOptionRegister().Equals(0));
         }
@@ -211,11 +213,11 @@ namespace PIC_Simulator.Tests
 
             //act
             classUnderTest.setMemoryBankTo(1);
-            classUnderTest.setBit(PORT_A, 0);
+            classUnderTest.setBit(PORT_A, 1);
             classUnderTest.setMemoryBankTo(0);
 
             //assert
-            Assert.That(classUnderTest.requestAccess(PORT_A,0).Equals(true));
+            Assert.That(classUnderTest.requestAccess(PORT_A,0).Equals(false));
         }
 
         [Test()]
@@ -247,7 +249,9 @@ namespace PIC_Simulator.Tests
 
         private Memory getClassUnderTest()
         {
-            return new Memory();
+            Memory memory = new Memory();
+            memory.init(new Controller(), new InterruptController(), new EEPROM());
+            return memory;
         }
     }
 }
