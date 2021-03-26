@@ -8,21 +8,21 @@ namespace PIC_Simulator
 {
     public class Memory
     {
-        public Memory() { init(); }
-        private int[] memory; // addresses from 0x0c to 0x4f /-/ 0x8c to 0xcf
+        public Memory() 
+        {
+            reset();        
+        }
+        
+        public void init(Controller controller, InterruptController interruptController, EEPROM eeprom)
+        {
+            this.controller = controller;
+            this.interruptController = interruptController;
+            this.eeprom = eeprom;
 
+            this.reset();
+        }
 
-        private int wReg;
-
-        #region overloaded special function Register on BANK 1
-        private int OPTION;
-        private int TRISA;
-        private int TRISB;
-        private int EECON1;
-        private int EECON2;
-        #endregion
-
-        public void init()
+        public void reset()
         {
             memory = new int[81];
             wReg = 0;
@@ -38,6 +38,23 @@ namespace PIC_Simulator
             setFile(0x6, 0xff);
             setMemoryBankTo(0);
         }
+
+        private Controller controller;
+        private InterruptController interruptController;
+        private EEPROM eeprom;
+
+
+        private int[] memory; // addresses from 0x0c to 0x4f /-/ 0x8c to 0xcf
+
+        private int wReg;
+
+        #region overloaded special function Register on BANK 1
+        private int OPTION;
+        private int TRISA;
+        private int TRISB;
+        private int EECON1;
+        private int EECON2;
+        #endregion
 
         #region file access
         public int setFile(int fileAddress, int value)
@@ -135,16 +152,18 @@ namespace PIC_Simulator
             {
                 if (reg == 5 && bit == 4)
                 {
-                    GUI_Simu.controller.incTimer0ByExternalInput(false);
+                    
+                    
+                    controller.incTimer0ByExternalInput(false);
                 }
                 if (reg == 6 && bit == 0)
                 {
-                    GUI_Simu.interruptController.onRB0Changed(false);
+                    interruptController.onRB0Changed(false);
                 }
 
                 if (reg == 6 && (bit == 4 || bit == 5 || bit == 6 || bit == 7))
                 {
-                    GUI_Simu.interruptController.onRB4TO7Changed();
+                    interruptController.onRB4TO7Changed();
                 }
                 int file = getFile(reg);
                 int newFile = file + Convert.ToInt16(Math.Pow(2, bit));
@@ -158,15 +177,15 @@ namespace PIC_Simulator
             {
                 if (reg == 5 && bit == 4)
                 {
-                    GUI_Simu.controller.incTimer0ByExternalInput(true);
+                    controller.incTimer0ByExternalInput(true);
                 }
                 if (reg == 6 && bit == 0)
                 {
-                    GUI_Simu.interruptController.onRB0Changed(true);
+                    interruptController.onRB0Changed(true);
                 }
                 if (reg == 6 && (bit == 4 || bit == 5 || bit == 6 || bit == 7))
                 {
-                    GUI_Simu.interruptController.onRB4TO7Changed();
+                    interruptController.onRB4TO7Changed();
                 }
                 int file = getFile(reg);
                 int newfile = file - Convert.ToInt16(Math.Pow(2, bit));
@@ -256,11 +275,11 @@ namespace PIC_Simulator
         {
             if ((value & 0x2) != 0 && (value & 0x4) != 0)
             {
-                GUI_Simu.eeprom.writeToEEPROM();
+                eeprom.writeToEEPROM();
             }
             else if ((value & 0x1) != 0)
             {
-                GUI_Simu.eeprom.readFromEEPROM();
+                eeprom.readFromEEPROM();
             }
             EECON1 = value;
         }
@@ -269,7 +288,7 @@ namespace PIC_Simulator
         {
             if (EECON2 == 0x55 && value == 0xaa)
             {
-                GUI_Simu.eeprom.setStateMachineTriggered();
+                eeprom.setStateMachineTriggered();
             }
             EECON2 = value;
         }
@@ -291,7 +310,7 @@ namespace PIC_Simulator
         public void setTMR0(int timer0)
         {
            memory[1] = timer0;
-           GUI_Simu.controller.resetPrescaleCounter();
+           controller.resetPrescaleCounter();
         }
         #endregion
 

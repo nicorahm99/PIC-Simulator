@@ -8,6 +8,13 @@ namespace PIC_Simulator
 {
     public class Prescaler
     {
+        private Memory memory;
+
+        public void init(Memory memory)
+        {
+            this.memory = memory;
+        }
+
         public int getPrescaler()
         {
             int optionFile = getOptionFile(); // get the option file
@@ -69,7 +76,7 @@ namespace PIC_Simulator
 
         private int getOptionFile()
         {
-            return GUI_Simu.memory.getOptionRegister();
+            return memory.getOptionRegister();
         }
     }
 }

@@ -8,9 +8,10 @@ namespace PIC_Simulator.Commands
 {
     class SUBLW : Command
     {
-        public SUBLW(int k)
+        public SUBLW(int k, Memory memory)
         {
             literal = k;
+            this.memory = memory;
         }
         public override void execute()
         {

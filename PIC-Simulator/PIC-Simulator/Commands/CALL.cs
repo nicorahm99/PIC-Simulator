@@ -9,13 +9,16 @@ namespace PIC_Simulator.Commands
     class CALL: Command
     {
         int targetAdress;
-        public CALL(int adress)
+        public CALL(int adress, Stack stack, Memory memory, Controller controller)
         {
             targetAdress = adress;
+            this.stack = stack;
+            this.memory = memory;
+            this.controller = controller;
         }
         public override void execute()
         {
-            GUI_Simu.stack.push(GUI_Simu.memory.getFullPC());
+            stack.push(memory.getFullPC());
             _goto();
         }
 
@@ -23,13 +26,13 @@ namespace PIC_Simulator.Commands
         {
             if (targetAdress == 0)
             {
-                GUI_Simu.memory.setFullPC(1023);
+                memory.setFullPC(1023);
             }
             else
             {
-                GUI_Simu.memory.setFullPC(targetAdress - 1);
+                memory.setFullPC(targetAdress - 1);
             }
-            GUI_Simu.controller.incTimer0ByProgram();
+            controller.incTimer0ByProgram();
         }
     }
 }

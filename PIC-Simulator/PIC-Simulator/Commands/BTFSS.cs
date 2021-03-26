@@ -8,19 +8,21 @@ namespace PIC_Simulator.Commands
 {
     class BTFSS : Command
     {
-        public BTFSS(int fAddress, int bAddress)
+        public BTFSS(int fAddress, int bAddress, Memory memory, Controller controller)
         {
             fileAddress = fAddress;
             bitAddress = bAddress;
+            this.memory = memory;
+            this.controller = controller;
         }
         public override void execute()
         {
-            int registerContent = GUI_Simu.memory.getFile(fileAddress);
+            int registerContent = memory.getFile(fileAddress);
             registerContent &= 1 << bitAddress;
             if (registerContent != 0)
             {
-                GUI_Simu.memory.incPC();
-                GUI_Simu.controller.incTimer0ByProgram();
+                memory.incPC();
+                controller.incTimer0ByProgram();
             }
         }
     }

@@ -10,10 +10,12 @@ namespace PIC_Simulator.Commands
     {
         bool isResultWrittenToW;
 
-        public DECFSZ(bool isResWritToW, int fAddress)
+        public DECFSZ(bool isResWritToW, int fAddress, Memory memory, Controller controller)
         {
             fileAddress = fAddress;
             isResultWrittenToW = isResWritToW;
+            this.memory = memory;
+            this.controller = controller;
         }
         public override void execute()
         {
@@ -23,8 +25,8 @@ namespace PIC_Simulator.Commands
             writeResultToRightDestination(result, isResultWrittenToW, fileAddress);
             if (result == 0)
             {
-                GUI_Simu.memory.incPC();
-                GUI_Simu.controller.incTimer0ByProgram();
+                memory.incPC();
+                controller.incTimer0ByProgram();
             }
         }
     }

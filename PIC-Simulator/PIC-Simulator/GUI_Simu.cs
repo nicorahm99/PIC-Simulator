@@ -57,18 +57,21 @@ namespace PIC_Simulator
 
         #region init
 
-        public static readonly Parser parser = new Parser();
-        public static readonly Decoder decoder = new Decoder();
-        public static readonly Executer executer = new Executer();
-        public static readonly ROM rom = new ROM();
-        public static readonly Memory memory = new Memory();
-        public static readonly EEPROM eeprom = new EEPROM();
-        public static readonly Controller controller = new Controller();
-        public static readonly InterruptController interruptController = new InterruptController();
-        public static readonly Prescaler prescaler = new Prescaler();
-        public static readonly Stack stack = new Stack();
         public static Dictionary<int, int> pcToLine = new Dictionary<int, int>();
         public static Dictionary<int, int> lineToPc = new Dictionary<int, int>();
+
+
+        private Stack stack = new Stack();
+        private Decoder decoder = new Decoder();
+        private ROM rom = new ROM();
+
+        private Prescaler prescaler = new Prescaler();
+        private Memory memory = new Memory();
+        private EEPROM EEPROM = new EEPROM();
+        private InterruptController interruptController = new InterruptController();
+        private Executer executer = new Executer();
+        private Controller controller = new Controller();
+        private Parser parser = new Parser();
 
 
         string helpMsg = "DS PIC16F84/CR84 - Simulator" + Environment.NewLine + "Dominik Lange & Nico Rahm" + Environment.NewLine + "15.06.2020" + Environment.NewLine + "Version 1.0";
@@ -83,6 +86,7 @@ namespace PIC_Simulator
 
         private void GUI_Simu_load(object sender, EventArgs e)
         {
+            initComponents();
             initMemory();
             refreshSFR_b();
             refreshSFRW();
@@ -97,8 +101,8 @@ namespace PIC_Simulator
 
         public void reset()
         {
-            memory.init();
-            controller.init();
+            memory.reset();
+            controller.reset();
             stack.init();
             refreshSFRW();
             refreshMemory();
@@ -106,10 +110,21 @@ namespace PIC_Simulator
             resetTiming();
         }
 
+        private void initComponents()
+        {
+            memory.init(controller, interruptController, EEPROM);
+            EEPROM.init(memory);
+            executer.init(memory, stack);
+            interruptController.init(memory, executer);
+            prescaler.init(memory);
+            controller.init(rom, interruptController, memory, decoder, executer, prescaler);
+            parser.init(rom);
+            decoder.init(memory, controller, stack);
+        }
         public void init()
         {
-            memory.init();
-            controller.init();
+            memory.reset();
+            controller.reset();
             rom.init();
             parser.init();
             stack.init();
@@ -143,7 +158,7 @@ namespace PIC_Simulator
             }
             else if (fileAddress >= 0x80 && fileAddress <= 0xCF)
             {
-                int currentMemoryBank = GUI_Simu.memory.getCurrentMemoryBank();
+                int currentMemoryBank = memory.getCurrentMemoryBank();
                 memory.setMemoryBankTo(1);
                 fileAddress -= 0x80;
                 int tmp =  memory.setFile(fileAddress, value);
@@ -165,7 +180,7 @@ namespace PIC_Simulator
             }
             else if (fileAddress >= 0x80 && fileAddress <= 0xCF)
             {
-                int currentMemoryBank = GUI_Simu.memory.getCurrentMemoryBank();
+                int currentMemoryBank = memory.getCurrentMemoryBank();
                 memory.setMemoryBankTo(1);
                 fileAddress -= 0x80;
                 file = memory.getFile(fileAddress);
@@ -187,7 +202,7 @@ namespace PIC_Simulator
             }
             else if (fileAddress >= 0x80 && fileAddress <= 0xCF)
             {
-                int currentMemoryBank = GUI_Simu.memory.getCurrentMemoryBank();
+                int currentMemoryBank = memory.getCurrentMemoryBank();
                 memory.setMemoryBankTo(1);
                 fileAddress -= 0x80;
                 bit = memory.getBit(fileAddress, bitAddress);
@@ -208,7 +223,7 @@ namespace PIC_Simulator
             }
             else if (fileAddress >= 0x80 && fileAddress <= 0xCF)
             {
-                int currentMemoryBank = GUI_Simu.memory.getCurrentMemoryBank();
+                int currentMemoryBank = memory.getCurrentMemoryBank();
                 memory.setMemoryBankTo(1);
                 fileAddress -= 0x80;
                 memory.setBit(fileAddress, bitAddress);
@@ -224,7 +239,7 @@ namespace PIC_Simulator
             }
             else if (fileAddress >= 0x80 && fileAddress <= 0xCF)
             {
-                int currentMemoryBank = GUI_Simu.memory.getCurrentMemoryBank();
+                int currentMemoryBank = memory.getCurrentMemoryBank();
                 memory.setMemoryBankTo(1);
                 fileAddress -= 0x80;
                 memory.clearBit(fileAddress, bit);
@@ -241,7 +256,7 @@ namespace PIC_Simulator
             }
             else if (fileAddress >= 0x80 && fileAddress <= 0xCF)
             {
-                int currentMemoryBank = GUI_Simu.memory.getCurrentMemoryBank();
+                int currentMemoryBank = memory.getCurrentMemoryBank();
                 memory.setMemoryBankTo(1);
                 fileAddress -= 0x80;
                 access = memory.requestAccess(fileAddress, bit);

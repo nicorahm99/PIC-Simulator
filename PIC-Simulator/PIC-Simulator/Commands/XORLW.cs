@@ -8,9 +8,10 @@ namespace PIC_Simulator.Commands
 {
     class XORLW : Command
     {
-        public XORLW(int k)
+        public XORLW(int k, Memory memory)
         {
             literal = k;
+            this.memory = memory;
         }
         public override void execute()
         {

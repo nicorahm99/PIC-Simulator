@@ -8,12 +8,16 @@ namespace PIC_Simulator.Commands
 {
     class RETFIE: Command
     {
-        public RETFIE() { return; }
+        public RETFIE(Controller controller, Memory memory) 
+        {
+            this.controller = controller;
+            this.memory = memory;
+        }
         public override void execute()
         {
             setBit(0xb, 7);
             popStackToPc();
-            GUI_Simu.controller.incTimer0ByProgram();
+            controller.incTimer0ByProgram();
         }
     }
 }

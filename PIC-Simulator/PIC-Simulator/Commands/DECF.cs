@@ -10,10 +10,11 @@ namespace PIC_Simulator.Commands
     {
         bool isResultWrittenToW;
 
-        public DECF(bool isResWritToW, int fAddress)
+        public DECF(bool isResWritToW, int fAddress, Memory memory)
         {
             fileAddress = fAddress;
             isResultWrittenToW = isResWritToW;
+            this.memory = memory;
         }
         public override void execute()
         {

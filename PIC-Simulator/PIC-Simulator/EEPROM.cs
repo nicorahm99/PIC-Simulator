@@ -8,19 +8,24 @@ using System.Threading.Tasks;
 namespace PIC_Simulator
 {
     public class EEPROM
-    {
-        // TODO set WRERR Flag
+    {   
+        private Memory memory;
         
         private int[] eeprom = new int[256];
         private bool isStateMachineTriggered = false;
+
+        public void init(Memory memory)
+        {
+            this.memory = memory;
+        }
         
         public void writeToEEPROM()
         {
-            int currentMemoryBank = GUI_Simu.memory.getCurrentMemoryBank();
-            GUI_Simu.memory.setMemoryBankTo(0);
-            int address = GUI_Simu.memory.getFile(0x09);
-            int value = GUI_Simu.memory.getFile(0x08);
-            GUI_Simu.memory.setMemoryBankTo(currentMemoryBank);
+            int currentMemoryBank = memory.getCurrentMemoryBank();
+            memory.setMemoryBankTo(0);
+            int address = memory.getFile(0x09);
+            int value = memory.getFile(0x08);
+            memory.setMemoryBankTo(currentMemoryBank);
             if (address < 64 && isStateMachineTriggered)
             {
                 eeprom[address] = value;
@@ -33,15 +38,15 @@ namespace PIC_Simulator
 
         public void readFromEEPROM() 
         {
-            int currentMemoryBank = GUI_Simu.memory.getCurrentMemoryBank();
-            GUI_Simu.memory.setMemoryBankTo(0);
-            int address = GUI_Simu.memory.getFile(0x09);
+            int currentMemoryBank = memory.getCurrentMemoryBank();
+            memory.setMemoryBankTo(0);
+            int address = memory.getFile(0x09);
             if (address < 64)
             {
-                GUI_Simu.memory.setFile(0x08, eeprom[address]);
+                memory.setFile(0x08, eeprom[address]);
                 clearReadBitSetInetrruptFlag();
             }
-            GUI_Simu.memory.setMemoryBankTo(currentMemoryBank);
+            memory.setMemoryBankTo(currentMemoryBank);
         }
 
         public void setStateMachineTriggered()
@@ -51,23 +56,25 @@ namespace PIC_Simulator
 
         private void clearBit(int bitAddress)
         {
-            int currentMemoryBank = GUI_Simu.memory.getCurrentMemoryBank();
-            GUI_Simu.memory.setMemoryBankTo(1);
-            int eecon1 = GUI_Simu.memory.getFile(0x08);
+            int currentMemoryBank = memory.getCurrentMemoryBank();
+            memory.setMemoryBankTo(1);
+            int eecon1 = memory.getFile(0x08);
             eecon1 &= ~(1 << bitAddress);
             eecon1 += 0x10;
-            GUI_Simu.memory.setFile(0x08, eecon1);
-            GUI_Simu.memory.setMemoryBankTo(currentMemoryBank);
+            memory.setFile(0x08, eecon1);
+            memory.setMemoryBankTo(currentMemoryBank);
         }
 
+#pragma warning disable CS1998 // Bei der asynchronen Methode fehlen "await"-Operatoren. Die Methode wird synchron ausgeführt.
         private async Task<int> clearWriteBitSetInetrruptFlag()
+#pragma warning restore CS1998 // Bei der asynchronen Methode fehlen "await"-Operatoren. Die Methode wird synchron ausgeführt.
         {
             Task.Delay(1000).Wait();
             clearBit(1);
-            int currentMemoryBank = GUI_Simu.memory.getCurrentMemoryBank();
-            GUI_Simu.memory.setMemoryBankTo(1);
-            GUI_Simu.memory.setBit(8,4);
-            GUI_Simu.memory.setMemoryBankTo(currentMemoryBank);
+            int currentMemoryBank = memory.getCurrentMemoryBank();
+            memory.setMemoryBankTo(1);
+            memory.setBit(8,4);
+            memory.setMemoryBankTo(currentMemoryBank);
             return 0;
         }
 

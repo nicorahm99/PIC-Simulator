@@ -8,17 +8,20 @@ namespace PIC_Simulator.Commands
 {
     class SLEEP: Command
     {
-        public SLEEP() { return; }
+        public SLEEP(Memory memory) 
+        {
+            this.memory = memory;
+        }
         public override void execute()
         {
             //00h → WDT,
             //0 → WDT prescaler,
-            int currentMemoryBank = GUI_Simu.memory.getCurrentMemoryBank();
-            GUI_Simu.memory.setMemoryBankTo(1);
+            int currentMemoryBank = memory.getCurrentMemoryBank();
+            memory.setMemoryBankTo(1);
             clearBit(0x1, 0);
             clearBit(0x1, 1);
             clearBit(0x1, 2);
-            GUI_Simu.memory.setMemoryBankTo(currentMemoryBank);
+            memory.setMemoryBankTo(currentMemoryBank);
             //1 → TO,
             setBit(0x3, 4);
             //0 → PD

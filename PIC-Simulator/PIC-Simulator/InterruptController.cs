@@ -9,6 +9,14 @@ namespace PIC_Simulator
 {
     public class InterruptController
     {
+        private Memory memory;
+        private Executer executer;
+
+        public void init(Memory memory, Executer executer)
+        {
+            this.memory = memory;
+            this.executer = executer;
+        }
         public enum InterruptFlags
         {
             T0IF,
@@ -18,7 +26,7 @@ namespace PIC_Simulator
 
         public void onRB0Changed(bool isFallingEdge)
         {
-            int optionRegister = GUI_Simu.memory.getOptionRegister();
+            int optionRegister = memory.getOptionRegister();
 
             if ((optionRegister & 2 ^ 6) == 0 && isFallingEdge)
             {
@@ -40,16 +48,16 @@ namespace PIC_Simulator
             int bitAdress = decodeInterruptFlag(flag);
             if (isInterruptEnabled(bitAdress))
             {
-                int intCon = GUI_Simu.memory.getFile(0xb);
+                int intCon = memory.getFile(0xb);
                 intCon |= (1 << bitAdress);
-                GUI_Simu.memory.setFile(0xb, intCon);
+                memory.setFile(0xb, intCon);
             }
         }
 
         private bool isInterruptEnabled(int bitAdress)
         {
             bitAdress += 3; //bitadress of Enabled flag
-            int intCon = GUI_Simu.memory.getFile(0xb);
+            int intCon = memory.getFile(0xb);
 
             if ((intCon & (1 << bitAdress)) != 0)
             {
@@ -75,10 +83,10 @@ namespace PIC_Simulator
 
         public void checkInterrupts()
         {
-            int intCon = GUI_Simu.memory.getFile(0xb);
+            int intCon = memory.getFile(0xb);
             if ((intCon & 0x7) != 0 && (intCon & 1 << 7) != 0)
             {
-                GUI_Simu.executer.interruptOccured();
+                executer.interruptOccured();
             }
         }
     }

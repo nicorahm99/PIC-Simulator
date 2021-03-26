@@ -8,9 +8,10 @@ namespace PIC_Simulator.Commands
 {
     class ANDLW: Command
     {
-        public ANDLW(int k)
+        public ANDLW(int k, Memory memory)
         {
             literal = k;
+            this.memory = memory;
         }
         public override void execute()
         {

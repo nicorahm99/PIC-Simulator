@@ -10,9 +10,16 @@ namespace PIC_Simulator
 {
     public class Parser
     {
+        private ROM romInstance;
+
         private string filePath = "C:/tmp/testfile.txt";
         private List<int> rom = new List<int>();
         private List<string> totalFile = new List<string>();
+
+        public void init(ROM rom)
+        {
+            romInstance = rom;
+        }
 
         public void setFilePath(string newPath)
         {
@@ -42,7 +49,7 @@ namespace PIC_Simulator
                         rom.Add(int.Parse(commandCode, System.Globalization.NumberStyles.HexNumber));
                     }
                 }
-                GUI_Simu.rom.setRom(rom);
+                romInstance.setRom(rom);
                 GUI_Simu.getDictPcToLine(pc_line);
                 GUI_Simu.getDictLineToPc(line_pc);
             }

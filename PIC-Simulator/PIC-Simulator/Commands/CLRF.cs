@@ -8,9 +8,10 @@ namespace PIC_Simulator.Commands
 {
     class CLRF: Command
     {
-        public CLRF(int fAddress)
+        public CLRF(int fAddress, Memory memory)
         {
             fileAddress = fAddress;
+            this.memory = memory;
         }
 
         public override void execute()

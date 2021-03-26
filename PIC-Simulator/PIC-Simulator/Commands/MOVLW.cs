@@ -8,9 +8,10 @@ namespace PIC_Simulator.Commands
 {
     class MOVLW : Command
     {
-        public MOVLW(int k)
+        public MOVLW(int k, Memory memory)
         {
             literal = k;
+            this.memory = memory;
         }
         public override void execute()
         {

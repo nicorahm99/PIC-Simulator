@@ -4,7 +4,14 @@ namespace PIC_Simulator
 {
     public class Executer
     {
-        public Executer() { }
+        private Memory memory;
+        private Stack stack;
+
+        public void init(Memory memory, Stack stack)
+        {
+            this.stack = stack;
+            this.memory = memory;
+        }
 
         public void executeCommand(Command command)
         {
@@ -13,21 +20,21 @@ namespace PIC_Simulator
 
         private void pushPcToStack()
         {
-            GUI_Simu.stack.push(GUI_Simu.memory.getFullPC());
+            stack.push(memory.getFullPC());
         }
 
         public void interruptOccured()
         {
             pushPcToStack();
             bcF(0xb, 7);
-            GUI_Simu.memory.setFullPC(4);
+            memory.setFullPC(4);
         }
 
         private int bcF(int fileAddress, int bitAddress)
         {
-            int registerContent = GUI_Simu.memory.getFile(fileAddress);
+            int registerContent = memory.getFile(fileAddress);
             registerContent &= ~(1 << bitAddress);
-            return GUI_Simu.memory.setFile(fileAddress, registerContent);
+            return memory.setFile(fileAddress, registerContent);
         }
 
         #region execute command old
@@ -217,8 +224,8 @@ namespace PIC_Simulator
         //    writeResultToRightDestination(result, isResultWrittenToW, fileAddress);
         //    if (result == 0)
         //    {
-        //        GUI_Simu.memory.incPC();
-        //        GUI_Simu.controller.incTimer0ByProgram();
+        //        memory.incPC();
+        //        controller.incTimer0ByProgram();
         //    }
 
         //    return fileAddress;
@@ -244,8 +251,8 @@ namespace PIC_Simulator
         //    if (result > 255)
         //    {
         //        result -= 256;
-        //        GUI_Simu.memory.incPC(); 
-        //        GUI_Simu.controller.incTimer0ByProgram();
+        //        memory.incPC(); 
+        //        controller.incTimer0ByProgram();
         //    }
 
         //    writeResultToRightDestination(result, isResultWrittenToW, fileAddress);
@@ -347,26 +354,26 @@ namespace PIC_Simulator
 
         //private int bcF(int fileAddress, int bitAddress)
         //{
-        //    int registerContent = GUI_Simu.memory.getFile(fileAddress);
+        //    int registerContent = memory.getFile(fileAddress);
         //    registerContent &= ~(1 << bitAddress);
-        //    return GUI_Simu.memory.setFile(fileAddress, registerContent);
+        //    return memory.setFile(fileAddress, registerContent);
         //}
 
         //private int bsF(int fileAddress, int bitAddress)
         //{
-        //    int registerContent = GUI_Simu.memory.getFile(fileAddress);
+        //    int registerContent = memory.getFile(fileAddress);
         //    registerContent |= 1 << bitAddress;
-        //    return GUI_Simu.memory.setFile(fileAddress, registerContent);
+        //    return memory.setFile(fileAddress, registerContent);
         //}
 
         //private int btFsc(int fileAddress, int bitAddress)
         //{
-        //    int registerContent = GUI_Simu.memory.getFile(fileAddress);
+        //    int registerContent = memory.getFile(fileAddress);
         //    registerContent &= 1 << bitAddress;
         //    if (registerContent == 0)
         //    {
-        //        GUI_Simu.memory.incPC();
-        //        GUI_Simu.controller.incTimer0ByProgram();
+        //        memory.incPC();
+        //        controller.incTimer0ByProgram();
         //    }
 
         //    return fileAddress;
@@ -374,12 +381,12 @@ namespace PIC_Simulator
 
         //private int btFss(int fileAddress, int bitAddress)
         //{
-        //    int registerContent = GUI_Simu.memory.getFile(fileAddress);
+        //    int registerContent = memory.getFile(fileAddress);
         //    registerContent &= 1 << bitAddress;
         //    if (registerContent != 0)
         //    {
-        //        GUI_Simu.memory.incPC();
-        //        GUI_Simu.controller.incTimer0ByProgram();
+        //        memory.incPC();
+        //        controller.incTimer0ByProgram();
         //    }
 
         //    return fileAddress;
@@ -427,13 +434,13 @@ namespace PIC_Simulator
         //{
         //    if (address == 0)
         //    {
-        //        GUI_Simu.memory.setFullPC(1023);
+        //        memory.setFullPC(1023);
         //    }
         //    else
         //    {
-        //        GUI_Simu.memory.setFullPC(address - 1);
+        //        memory.setFullPC(address - 1);
         //    }
-        //    GUI_Simu.controller.incTimer0ByProgram();
+        //    controller.incTimer0ByProgram();
 
         //    return address;
         //}
@@ -458,7 +465,7 @@ namespace PIC_Simulator
         //{
         //    bsF(0xb, 7);
         //    popStackToPc();
-        //    GUI_Simu.controller.incTimer0ByProgram();
+        //    controller.incTimer0ByProgram();
         //    return 0;
         //}
 
@@ -466,14 +473,14 @@ namespace PIC_Simulator
         //{
         //    writeResultToRightDestination(literal, true, 0);
         //    popStackToPc();
-        //    GUI_Simu.controller.incTimer0ByProgram();
+        //    controller.incTimer0ByProgram();
         //    return literal;
         //}
 
         //private int _return()
         //{
         //    popStackToPc();
-        //    GUI_Simu.controller.incTimer0ByProgram();
+        //    controller.incTimer0ByProgram();
         //    return 0;
         //}
 
@@ -481,12 +488,12 @@ namespace PIC_Simulator
         //{
         //    //00h → WDT,
         //    //0 → WDT prescaler,
-        //    int currentMemoryBank = GUI_Simu.memory.getCurrentMemoryBank();
-        //    GUI_Simu.memory.setMemoryBankTo(1);
+        //    int currentMemoryBank = memory.getCurrentMemoryBank();
+        //    memory.setMemoryBankTo(1);
         //    bcF(0x1, 0);
         //    bcF(0x1, 1);
         //    bcF(0x1, 2);
-        //    GUI_Simu.memory.setMemoryBankTo(currentMemoryBank);
+        //    memory.setMemoryBankTo(currentMemoryBank);
         //    //1 → TO,
         //    bsF(0x3, 4);
         //    //0 → PD
@@ -620,30 +627,30 @@ namespace PIC_Simulator
         //{
         //    if (isResultWrittenToW)
         //    {
-        //        return GUI_Simu.memory.setWReg(result);
+        //        return memory.setWReg(result);
         //    }
 
-        //    return GUI_Simu.memory.setFile(fileAddress, result);
+        //    return memory.setFile(fileAddress, result);
         //}
 
         //private int getWReg()
         //{
-        //    return GUI_Simu.memory.getWReg();
+        //    return memory.getWReg();
         //}
 
         //private int getFile(int fileAddress)
         //{
-        //    return GUI_Simu.memory.getFile(fileAddress);
+        //    return memory.getFile(fileAddress);
         //}
 
         //private void pushPcToStack()
         //{
-        //    GUI_Simu.stack.push(GUI_Simu.memory.getFullPC());
+        //    stack.push(memory.getFullPC());
         //}
 
         //private void popStackToPc()
         //{
-        //    GUI_Simu.memory.setFullPC(GUI_Simu.stack.pop());
+        //    memory.setFullPC(stack.pop());
         //}
 
         //private bool isGreaterThan(int lower, int higher)

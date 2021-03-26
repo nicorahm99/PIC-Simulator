@@ -9,21 +9,23 @@ namespace PIC_Simulator.Commands
     class GOTO: Command
     {
         int targetAddress;
-        public GOTO(int address)
+        public GOTO(int address, Memory memory, Controller controller)
         {
             targetAddress = address;
+            this.memory = memory;
+            this.controller = controller;
         }
         public override void execute()
         {
             if (targetAddress == 0)
             {
-                GUI_Simu.memory.setFullPC(1023);
+                memory.setFullPC(1023);
             }
             else
             {
-                GUI_Simu.memory.setFullPC(targetAddress - 1);
+                memory.setFullPC(targetAddress - 1);
             }
-            GUI_Simu.controller.incTimer0ByProgram();
+            controller.incTimer0ByProgram();
         }
     }
 }

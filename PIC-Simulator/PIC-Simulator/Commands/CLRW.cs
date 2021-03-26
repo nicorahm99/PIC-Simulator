@@ -8,7 +8,10 @@ namespace PIC_Simulator.Commands
 {
     class CLRW: Command
     {
-        public CLRW() { }
+        public CLRW(Memory memory)
+        {
+            this.memory = memory;
+        }
         public override void execute()
         {
             writeResultToRightDestination(0, true, 0);

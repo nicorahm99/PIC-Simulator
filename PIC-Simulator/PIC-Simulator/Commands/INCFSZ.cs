@@ -10,10 +10,12 @@ namespace PIC_Simulator.Commands
     {
         bool isResultWrittenToW;
 
-        public INCFSZ(bool isResWritToW, int fAddress)
+        public INCFSZ(bool isResWritToW, int fAddress, Memory memory, Controller controller)
         {
             fileAddress = fAddress;
             isResultWrittenToW = isResWritToW;
+            this.memory = memory;
+            this.controller = controller;
         }
         public override void execute()
         {
@@ -22,8 +24,8 @@ namespace PIC_Simulator.Commands
             if (result > 255)
             {
                 result -= 256;
-                GUI_Simu.memory.incPC();
-                GUI_Simu.controller.incTimer0ByProgram();
+                memory.incPC();
+                controller.incTimer0ByProgram();
             }
             writeResultToRightDestination(result, isResultWrittenToW, fileAddress);
         }

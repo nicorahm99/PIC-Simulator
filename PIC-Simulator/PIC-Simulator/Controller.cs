@@ -10,43 +10,57 @@ namespace PIC_Simulator
 {
     public class Controller
     {
+        private ROM rom;
+        private InterruptController interruptController;
+        private Memory memory;
+        private Decoder decoder;
+        private Executer executer;
+        private Prescaler prescaler;
+
+
+
         private int prescaleCounter;
-        private int watchdog;
         List<int> breakPoints = new List<int>(); // list contains pcs of all breakpoints
 
-        public Controller()
+        public void init(ROM rom, InterruptController interruptController, Memory memory, Decoder decoder, Executer executer, Prescaler prescaler)
         {
-            init();
+            this.rom = rom;
+            this.interruptController = interruptController;
+            this.memory = memory;
+            this.decoder = decoder;
+            this.executer = executer;
+            this.prescaler = prescaler;
+
+            reset();
         }
 
         public bool step()
         {
-            GUI_Simu.interruptController.checkInterrupts();
-            int pc = GUI_Simu.memory.getFullPC();
+            interruptController.checkInterrupts();
+            int pc = memory.getFullPC();
             bool isInList = breakPoints.IndexOf(pc) != -1; //returns true if pc is in breakpoint-list
             if (isInList)
             {
                 return true;
             }
 
-            int commandCode = GUI_Simu.rom.fetchCommand(pc);
-            Command command = GUI_Simu.decoder.decodeCommand(commandCode);
-            GUI_Simu.executer.executeCommand(command);
-            GUI_Simu.memory.incPC();
+            int commandCode = rom.fetchCommand(pc);
+            Command command = decoder.decodeCommand(commandCode);
+            executer.executeCommand(command);
+            memory.incPC();
             incTimer0ByProgram();
             //reset watchdog
             return false;
         }
 
-        public void init()
+        public void reset()
         {
-            watchdog = 0;
-            GUI_Simu.memory.setFullPC(0);
+            memory.setFullPC(0);
         }
 
         private void incTimer0() // timer 0 overflow sets T0IF
         {
-            int timer0 = GUI_Simu.memory.getTMR0();
+            int timer0 = memory.getTMR0();
             if (timer0 < 0xFF)
             {
                 timer0++;
@@ -54,15 +68,15 @@ namespace PIC_Simulator
             else
             {
                 timer0 = 0;
-                GUI_Simu.interruptController.setInterruptFlag(InterruptController.InterruptFlags.T0IF);
+                interruptController.setInterruptFlag(InterruptController.InterruptFlags.T0IF);
             }
 
-            GUI_Simu.memory.setTMR0(timer0);
+            memory.setTMR0(timer0);
         }
 
         public void incTimer0ByExternalInput(bool isFallingEdge)
         {
-            int optionRegister = GUI_Simu.memory.getOptionRegister();
+            int optionRegister = memory.getOptionRegister();
             if ((optionRegister & 1 << 5) != 0)
             {
                 if ((optionRegister & 1 << 4) != 0 && isFallingEdge || (optionRegister & 1 << 4) == 0 && !isFallingEdge)
@@ -74,7 +88,7 @@ namespace PIC_Simulator
 
         public void incTimer0RegardingPrescaler()
         {
-            if (prescaleCounter < GUI_Simu.prescaler.getTMR0Prescaler() - 1)
+            if (prescaleCounter < prescaler.getTMR0Prescaler() - 1)
             {
                 prescaleCounter++;
             }
@@ -87,7 +101,7 @@ namespace PIC_Simulator
 
         public void incTimer0ByProgram()
         {
-            if ((GUI_Simu.memory.getOptionRegister() & 1 << 5) == 0)
+            if ((memory.getOptionRegister() & 1 << 5) == 0)
             {
                 incTimer0RegardingPrescaler();
             }
@@ -96,11 +110,6 @@ namespace PIC_Simulator
         public void setBreakPoints(List<int> bPs)
         {
             breakPoints = bPs;
-        }
-
-        private void resetWatchdog()
-        {
-            watchdog = 0;
         }
 
         public void resetPrescaleCounter()

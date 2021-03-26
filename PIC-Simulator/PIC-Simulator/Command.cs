@@ -45,6 +45,9 @@ namespace PIC_Simulator
 
     public abstract class Command
     {
+        protected Memory memory;
+        protected Controller controller;
+        protected Stack stack;
         public abstract void execute();
 
         protected int fileAddress; // eaquals operand f
@@ -69,16 +72,16 @@ namespace PIC_Simulator
 
         protected int clearBit(int fileAddress, int bitAddress)
         {
-            int registerContent = GUI_Simu.memory.getFile(fileAddress);
+            int registerContent = memory.getFile(fileAddress);
             registerContent &= ~(1 << bitAddress);
-            return GUI_Simu.memory.setFile(fileAddress, registerContent);
+            return memory.setFile(fileAddress, registerContent);
         }
 
         protected int setBit(int fileAddress, int bitAddress)
         {
-            int registerContent = GUI_Simu.memory.getFile(fileAddress);
+            int registerContent = memory.getFile(fileAddress);
             registerContent |= 1 << bitAddress;
-            return GUI_Simu.memory.setFile(fileAddress, registerContent);
+            return memory.setFile(fileAddress, registerContent);
         }
 
         protected void setZeroFlagTo(int value)
@@ -178,25 +181,25 @@ namespace PIC_Simulator
         {
             if (isResultWrittenToW)
             {
-                return GUI_Simu.memory.setWReg(result);
+                return memory.setWReg(result);
             }
 
-            return GUI_Simu.memory.setFile(fileAddress, result);
+            return memory.setFile(fileAddress, result);
         }
 
         protected int getWReg()
         {
-            return GUI_Simu.memory.getWReg();
+            return memory.getWReg();
         }
 
         protected int getFile(int fileAddress)
         {
-            return GUI_Simu.memory.getFile(fileAddress);
+            return memory.getFile(fileAddress);
         }
 
         protected void popStackToPc()
         {
-            GUI_Simu.memory.setFullPC(GUI_Simu.stack.pop());
+            memory.setFullPC(stack.pop());
         }
         #endregion
     }

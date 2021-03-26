@@ -8,11 +8,15 @@ namespace PIC_Simulator.Commands
 {
     class RETURN: Command
     {
-        public RETURN() { return; }
+        public RETURN(Controller controller, Memory memory) 
+        { 
+            this.controller = controller;
+            this.memory = memory;
+        }
         public override void execute()
         {
             popStackToPc();
-            GUI_Simu.controller.incTimer0ByProgram();
+            controller.incTimer0ByProgram();
         }
     }
 }

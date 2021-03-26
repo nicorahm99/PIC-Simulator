@@ -8,15 +8,17 @@ namespace PIC_Simulator.Commands
 {
     class RETLW : Command
     {
-        public RETLW(int k)
+        public RETLW(int k, Controller controller, Memory memory)
         {
             literal = k;
+            this.controller = controller;
+            this.memory = memory;
         }
         public override void execute()
         {
             writeResultToRightDestination(literal, true, 0);
             popStackToPc();
-            GUI_Simu.controller.incTimer0ByProgram();
+            controller.incTimer0ByProgram();
         }
     }
 }

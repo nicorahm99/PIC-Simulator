@@ -8,16 +8,17 @@ namespace PIC_Simulator.Commands
 {
     class BCF : Command
     {
-        public BCF(int fAddress, int bAddress)
+        public BCF(int fAddress, int bAddress, Memory memory)
         {
             fileAddress = fAddress;
             bitAddress = bAddress;
+            this.memory = memory;
         }
         public override void execute()
         {
-            int registerContent = GUI_Simu.memory.getFile(fileAddress);
+            int registerContent = memory.getFile(fileAddress);
             registerContent &= ~(1 << bitAddress);
-            GUI_Simu.memory.setFile(fileAddress, registerContent);
+            memory.setFile(fileAddress, registerContent);
         }
     }
 }

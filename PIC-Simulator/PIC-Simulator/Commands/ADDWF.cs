@@ -10,15 +10,16 @@ namespace PIC_Simulator.Commands
     {
         bool isResultWrittenToW;
 
-        public ADDWF(bool isResWritToW, int fAddress)
+        public ADDWF(bool isResWritToW, int fAddress, Memory memory)
         {
             fileAddress = fAddress;
             isResultWrittenToW = isResWritToW;
+            this.memory = memory;
         }
         public override void execute()
         {
-            int wContent = GUI_Simu.memory.getWReg();
-            int fileContent = GUI_Simu.memory.getFile(this.fileAddress);
+            int wContent = memory.getWReg();
+            int fileContent = memory.getFile(this.fileAddress);
             int result = wContent + fileContent;
             int fourBitResult = (wContent & 0xf) + (fileContent & 0xf);
             setCarryFlagIfNeeded(result);

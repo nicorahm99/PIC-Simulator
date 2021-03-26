@@ -36,7 +36,7 @@ namespace PIC_Simulator.Tests
             var classUnderTest = getClassUnderTest();
 
             //act 
-            classUnderTest.init();
+            classUnderTest.reset();
 
             //assert
             Assert.That(classUnderTest.getFile(0x3).Equals(0x18));
@@ -49,7 +49,7 @@ namespace PIC_Simulator.Tests
             var classUnderTest = getClassUnderTest();
 
             //act 
-            classUnderTest.init();
+            classUnderTest.reset();
 
             //assert
             Assert.That(classUnderTest.getBit(0x3, 3).Equals(1));
@@ -88,7 +88,7 @@ namespace PIC_Simulator.Tests
             var classUnderTest = getClassUnderTest();
 
             //act 
-            classUnderTest.init();
+            classUnderTest.reset();
 
             //assert
             Assert.That(classUnderTest.getWReg().Equals(0));
@@ -127,7 +127,7 @@ namespace PIC_Simulator.Tests
             var classUnderTest = getClassUnderTest();
 
             //act 
-            classUnderTest.init();
+            classUnderTest.reset();
 
             //assert
             Assert.That(classUnderTest.getFullPC().Equals(0));
@@ -140,7 +140,7 @@ namespace PIC_Simulator.Tests
             var classUnderTest = getClassUnderTest();
 
             //act 
-            classUnderTest.init();
+            classUnderTest.reset();
             classUnderTest.incPC();
             classUnderTest.incPC();
             classUnderTest.incPC();
@@ -157,7 +157,7 @@ namespace PIC_Simulator.Tests
             var classUnderTest = getClassUnderTest();
 
             //act 
-            classUnderTest.init();
+            classUnderTest.reset();
             classUnderTest.setFullPC(VALID_8_BIT_NUMBER);
 
             //assert
@@ -184,7 +184,7 @@ namespace PIC_Simulator.Tests
             var classUnderTest = getClassUnderTest();
 
             //act 
-            classUnderTest.init();
+            classUnderTest.reset();
 
             //assert
             Assert.That(classUnderTest.getOptionRegister().Equals(0));

@@ -8,9 +8,10 @@ namespace PIC_Simulator.Commands
 {
     class MOVWF: Command
     {
-        public MOVWF(int fAddress)
+        public MOVWF(int fAddress, Memory memory)
         {
             fileAddress = fAddress;
+            this.memory = memory;
         }
         public override void execute()
         {

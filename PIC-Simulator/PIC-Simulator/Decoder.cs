@@ -10,6 +10,10 @@ namespace PIC_Simulator
 {
     public class Decoder
     {
+        private Memory memory;
+        private Controller controller;
+        private Stack stack;
+
         private const int sevenBitMask = 0x3f80; //2)
         private const int sixBitMask = 0x3f00; //1)
         private const int fiveBitMask = 0x3e00; //4)
@@ -24,7 +28,12 @@ namespace PIC_Simulator
 
         Command command;
 
-        public Decoder(){}
+        public void init(Memory memory, Controller controller, Stack stack)
+        {
+            this.memory = memory;
+            this.controller = controller;
+            this.stack = stack;
+        }
 
         public Command decodeCommand(int commandCode)
         {
@@ -54,13 +63,13 @@ namespace PIC_Simulator
                     command = new CLRWDT(); //todo
                     return true;
                 case retfieCommand:
-                    command = new RETFIE();
+                    command = new RETFIE(controller, memory);
                     return true;
                 case returnCommand:
-                    command = new RETURN();
+                    command = new RETURN(controller, memory);
                     return true;
                 case sleepCommand:
-                    command = new SLEEP();
+                    command = new SLEEP(memory);
                     return true;
                 case 96:
                 case 64:
@@ -79,16 +88,16 @@ namespace PIC_Simulator
             {
                 case 0x180:
                     fileAddress = extractFileAddress(commandCode);
-                    command = new CLRF(fileAddress);
+                    command = new CLRF(fileAddress, memory);
                     return true;
 
                 case 0x100:
-                    command = new CLRW();
+                    command = new CLRW(memory);
                     return true;
 
                 case 0x80:
                     fileAddress = extractFileAddress(commandCode);
-                    command = new MOVWF(fileAddress);
+                    command = new MOVWF(fileAddress, memory);
                     return true;
             }
             return false;
@@ -102,71 +111,71 @@ namespace PIC_Simulator
             switch (commandCode & sixBitMask)
             {
                 case 0x700:
-                    command = new ADDWF(isWrittenIntoW, fileAddress);
+                    command = new ADDWF(isWrittenIntoW, fileAddress, memory);
                     return true;
 
                 case 0x500:
-                    command = new ANDWF(isWrittenIntoW, fileAddress);
+                    command = new ANDWF(isWrittenIntoW, fileAddress, memory);
                     return true; ;
 
                 case 0x900:
-                    command = new COMF(isWrittenIntoW, fileAddress);
+                    command = new COMF(isWrittenIntoW, fileAddress, memory);
                     return true; ;
 
                 case 0x300:
-                    command = new DECF(isWrittenIntoW, fileAddress);
+                    command = new DECF(isWrittenIntoW, fileAddress, memory);
                     return true; ;
 
                 case 0xb00:
-                    command = new DECFSZ(isWrittenIntoW, fileAddress);
+                    command = new DECFSZ(isWrittenIntoW, fileAddress, memory, controller);
                     return true; ;
 
                 case 0xa00:
-                    command = new INCF(isWrittenIntoW, fileAddress);
+                    command = new INCF(isWrittenIntoW, fileAddress, memory);
                     return true; ;
 
                 case 0xf00:
-                    command = new INCFSZ(isWrittenIntoW, fileAddress);
+                    command = new INCFSZ(isWrittenIntoW, fileAddress, memory, controller);
                     return true; ;
 
                 case 0x400:
-                    command = new IORWF(isWrittenIntoW, fileAddress);
+                    command = new IORWF(isWrittenIntoW, fileAddress, memory);
                     return true; ;
 
                 case 0x800:
-                    command = new MOVF(isWrittenIntoW, fileAddress);
+                    command = new MOVF(isWrittenIntoW, fileAddress, memory);
                     return true; ;
 
                 case 0xd00:
-                    command = new RLF(isWrittenIntoW, fileAddress);
+                    command = new RLF(isWrittenIntoW, fileAddress, memory);
                     return true; ;
 
                 case 0xc00:
-                    command = new RRF(isWrittenIntoW, fileAddress);
+                    command = new RRF(isWrittenIntoW, fileAddress, memory);
                     return true; ;
 
                 case 0x200:
-                    command = new SUBWF(isWrittenIntoW, fileAddress);
+                    command = new SUBWF(isWrittenIntoW, fileAddress, memory);
                     return true; ;
 
                 case 0xe00:
-                    command = new SWAPF(isWrittenIntoW, fileAddress);
+                    command = new SWAPF(isWrittenIntoW, fileAddress, memory);
                     return true; ;
 
                 case 0x600:
-                    command = new XORWF(isWrittenIntoW, fileAddress);
+                    command = new XORWF(isWrittenIntoW, fileAddress, memory);
                     return true; ;
 
                 case 0x3900:
-                    command = new ANDLW(literal);
+                    command = new ANDLW(literal, memory);
                     return true; ;
 
                 case 0x3800:
-                    command = new IORLW(literal);
+                    command = new IORLW(literal, memory);
                     return true; ;
 
                 case 0x3a00:
-                    command = new XORLW(literal);
+                    command = new XORLW(literal, memory);
                     return true; ;
             }
             return false;
@@ -178,11 +187,11 @@ namespace PIC_Simulator
             switch (commandCode & fiveBitMask)
             {
                 case 0x3e00:
-                    command = new ADDLW(literal);
+                    command = new ADDLW(literal, memory);
                     return true;
 
                 case 0x3c00:
-                    command = new SUBLW(literal);
+                    command = new SUBLW(literal, memory);
                     return true;
             }
             return false;
@@ -196,27 +205,27 @@ namespace PIC_Simulator
             switch (commandCode & fourBitMask)
             {
                 case 0x1000:
-                    command = new BCF(fileAddress, bitAddress);
+                    command = new BCF(fileAddress, bitAddress, memory);
                     return true;
 
                 case 0x1400:
-                    command = new BSF(fileAddress, bitAddress);
+                    command = new BSF(fileAddress, bitAddress, memory);
                     return true;
 
                 case 0x1800:
-                    command = new BTFSC(fileAddress, bitAddress);
+                    command = new BTFSC(fileAddress, bitAddress, memory, controller);
                     return true;
 
                 case 0x1c00:
-                    command = new BTFSS(fileAddress, bitAddress);
+                    command = new BTFSS(fileAddress, bitAddress, memory, controller);
                     return true;
 
                 case 0x3000:
-                    command = new MOVLW(literal);
+                    command = new MOVLW(literal, memory);
                     return true;
 
                 case 0x3400:
-                    command = new RETLW(literal);
+                    command = new RETLW(literal, controller, memory);
                     return true;
             }
             return false;
@@ -228,11 +237,11 @@ namespace PIC_Simulator
             switch (commandCode & threeBitMask)
             {
                 case 0x2000:
-                    command = new CALL(jumpAddress);
+                    command = new CALL(jumpAddress, stack, memory, controller);
                     return true;
 
                 case 0x2800:
-                    command = new GOTO(jumpAddress);
+                    command = new GOTO(jumpAddress, memory, controller);
                     return true;
             }
             return false;
