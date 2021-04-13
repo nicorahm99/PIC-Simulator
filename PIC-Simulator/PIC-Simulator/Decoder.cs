@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace PIC_Simulator
 {
-    public class Decoder
+    public class Decoder : IDecoder
     {
-        private Memory memory;
-        private Controller controller;
-        private Stack stack;
+        private IMemory memory;
+        private IController controller;
+        private IStack stack;
 
         private const int sevenBitMask = 0x3f80; //2)
         private const int sixBitMask = 0x3f00; //1)
@@ -48,7 +48,7 @@ namespace PIC_Simulator
             if (is4BitMasked(commandCode)) { return command; }
 
             if (is3BitMasked(commandCode)) { return command; }
-            
+
             return command; //should never be reached --> command undefined
         }
 
@@ -56,11 +56,11 @@ namespace PIC_Simulator
         #region Generate Command Instance
         private bool isStaticCommand(int commandCode)
         {
-            
+
             switch (commandCode)
             {
                 case clrwdtCommand:
-                    command = new CLRWDT(); //todo
+                    command = new CLRWDT();
                     return true;
                 case retfieCommand:
                     command = new RETFIE(controller, memory);
@@ -102,7 +102,7 @@ namespace PIC_Simulator
             }
             return false;
         }
-        
+
         private bool is6BitMasked(int commandCode)
         {
             bool isWrittenIntoW = isResultWrittenToW(commandCode);
@@ -116,67 +116,67 @@ namespace PIC_Simulator
 
                 case 0x500:
                     command = new ANDWF(isWrittenIntoW, fileAddress, memory);
-                    return true; ;
+                    return true;
 
                 case 0x900:
                     command = new COMF(isWrittenIntoW, fileAddress, memory);
-                    return true; ;
+                    return true;
 
                 case 0x300:
                     command = new DECF(isWrittenIntoW, fileAddress, memory);
-                    return true; ;
+                    return true;
 
                 case 0xb00:
                     command = new DECFSZ(isWrittenIntoW, fileAddress, memory, controller);
-                    return true; ;
+                    return true;
 
                 case 0xa00:
                     command = new INCF(isWrittenIntoW, fileAddress, memory);
-                    return true; ;
+                    return true; 
 
                 case 0xf00:
                     command = new INCFSZ(isWrittenIntoW, fileAddress, memory, controller);
-                    return true; ;
+                    return true; 
 
                 case 0x400:
                     command = new IORWF(isWrittenIntoW, fileAddress, memory);
-                    return true; ;
+                    return true; 
 
                 case 0x800:
                     command = new MOVF(isWrittenIntoW, fileAddress, memory);
-                    return true; ;
+                    return true; 
 
                 case 0xd00:
                     command = new RLF(isWrittenIntoW, fileAddress, memory);
-                    return true; ;
+                    return true; 
 
                 case 0xc00:
                     command = new RRF(isWrittenIntoW, fileAddress, memory);
-                    return true; ;
+                    return true; 
 
                 case 0x200:
                     command = new SUBWF(isWrittenIntoW, fileAddress, memory);
-                    return true; ;
+                    return true; 
 
                 case 0xe00:
                     command = new SWAPF(isWrittenIntoW, fileAddress, memory);
-                    return true; ;
+                    return true; 
 
                 case 0x600:
                     command = new XORWF(isWrittenIntoW, fileAddress, memory);
-                    return true; ;
+                    return true; 
 
                 case 0x3900:
                     command = new ANDLW(literal, memory);
-                    return true; ;
+                    return true; 
 
                 case 0x3800:
                     command = new IORLW(literal, memory);
-                    return true; ;
+                    return true; 
 
                 case 0x3a00:
                     command = new XORLW(literal, memory);
-                    return true; ;
+                    return true; 
             }
             return false;
         }

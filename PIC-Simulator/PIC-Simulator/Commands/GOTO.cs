@@ -8,8 +8,8 @@ namespace PIC_Simulator.Commands
 {
     class GOTO: Command
     {
-        int targetAddress;
-        public GOTO(int address, Memory memory, Controller controller)
+        readonly int targetAddress;
+        public GOTO(int address, IMemory memory, IController controller)
         {
             targetAddress = address;
             this.memory = memory;

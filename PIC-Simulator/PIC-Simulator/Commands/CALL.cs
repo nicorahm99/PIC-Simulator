@@ -8,8 +8,8 @@ namespace PIC_Simulator.Commands
 {
     class CALL: Command
     {
-        int targetAdress;
-        public CALL(int adress, Stack stack, Memory memory, Controller controller)
+        readonly int targetAdress;
+        public CALL(int adress, IStack stack, IMemory memory, IController controller)
         {
             targetAdress = adress;
             this.stack = stack;

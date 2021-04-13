@@ -8,7 +8,7 @@ namespace PIC_Simulator.Commands
 {
     class CLRW: Command
     {
-        public CLRW(Memory memory)
+        public CLRW(IMemory memory)
         {
             this.memory = memory;
         }

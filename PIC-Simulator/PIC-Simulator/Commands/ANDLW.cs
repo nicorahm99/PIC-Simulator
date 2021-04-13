@@ -8,7 +8,7 @@ namespace PIC_Simulator.Commands
 {
     class ANDLW: Command
     {
-        public ANDLW(int k, Memory memory)
+        public ANDLW(int k, IMemory memory)
         {
             literal = k;
             this.memory = memory;

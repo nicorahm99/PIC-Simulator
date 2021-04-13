@@ -11,7 +11,7 @@ namespace PIC_Simulator.Tests
     [TestFixture]
     public class StackTests
     {
-        int VALID_INTEGER = 12345;
+        readonly int VALID_INTEGER = 12345;
 
         [Test]
         public void singlePushPopTest()

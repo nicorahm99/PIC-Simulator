@@ -8,9 +8,9 @@ namespace PIC_Simulator.Commands
 {
     class SWAPF : Command
     {
-        bool isResultWrittenToW;
+        readonly bool isResultWrittenToW;
 
-        public SWAPF(bool isResWritToW, int fAddress, Memory memory)
+        public SWAPF(bool isResWritToW, int fAddress, IMemory memory)
         {
             fileAddress = fAddress;
             isResultWrittenToW = isResWritToW;

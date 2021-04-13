@@ -2,10 +2,10 @@
 
 namespace PIC_Simulator
 {
-    public class Executer
+    public class Executer : IExecuter
     {
-        private Memory memory;
-        private Stack stack;
+        private IMemory memory;
+        private IStack stack;
 
         public void init(Memory memory, Stack stack)
         {
@@ -30,11 +30,11 @@ namespace PIC_Simulator
             memory.setFullPC(4);
         }
 
-        private int bcF(int fileAddress, int bitAddress)
+        private void bcF(int fileAddress, int bitAddress)
         {
             int registerContent = memory.getFile(fileAddress);
             registerContent &= ~(1 << bitAddress);
-            return memory.setFile(fileAddress, registerContent);
+            memory.setFile(fileAddress, registerContent);
         }
 
         #region execute command old

@@ -8,7 +8,7 @@ namespace PIC_Simulator.Commands
 {
     class BTFSS : Command
     {
-        public BTFSS(int fAddress, int bAddress, Memory memory, Controller controller)
+        public BTFSS(int fAddress, int bAddress, IMemory memory, IController controller)
         {
             fileAddress = fAddress;
             bitAddress = bAddress;

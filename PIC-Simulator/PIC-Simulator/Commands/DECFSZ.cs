@@ -8,9 +8,9 @@ namespace PIC_Simulator.Commands
 {
     class DECFSZ : Command
     {
-        bool isResultWrittenToW;
+        readonly bool isResultWrittenToW;
 
-        public DECFSZ(bool isResWritToW, int fAddress, Memory memory, Controller controller)
+        public DECFSZ(bool isResWritToW, int fAddress, IMemory memory, IController controller)
         {
             fileAddress = fAddress;
             isResultWrittenToW = isResWritToW;

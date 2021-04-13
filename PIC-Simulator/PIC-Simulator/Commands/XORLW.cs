@@ -8,7 +8,7 @@ namespace PIC_Simulator.Commands
 {
     class XORLW : Command
     {
-        public XORLW(int k, Memory memory)
+        public XORLW(int k, IMemory memory)
         {
             literal = k;
             this.memory = memory;

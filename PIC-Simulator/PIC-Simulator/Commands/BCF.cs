@@ -8,7 +8,7 @@ namespace PIC_Simulator.Commands
 {
     class BCF : Command
     {
-        public BCF(int fAddress, int bAddress, Memory memory)
+        public BCF(int fAddress, int bAddress, IMemory memory)
         {
             fileAddress = fAddress;
             bitAddress = bAddress;

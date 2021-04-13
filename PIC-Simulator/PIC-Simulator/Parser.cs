@@ -8,9 +8,9 @@ using System.Windows.Forms;
 
 namespace PIC_Simulator
 {
-    public class Parser
+    public class Parser : IParser
     {
-        private ROM romInstance;
+        private IROM romInstance;
 
         private string filePath = "C:/tmp/testfile.txt";
         private List<int> rom = new List<int>();
@@ -45,7 +45,6 @@ namespace PIC_Simulator
                         int lineNumber = int.Parse(match.Groups[4].ToString(), NumberStyles.Integer);
                         pc_line.Add(adress, lineNumber);
                         line_pc.Add(lineNumber, adress);
-                        //MessageBox.Show(commandCode);
                         rom.Add(int.Parse(commandCode, System.Globalization.NumberStyles.HexNumber));
                     }
                 }
@@ -57,7 +56,7 @@ namespace PIC_Simulator
             {
                 MessageBox.Show(ex.ToString());
             }
-            
+
         }
 
         public void init()

@@ -12,11 +12,6 @@ namespace PIC_Simulator.Tests
     [TestFixture()]
     public class ROMTests
     {
-        //[SetUp]
-        //public void Init()
-        //{
-        //    ROM testRom = new ROM();
-        //}
 
         [Test()]
         public void fetchCommandTest()

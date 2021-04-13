@@ -8,7 +8,7 @@ namespace PIC_Simulator.Commands
 {
     class SLEEP: Command
     {
-        public SLEEP(Memory memory) 
+        public SLEEP(IMemory memory) 
         {
             this.memory = memory;
         }

@@ -8,7 +8,7 @@ namespace PIC_Simulator.Commands
 {
     class MOVLW : Command
     {
-        public MOVLW(int k, Memory memory)
+        public MOVLW(int k, IMemory memory)
         {
             literal = k;
             this.memory = memory;

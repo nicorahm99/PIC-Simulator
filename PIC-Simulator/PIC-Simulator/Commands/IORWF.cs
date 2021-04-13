@@ -8,9 +8,9 @@ namespace PIC_Simulator.Commands
 {
     class IORWF : Command
     {
-        bool isResultWrittenToW;
+        readonly bool isResultWrittenToW;
 
-        public IORWF(bool isResWritToW, int fAddress, Memory memory)
+        public IORWF(bool isResWritToW, int fAddress, IMemory memory)
         {
             fileAddress = fAddress;
             isResultWrittenToW = isResWritToW;

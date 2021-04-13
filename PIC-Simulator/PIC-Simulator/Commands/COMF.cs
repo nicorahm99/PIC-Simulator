@@ -8,9 +8,9 @@ namespace PIC_Simulator.Commands
 {
     class COMF: Command
     {
-        bool isResultWrittenToW;
+        readonly bool isResultWrittenToW;
 
-        public COMF(bool isResWritToW, int fAddress, Memory memory)
+        public COMF(bool isResWritToW, int fAddress, IMemory memory)
         {
             fileAddress = fAddress;
             isResultWrittenToW = isResWritToW;

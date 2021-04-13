@@ -8,7 +8,7 @@ namespace PIC_Simulator.Commands
 {
     class IORLW : Command
     {
-        public IORLW(int k, Memory memory)
+        public IORLW(int k, IMemory memory)
         {
             literal = k;
             this.memory = memory;

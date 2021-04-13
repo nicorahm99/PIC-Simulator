@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace PIC_Simulator
 {
-    public class EEPROM
-    {   
-        private Memory memory;
-        
+    public class EEPROM : IEEPROM
+    {
+        private IMemory memory;
+
         private int[] eeprom = new int[256];
         private bool isStateMachineTriggered = false;
 
@@ -18,7 +18,7 @@ namespace PIC_Simulator
         {
             this.memory = memory;
         }
-        
+
         public void writeToEEPROM()
         {
             int currentMemoryBank = memory.getCurrentMemoryBank();
@@ -36,7 +36,7 @@ namespace PIC_Simulator
 
         }
 
-        public void readFromEEPROM() 
+        public void readFromEEPROM()
         {
             int currentMemoryBank = memory.getCurrentMemoryBank();
             memory.setMemoryBankTo(0);
@@ -73,7 +73,7 @@ namespace PIC_Simulator
             clearBit(1);
             int currentMemoryBank = memory.getCurrentMemoryBank();
             memory.setMemoryBankTo(1);
-            memory.setBit(8,4);
+            memory.setBit(8, 4);
             memory.setMemoryBankTo(currentMemoryBank);
             return 0;
         }

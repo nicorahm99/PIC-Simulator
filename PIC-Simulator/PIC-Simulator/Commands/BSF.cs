@@ -8,7 +8,7 @@ namespace PIC_Simulator.Commands
 {
     class BSF: Command
     {
-        public BSF(int fAddress, int bAddress, Memory memory)
+        public BSF(int fAddress, int bAddress, IMemory memory)
         {
             fileAddress = fAddress;
             bitAddress = bAddress;

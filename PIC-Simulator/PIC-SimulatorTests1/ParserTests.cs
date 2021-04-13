@@ -57,7 +57,7 @@ namespace PIC_Simulator.Tests
         }
 
 
-        private List<int> testTotalFile = new List<int> {
+        private readonly List<int> testTotalFile = new List<int> {
 
 12289,
 5763 ,

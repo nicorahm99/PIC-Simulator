@@ -8,7 +8,7 @@ namespace PIC_Simulator.Commands
 {
     class RETFIE: Command
     {
-        public RETFIE(Controller controller, Memory memory) 
+        public RETFIE(IController controller, IMemory memory) 
         {
             this.controller = controller;
             this.memory = memory;

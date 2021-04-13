@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace PIC_Simulator
 {
-    public class InterruptController
+    public class InterruptController : IInterruptController
     {
-        private Memory memory;
-        private Executer executer;
+        private IMemory memory;
+        private IExecuter executer;
 
         public void init(Memory memory, Executer executer)
         {

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PIC_Simulator
 {
-    public class ROM
+    public class ROM : IROM
     {
         private int[] rom;
 

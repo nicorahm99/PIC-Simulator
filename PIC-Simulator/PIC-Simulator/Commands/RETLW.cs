@@ -8,7 +8,7 @@ namespace PIC_Simulator.Commands
 {
     class RETLW : Command
     {
-        public RETLW(int k, Controller controller, Memory memory)
+        public RETLW(int k, IController controller, IMemory memory)
         {
             literal = k;
             this.controller = controller;

@@ -8,9 +8,9 @@ namespace PIC_Simulator.Commands
 {
     class INCF : Command
     {
-        bool isResultWrittenToW;
+        readonly bool isResultWrittenToW;
 
-        public INCF(bool isResWritToW, int fAddress, Memory memory)
+        public INCF(bool isResWritToW, int fAddress, IMemory memory)
         {
             fileAddress = fAddress;
             isResultWrittenToW = isResWritToW;

@@ -8,9 +8,9 @@ namespace PIC_Simulator.Commands
 {
     class ADDWF: Command
     {
-        bool isResultWrittenToW;
+        readonly bool isResultWrittenToW;
 
-        public ADDWF(bool isResWritToW, int fAddress, Memory memory)
+        public ADDWF(bool isResWritToW, int fAddress, IMemory memory)
         {
             fileAddress = fAddress;
             isResultWrittenToW = isResWritToW;

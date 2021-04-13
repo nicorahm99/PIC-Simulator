@@ -45,9 +45,9 @@ namespace PIC_Simulator
 
     public abstract class Command
     {
-        protected Memory memory;
-        protected Controller controller;
-        protected Stack stack;
+        protected IMemory memory;
+        protected IController controller;
+        protected IStack stack;
         public abstract void execute();
 
         protected int fileAddress; // eaquals operand f

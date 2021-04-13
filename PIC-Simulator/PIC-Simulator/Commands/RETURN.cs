@@ -8,7 +8,7 @@ namespace PIC_Simulator.Commands
 {
     class RETURN: Command
     {
-        public RETURN(Controller controller, Memory memory) 
+        public RETURN(IController controller, IMemory memory) 
         { 
             this.controller = controller;
             this.memory = memory;

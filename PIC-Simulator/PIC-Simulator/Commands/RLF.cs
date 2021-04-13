@@ -8,9 +8,9 @@ namespace PIC_Simulator.Commands
 {
     class RLF : Command
     {
-        bool isResultWrittenToW;
+        readonly bool isResultWrittenToW;
 
-        public RLF(bool isResWritToW, int fAddress, Memory memory)
+        public RLF(bool isResWritToW, int fAddress, IMemory memory)
         {
             fileAddress = fAddress;
             isResultWrittenToW = isResWritToW;

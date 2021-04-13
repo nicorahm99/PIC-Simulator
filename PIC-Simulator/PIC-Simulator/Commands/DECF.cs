@@ -8,9 +8,9 @@ namespace PIC_Simulator.Commands
 {
     class DECF: Command
     {
-        bool isResultWrittenToW;
+        readonly bool isResultWrittenToW;
 
-        public DECF(bool isResWritToW, int fAddress, Memory memory)
+        public DECF(bool isResWritToW, int fAddress, IMemory memory)
         {
             fileAddress = fAddress;
             isResultWrittenToW = isResWritToW;

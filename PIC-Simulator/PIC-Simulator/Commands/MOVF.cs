@@ -8,9 +8,9 @@ namespace PIC_Simulator.Commands
 {
     class MOVF : Command
     {
-        bool isResultWrittenToW;
+        readonly bool isResultWrittenToW;
 
-        public MOVF(bool isResWritToW, int fAddress, Memory memory)
+        public MOVF(bool isResWritToW, int fAddress, IMemory memory)
         {
             fileAddress = fAddress;
             isResultWrittenToW = isResWritToW;

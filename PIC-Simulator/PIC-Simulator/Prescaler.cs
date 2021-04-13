@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace PIC_Simulator
 {
-    public class Prescaler
+    public class Prescaler : IPrescaler
     {
-        private Memory memory;
+        private IMemory memory;
 
         public void init(Memory memory)
         {

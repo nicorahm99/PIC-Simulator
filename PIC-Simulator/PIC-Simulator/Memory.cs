@@ -6,13 +6,19 @@ using System.Threading.Tasks;
 
 namespace PIC_Simulator
 {
-    public class Memory
+    public class Memory : IMemory
     {
-        public Memory() 
+
+        private IController controller;
+        private IInterruptController interruptController;
+        private IEEPROM eeprom;
+
+
+        public Memory()
         {
-            reset();        
+            reset();
         }
-        
+
         public void init(Controller controller, InterruptController interruptController, EEPROM eeprom)
         {
             this.controller = controller;
@@ -38,10 +44,6 @@ namespace PIC_Simulator
             setFile(0x6, 0xff);
             setMemoryBankTo(0);
         }
-
-        private Controller controller;
-        private InterruptController interruptController;
-        private EEPROM eeprom;
 
 
         private int[] memory; // addresses from 0x0c to 0x4f /-/ 0x8c to 0xcf
@@ -152,8 +154,8 @@ namespace PIC_Simulator
             {
                 if (reg == 5 && bit == 4)
                 {
-                    
-                    
+
+
                     controller.incTimer0ByExternalInput(false);
                 }
                 if (reg == 6 && bit == 0)
@@ -190,7 +192,7 @@ namespace PIC_Simulator
                 int file = getFile(reg);
                 int newfile = file - Convert.ToInt16(Math.Pow(2, bit));
                 setFile(reg, newfile);
-            } 
+            }
         }
         #endregion
 
@@ -305,12 +307,12 @@ namespace PIC_Simulator
             else { access = false; }
 
             return access;
-        } 
-        
+        }
+
         public void setTMR0(int timer0)
         {
-           memory[1] = timer0;
-           controller.resetPrescaleCounter();
+            memory[1] = timer0;
+            controller.resetPrescaleCounter();
         }
         #endregion
 

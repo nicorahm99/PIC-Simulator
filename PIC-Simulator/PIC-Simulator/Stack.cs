@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PIC_Simulator
 {
-    public class Stack
+    public class Stack : IStack
     {
         private int optionCounter = 0;
         private List<int> stack = new List<int>();
@@ -33,9 +33,9 @@ namespace PIC_Simulator
 
         public int pop()
         {
-            if (optionCounter>0 && optionCounter <= 8)
+            if (optionCounter > 0 && optionCounter <= 8)
             {
-                int value = stack[(optionCounter-1)];
+                int value = stack[(optionCounter - 1)];
                 stack.RemoveAt((optionCounter - 1));
                 optionCounter--;
                 return value;
@@ -57,7 +57,7 @@ namespace PIC_Simulator
         {
             if (optionCounter > 0 && optionCounter <= 8)
             {
-                return stack[optionCounter-1];
+                return stack[optionCounter - 1];
             }
             else if (optionCounter > 8)
             {

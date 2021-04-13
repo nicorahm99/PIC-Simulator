@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace PIC_Simulator
 {
-    public class Controller
+    public class Controller : IController
     {
-        private ROM rom;
-        private InterruptController interruptController;
-        private Memory memory;
-        private Decoder decoder;
-        private Executer executer;
-        private Prescaler prescaler;
+        private IROM rom;
+        private IInterruptController interruptController;
+        private IMemory memory;
+        private IDecoder decoder;
+        private IExecuter executer;
+        private IPrescaler prescaler;
 
 
 
