@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,6 +9,18 @@ namespace PIC_Simulator
 {
     public class Stack : IStack
     {
+        private static volatile Stack instance;
+        public static Stack Instance
+        {
+            [MethodImpl(MethodImplOptions.Synchronized)]
+            get
+            {
+                if (instance == null)
+                    instance = new Stack();
+                return instance;
+            }
+        }
+
         private int optionCounter = 0;
         private List<int> stack = new List<int>();
 

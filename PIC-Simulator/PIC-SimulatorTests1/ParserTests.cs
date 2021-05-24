@@ -53,7 +53,9 @@ namespace PIC_Simulator.Tests
 
         private Parser getClassUnderTest()
         {
-            return new Parser();
+            Parser parser = new Parser();
+            parser.init(new ROM());
+            return parser;
         }
 
 

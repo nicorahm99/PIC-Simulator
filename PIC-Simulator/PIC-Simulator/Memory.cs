@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,6 +9,18 @@ namespace PIC_Simulator
 {
     public class Memory : IMemory
     {
+        private static volatile Memory instance;
+
+        public static Memory Instance
+        {
+            [MethodImpl(MethodImplOptions.Synchronized)]
+            get
+            {
+                if (instance == null)
+                    instance = new Memory();
+                return instance;
+            }
+        }
 
         private IController controller;
         private IInterruptController interruptController;

@@ -52,7 +52,7 @@ namespace PIC_Simulator.Tests
 
         private Stack getClassUnderTest()
         {
-            return new Stack();
+            return Stack.Instance;
         }
     }
 }

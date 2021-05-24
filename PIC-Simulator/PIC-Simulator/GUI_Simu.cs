@@ -61,12 +61,12 @@ namespace PIC_Simulator
         public static Dictionary<int, int> lineToPc = new Dictionary<int, int>();
 
 
-        private Stack stack = new Stack();
+        private Stack stack = Stack.Instance;
         private Decoder decoder = new Decoder();
         private ROM rom = new ROM();
 
         private Prescaler prescaler = new Prescaler();
-        private Memory memory = new Memory();
+        private Memory memory = Memory.Instance;
         private EEPROM EEPROM = new EEPROM();
         private InterruptController interruptController = new InterruptController();
         private Executer executer = new Executer();

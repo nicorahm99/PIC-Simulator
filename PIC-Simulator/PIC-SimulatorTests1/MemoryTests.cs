@@ -189,7 +189,7 @@ namespace PIC_Simulator.Tests
 
             Console.WriteLine(classUnderTest.getOptionRegister());
             //assert
-            Assert.That(classUnderTest.getOptionRegister().Equals(0));
+            Assert.That(classUnderTest.getOptionRegister().Equals(255));
         }
 
         [Test()]
@@ -249,7 +249,7 @@ namespace PIC_Simulator.Tests
 
         private Memory getClassUnderTest()
         {
-            Memory memory = new Memory();
+            Memory memory = Memory.Instance;
             memory.init(new Controller(), new InterruptController(), new EEPROM());
             return memory;
         }
