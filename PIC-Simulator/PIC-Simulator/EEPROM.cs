@@ -14,7 +14,7 @@ namespace PIC_Simulator
         private int[] eeprom = new int[256];
         private bool isStateMachineTriggered = false;
 
-        public void init(Memory memory)
+        public void init(IMemory memory)
         {
             this.memory = memory;
         }
@@ -81,6 +81,11 @@ namespace PIC_Simulator
         private void clearReadBitSetInetrruptFlag()
         {
             clearBit(0);
+        }
+
+        public int[] getEeprom()
+        {
+            return eeprom;
         }
     }
 }

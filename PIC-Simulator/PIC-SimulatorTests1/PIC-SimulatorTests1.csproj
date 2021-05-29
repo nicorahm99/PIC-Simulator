@@ -67,6 +67,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="EEPROMTests.cs" />
     <Compile Include="MemoryTests.cs" />
     <Compile Include="ParserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

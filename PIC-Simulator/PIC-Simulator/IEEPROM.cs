@@ -2,7 +2,7 @@
 {
     public interface IEEPROM
     {
-        void init(Memory memory);
+        void init(IMemory memory);
         void readFromEEPROM();
         void setStateMachineTriggered();
         void writeToEEPROM();
